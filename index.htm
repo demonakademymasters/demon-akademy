@@ -53,7 +53,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .btn-fire{background:linear-gradient(135deg,rgba(192,57,43,0.9),rgba(120,0,0,0.8));color:var(--gold);border:1px solid var(--fire);clip-path:polygon(8px 0%,calc(100% - 8px) 0%,100% 50%,calc(100% - 8px) 100%,8px 100%,0% 50%);padding:0.7rem 2.2rem}
 .btn-fire:hover{background:linear-gradient(135deg,var(--fire),rgba(180,0,0,0.8));box-shadow:0 0 18px rgba(192,57,43,0.5)}
 .btn-fire:disabled{opacity:0.5;cursor:not-allowed}
-.btn-fire:disabled:hover{box-shadow:none}
 .btn-sm{font-family:'Cinzel',serif;font-size:0.6rem;padding:0.3rem 0.8rem;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.2s;border:1px solid var(--border);background:rgba(44,31,15,0.7);color:var(--text2)}
 .btn-sm:hover{background:rgba(192,57,43,0.3);color:var(--gold);border-color:var(--gold)}
 .bc{text-align:center;margin:1rem 0}
@@ -72,7 +71,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .mc::after{content:'';position:absolute;top:0;right:0;width:50px;height:50px;background:radial-gradient(circle at top right,rgba(192,57,43,0.12),transparent 70%)}
 .mn{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);margin-bottom:0.2rem}
 .mlv{font-size:0.82rem;color:var(--fire);font-weight:bold}
-.mgd{font-size:0.72rem;color:var(--text3);margin-bottom:0.5rem}
 
 .skr{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem}
 .skn{min-width:80px;color:var(--text3);font-family:'Cinzel',serif;font-size:0.64rem;text-transform:uppercase;letter-spacing:0.04em}
@@ -100,6 +98,35 @@ body::before{content:'';position:fixed;inset:0;background:
 .gsr{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.4rem}
 .gs{font-size:0.75rem;color:var(--text3)}.gs span{color:var(--gold)}
 
+/* ── AVISO BOX (donde estaba Mailo Low) ── */
+.aviso-wrap{margin-bottom:1rem}
+/* Formulario oculto/visible */
+.aviso-form{background:linear-gradient(135deg,rgba(50,25,5,0.98),rgba(18,13,8,0.99));border:2px solid var(--gold);padding:1.1rem;margin-bottom:0.8rem;position:relative;clip-path:polygon(0 6px,6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px));display:none}
+.aviso-form.open{display:block}
+.aviso-form::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.aviso-form-title{font-family:'Cinzel Decorative',serif;font-size:0.9rem;color:var(--gold);margin-bottom:0.9rem;text-align:center}
+
+/* Botón agregar aviso */
+.btn-aviso{width:100%;font-family:'Cinzel Decorative',serif;font-size:0.88rem;padding:0.8rem 1rem;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.3s;border:2px solid var(--gold);background:linear-gradient(135deg,rgba(50,25,5,0.97),rgba(18,13,8,0.99));color:var(--gold);text-shadow:0 0 8px rgba(241,196,15,0.4);animation:glowBtn 2.5s infinite}
+.btn-aviso:hover{background:linear-gradient(135deg,rgba(192,57,43,0.5),rgba(50,25,5,0.97));box-shadow:0 0 20px rgba(241,196,15,0.3)}
+@keyframes glowBtn{0%,100%{box-shadow:0 0 8px rgba(241,196,15,0.2)}50%{box-shadow:0 0 20px rgba(241,196,15,0.5)}}
+
+/* Tarjeta de aviso publicado */
+.aviso-card{background:linear-gradient(135deg,rgba(60,20,5,0.97),rgba(18,13,8,0.99));border:2px solid var(--gold);padding:1rem 1.1rem;margin-bottom:0.7rem;position:relative;clip-path:polygon(0 6px,6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px))}
+.aviso-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.aviso-tag{font-family:'Cinzel',serif;font-size:0.65rem;color:var(--gold2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem}
+.aviso-msg{font-size:0.95rem;color:var(--text);line-height:1.5;margin-bottom:0.6rem;font-weight:bold}
+.aviso-del{position:absolute;top:0.5rem;right:0.5rem;background:none;border:1px solid rgba(192,57,43,0.5);color:#f1948a;cursor:pointer;font-size:0.6rem;padding:0.2rem 0.5rem;font-family:'Cinzel',serif;transition:all 0.2s}
+.aviso-del:hover{background:rgba(192,57,43,0.4);color:#fff}
+.aviso-exp{font-size:0.68rem;color:var(--text3);font-family:'Cinzel',serif;margin-top:0.3rem}
+
+/* Grilla de países */
+.paises-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:0.3rem;background:rgba(0,0,0,0.35);border:1px solid rgba(192,57,43,0.2);padding:0.7rem;margin-top:0.6rem;border-radius:2px}
+.paises-title{font-family:'Cinzel',serif;font-size:0.62rem;color:var(--gold2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem}
+.pais-item{font-size:0.72rem;color:var(--text2);padding:0.15rem 0}
+.pais-item span{color:var(--gold);font-weight:bold}
+
+/* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:500;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
 .modal{background:linear-gradient(135deg,rgba(44,31,15,0.99),rgba(10,6,4,0.99));border:1px solid var(--gold);padding:1.5rem;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
@@ -108,6 +135,12 @@ body::before{content:'';position:fixed;inset:0;background:
 .modal-close{position:absolute;top:0.8rem;right:0.8rem;background:none;border:1px solid var(--border);color:var(--text3);cursor:pointer;font-family:'Cinzel',serif;font-size:0.65rem;padding:0.25rem 0.6rem}
 .modal-close:hover{color:var(--fire);border-color:var(--fire)}
 
+/* MAILO LOW */
+.mailo-box{background:linear-gradient(135deg,rgba(80,10,10,0.97),rgba(30,5,5,0.98));border:2px solid var(--fire);padding:0.7rem 1rem;margin-top:0.5rem;text-align:center;clip-path:polygon(0 6px,6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px));animation:mailoPulse 2.5s infinite}
+@keyframes mailoPulse{0%,100%{border-color:var(--fire);box-shadow:0 0 8px rgba(192,57,43,0.3)}50%{border-color:var(--gold);box-shadow:0 0 20px rgba(241,196,15,0.35)}}
+.mailo-title{font-family:'Cinzel Decorative',serif;font-size:clamp(0.8rem,2.5vw,1.1rem);color:var(--gold);text-shadow:0 0 8px rgba(241,196,15,0.5)}
+.mailo-sub{font-family:'Cinzel',serif;font-size:0.65rem;color:var(--fire);margin-top:0.2rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.85}
+
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--dark)}
 ::-webkit-scrollbar-thumb{background:var(--stone2);border-radius:3px}
@@ -115,6 +148,7 @@ body::before{content:'';position:fixed;inset:0;background:
   .guild-logo{font-size:1.6rem}
   .nav-btn{font-size:0.58rem;padding:0.38rem 0.6rem}
   .mg2{grid-template-columns:1fr}
+  .paises-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
 }
 </style>
 </head>
@@ -136,7 +170,60 @@ body::before{content:'';position:fixed;inset:0;background:
 
 <div class="main">
 
+  <!-- ===== PORTAL ===== -->
   <div class="section active" id="s-portal">
+
+    <!-- BLOQUE AVISO GUILD (donde estaba Mailo Low) -->
+    <div class="aviso-wrap">
+
+      <!-- Botón principal para abrir el formulario -->
+      <button class="btn-aviso" onclick="toggleAvisoForm()">
+        📢 AGREGAR AVISO DE GUILD
+      </button>
+
+      <!-- Formulario oculto que aparece al clickear -->
+      <div class="aviso-form" id="avisoForm">
+        <div class="aviso-form-title">📢 Nuevo Aviso para la Guild</div>
+
+        <div class="fg" style="margin-bottom:0.8rem">
+          <label class="flb">Mensaje del Aviso *</label>
+          <textarea class="fi" id="av-msg" rows="3"
+            placeholder="Ej: WAR CONTRA SND — HORA VENEZUELA 2 PM..."
+            style="resize:vertical"></textarea>
+        </div>
+
+        <div class="grid2">
+          <div class="fg">
+            <label class="flb">📅 Fecha del Evento</label>
+            <input class="fi" id="av-date" type="date">
+          </div>
+          <div class="fg">
+            <label class="flb">🕐 Hora Venezuela (0–23)</label>
+            <input class="fi" id="av-hour" type="number"
+              placeholder="Ej: 14 para 2 PM · 20 para 8 PM" min="0" max="23">
+            <div style="font-size:0.63rem;color:var(--text3);margin-top:0.2rem">
+              Si pones hora → se calculan automáticamente todos los países latinos
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:0.6rem;justify-content:center;margin-top:0.5rem;flex-wrap:wrap">
+          <button class="btn btn-fire" id="btnPublicar" onclick="publicarAviso()">🔥 Publicar Aviso</button>
+          <button class="btn-sm" onclick="toggleAvisoForm()" style="padding:0.6rem 1.2rem">✕ Cancelar</button>
+        </div>
+      </div>
+
+      <!-- Avisos publicados se muestran aquí -->
+      <div id="avisosList"></div>
+
+      <!-- Mailo Low fijo debajo -->
+      <div class="mailo-box">
+        <div class="mailo-title">💀 MAILO LOW — SIN NOVIA 💀</div>
+        <div class="mailo-sub">Estado confirmado · Demon Akademy Official</div>
+      </div>
+    </div>
+    <!-- FIN BLOQUE AVISO -->
+
     <div class="gbanner">
       <div class="gcrest">🔥</div>
       <div class="ginfo">
@@ -153,6 +240,7 @@ body::before{content:'';position:fixed;inset:0;background:
         <div id="gUpd" style="margin-top:0.25rem">Cargando...</div>
       </div>
     </div>
+
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.9rem;margin-bottom:1rem">
       <div class="card"><div class="fl">⚔ Top Melee</div><div id="pMelee"><div class="loader">Cargando</div></div></div>
       <div class="card"><div class="fl">🔮 Top Mago</div><div id="pMage"><div class="loader">Cargando</div></div></div>
@@ -161,6 +249,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <div class="card"><div class="fl">📜 Últimas Actualizaciones</div><div id="pR"><div class="loader">Cargando</div></div></div>
   </div>
 
+  <!-- ===== MI PERFIL ===== -->
   <div class="section" id="s-register">
     <div class="sec-title">Registrar / Actualizar Perfil</div>
     <div class="card">
@@ -196,6 +285,7 @@ body::before{content:'';position:fixed;inset:0;background:
     </div>
   </div>
 
+  <!-- ===== RANKING ===== -->
   <div class="section" id="s-ranking">
     <div class="sec-title">Rankings de la Guild</div>
     <div class="rtabs">
@@ -208,6 +298,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <div class="card" id="rankCard"><div class="loader">Cargando ranking...</div></div>
   </div>
 
+  <!-- ===== MIEMBROS ===== -->
   <div class="section" id="s-members">
     <div class="sec-title">Miembros de la Guild</div>
     <div style="display:flex;gap:0.5rem;margin-bottom:0.9rem;flex-wrap:wrap">
@@ -222,6 +313,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <div id="mGrid"><div class="loader">Cargando miembros...</div></div>
   </div>
 
+  <!-- ===== COMPARAR ===== -->
   <div class="section" id="s-compare">
     <div class="sec-title">Comparar Guerreros</div>
     <div class="card">
@@ -235,6 +327,7 @@ body::before{content:'';position:fixed;inset:0;background:
 
 </div>
 
+<!-- MODAL EDITAR -->
 <div class="modal-bg" id="editModal">
   <div class="modal">
     <button class="modal-close" onclick="closeEdit()">✕ Cerrar</button>
@@ -272,7 +365,7 @@ body::before{content:'';position:fixed;inset:0;background:
 </div>
 
 <script>
-// ── CONFIG ─────────────────────────────────────────────────
+// ── CONFIG ─────────────────────────────────────────
 const SUPA_URL = 'https://mgffuphsbjsvjocdiqps.supabase.co/rest/v1';
 const SUPA_KEY = 'sb_publishable_LAD7Rh3pzvdgW9d5kMh6WA_WGG6x2DJ';
 const H = {
@@ -282,127 +375,231 @@ const H = {
   'Prefer': 'return=representation'
 };
 
-let members = [];
-let curRank = 'level';
+// Países latinos con timezone
+const PAISES = [
+  {n:'🇻🇪 Venezuela',   tz:'America/Caracas'},
+  {n:'🇲🇽 México',      tz:'America/Mexico_City'},
+  {n:'🇨🇴 Colombia',    tz:'America/Bogota'},
+  {n:'🇵🇪 Perú',        tz:'America/Lima'},
+  {n:'🇪🇨 Ecuador',     tz:'America/Guayaquil'},
+  {n:'🇨🇱 Chile',       tz:'America/Santiago'},
+  {n:'🇦🇷 Argentina',   tz:'America/Argentina/Buenos_Aires'},
+  {n:'🇺🇾 Uruguay',     tz:'America/Montevideo'},
+  {n:'🇧🇷 Brasil',      tz:'America/Sao_Paulo'},
+  {n:'🇧🇴 Bolivia',     tz:'America/La_Paz'},
+  {n:'🇵🇾 Paraguay',    tz:'America/Asuncion'},
+  {n:'🇵🇦 Panamá',      tz:'America/Panama'},
+  {n:'🇨🇷 Costa Rica',  tz:'America/Costa_Rica'},
+  {n:'🇬🇹 Guatemala',   tz:'America/Guatemala'},
+  {n:'🇭🇳 Honduras',    tz:'America/Tegucigalpa'},
+  {n:'🇸🇻 El Salvador', tz:'America/El_Salvador'},
+  {n:'🇳🇮 Nicaragua',   tz:'America/Managua'},
+  {n:'🇩🇴 R.Dominicana',tz:'America/Santo_Domingo'},
+  {n:'🇵🇷 Puerto Rico', tz:'America/Puerto_Rico'},
+  {n:'🇨🇺 Cuba',        tz:'America/Havana'},
+  {n:'🇪🇸 España',      tz:'Europe/Madrid'},
+];
 
-// ── API ────────────────────────────────────────────────────
-async function req(path, method='GET', body=null, customHeaders={}){
-  const opts = {method, headers:{...H, ...customHeaders}};
+let members  = [];
+let avisos   = [];   // avisos en memoria + Supabase
+let curRank  = 'level';
+
+// ── API ────────────────────────────────────────────
+async function apiReq(path, method='GET', body=null, extraH={}){
+  const opts = {method, headers:{...H,...extraH}};
   if(body) opts.body = JSON.stringify(body);
-  const r = await fetch(SUPA_URL + path, opts);
-  if(!r.ok){ const e = await r.text(); throw new Error(e); }
+  const r = await fetch(SUPA_URL+path, opts);
+  if(!r.ok){ const e=await r.text(); throw new Error(e); }
   const t = await r.text();
   return t ? JSON.parse(t) : [];
 }
 
-async function loadMembers(){
+async function loadAll(){
   try{
-    members = await req('/members?select=*&order=level.desc');
+    const [m, a] = await Promise.all([
+      apiReq('/members?select=*&order=level.desc'),
+      apiReq('/announcements?select=*&order=created_at.desc')
+    ]);
+    members = m;
+    // Filtrar expirados
+    const now = new Date();
+    avisos = a.filter(x => !x.expires_at || new Date(x.expires_at) > now);
     updateAll();
   }catch(e){
-    showToast('⚠ Error al conectar con el servidor');
-    console.error(e);
+    showToast('⚠ Error al conectar'); console.error(e);
   }
 }
 
-// ── HELPERS ────────────────────────────────────────────────
+// ── HELPERS ────────────────────────────────────────
 function v(id){ return (document.getElementById(id)?.value||'').trim(); }
 function n(id){ return parseInt(document.getElementById(id)?.value)||0; }
 function set(id,val){ const e=document.getElementById(id); if(e) e.value=val; }
 function makeId(name){ return name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,''); }
 function clsEmoji(c){ return c==='warrior'?'⚔':c==='mage'?'🔮':c==='archer'?'🏹':'⚡'; }
 function clsLabel(c){ return c==='warrior'?'Warrior':c==='mage'?'Mage':c==='archer'?'Archer':c||''; }
-function clsBadge(c){
-  const cl = c==='warrior'?'rw':c==='mage'?'rm':'ra';
-  return `<span class="rb ${cl}">${clsEmoji(c)} ${clsLabel(c)}</span>`;
-}
+function clsBadge(c){ const cl=c==='warrior'?'rw':c==='mage'?'rm':'ra'; return `<span class="rb ${cl}">${clsEmoji(c)} ${clsLabel(c)}</span>`; }
 function timeAgo(ts){
-  const d = Date.now()-ts;
+  const d=Date.now()-ts;
   if(d<60000) return 'hace unos segundos';
   if(d<3600000) return 'hace '+Math.floor(d/60000)+'min';
   if(d<86400000) return 'hace '+Math.floor(d/3600000)+'h';
   return 'hace '+Math.floor(d/86400000)+'d';
 }
-
 function buildData(id,name,level,cls,mel,mag,dis,def){
-  return { id, name, guild:'Demon Akademy', level, class:cls,
-    sk_melee:mel, sk_magic:mag, sk_dist:dis, sk_def:def,
-    updated_at:Date.now() };
+  return {id,name,guild:'Demon Akademy',level,class:cls,
+    sk_melee:mel,sk_magic:mag,sk_dist:dis,sk_def:def,updated_at:Date.now()};
 }
 
-// ── GUARDAR PERFIL (CORREGIDO CON UPSERT DIRECTO) ──────────
-async function saveProfile(){
-  const name=v('i-name'), lv=n('i-lv'), cls=v('i-cls');
-  if(!name){ showToast('⚠ Ingresa tu nombre de personaje'); return; }
-  if(!lv)  { showToast('⚠ Ingresa tu nivel'); return; }
-  if(!cls) { showToast('⚠ Selecciona tu clase'); return; }
+// ── ZONAS HORARIAS ─────────────────────────────────
+function calcPaises(dateStr, hourVzla){
+  // dateStr = "2025-05-28", hourVzla = 14
+  const fecha = new Date(`${dateStr}T${String(hourVzla).padStart(2,'0')}:00:00-04:00`);
+  return PAISES.map(p=>{
+    const hora = fecha.toLocaleTimeString('es-ES',{timeZone:p.tz,hour:'2-digit',minute:'2-digit',hour12:true});
+    const dia  = fecha.toLocaleDateString('es-ES',{timeZone:p.tz,weekday:'short',day:'numeric',month:'short'});
+    return {n:p.n, hora, dia};
+  });
+}
 
-  const btn=document.getElementById('btnSave');
-  btn.disabled=true; btn.textContent='Guardando...';
-
-  const id = makeId(name);
-  const data = buildData(id, name, lv, cls, n('sk-mel'), n('sk-mag'), n('sk-dis'), n('sk-def'));
-  
-  try{
-    // Ejecuta Upsert combinando duplicados usando la API REST nativa de PostgREST
-    await req('/members', 'POST', data, {
-      'Prefer': 'return=representation,resolution=merge-duplicates'
-    });
-    
-    showToast('✅ Perfil guardado: '+name);
-    
-    // Limpiar campos
-    ['i-name','i-lv','i-cls','sk-mel','sk-mag','sk-dis','sk-def'].forEach(id=>{
-      const e=document.getElementById(id); if(e) e.value='';
-    });
-    await loadMembers();
-  }catch(e){
-    showToast('⚠ Error: '+e.message);
+// ── AVISOS ─────────────────────────────────────────
+function toggleAvisoForm(){
+  const f = document.getElementById('avisoForm');
+  f.classList.toggle('open');
+  if(f.classList.contains('open')){
+    // Poner fecha de hoy
+    if(!document.getElementById('av-date').value)
+      document.getElementById('av-date').value = new Date().toISOString().split('T')[0];
   }
-  btn.disabled=false; btn.textContent='🔥 Guardar / Actualizar';
 }
 
-// ── MODAL EDITAR ───────────────────────────────────────────
+async function publicarAviso(){
+  const msg   = v('av-msg');
+  const date  = v('av-date');
+  const hourS = document.getElementById('av-hour').value.trim();
+  if(!msg){ showToast('⚠ Escribe el mensaje del aviso'); return; }
+
+  const btn = document.getElementById('btnPublicar');
+  btn.disabled=true; btn.textContent='Publicando...';
+
+  let eventTime = null;
+  let expiresAt = null;
+
+  if(date){
+    // Expira al final del día siguiente
+    const exp = new Date(date+'T23:59:59-04:00');
+    exp.setDate(exp.getDate()+1);
+    expiresAt = exp.toISOString();
+    if(hourS !== ''){
+      const h = parseInt(hourS);
+      if(h>=0 && h<=23)
+        eventTime = `${date}T${String(h).padStart(2,'0')}:00:00-04:00`;
+    }
+  }
+
+  try{
+    await apiReq('/announcements','POST',
+      {message:msg, event_time:eventTime, expires_at:expiresAt});
+    showToast('✅ Aviso publicado');
+    // Limpiar
+    document.getElementById('av-msg').value='';
+    document.getElementById('av-hour').value='';
+    document.getElementById('av-date').value='';
+    document.getElementById('avisoForm').classList.remove('open');
+    await loadAll();
+  }catch(e){ showToast('⚠ Error: '+e.message); }
+
+  btn.disabled=false; btn.textContent='🔥 Publicar Aviso';
+}
+
+async function borrarAviso(id){
+  if(!confirm('¿Borrar este aviso?')) return;
+  try{
+    await apiReq('/announcements?id=eq.'+id,'DELETE',null,{'Prefer':'return=minimal'});
+    showToast('🗑 Aviso borrado');
+    await loadAll();
+  }catch(e){ showToast('⚠ Error: '+e.message); }
+}
+
+function renderAvisos(){
+  const el = document.getElementById('avisosList');
+  if(!avisos.length){ el.innerHTML=''; return; }
+
+  const sorted = [...avisos].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+
+  el.innerHTML = sorted.map(a=>{
+    const hasTime = !!a.event_time;
+    let paisesHTML = '';
+
+    if(hasTime){
+      const et = new Date(a.event_time);
+      // Fecha en Venezuela para calcular
+      const yy = et.toLocaleDateString('en-CA',{timeZone:'America/Caracas'}); // "YYYY-MM-DD"
+      const hh = parseInt(et.toLocaleTimeString('es-ES',{timeZone:'America/Caracas',hour:'2-digit',hour12:false}));
+      const lista = calcPaises(yy, hh);
+      paisesHTML = `<div class="paises-grid">
+        ${lista.map(p=>`<div class="pais-item">${p.n}: <span>${p.hora}</span> <span style="color:var(--text3);font-size:0.62rem">${p.dia}</span></div>`).join('')}
+      </div>`;
+    }
+
+    const expStr = a.expires_at
+      ? 'Expira: '+new Date(a.expires_at).toLocaleDateString('es-ES',{day:'numeric',month:'short'})
+      : 'Sin expiración';
+
+    return `<div class="aviso-card">
+      <button class="aviso-del" onclick="borrarAviso(${a.id})">🗑 Borrar</button>
+      <div class="aviso-tag">📢 Aviso Guild</div>
+      <div class="aviso-msg">${a.message}</div>
+      ${paisesHTML ? '<div class="paises-title" style="margin-top:0.5rem;font-family:Cinzel,serif;font-size:0.62rem;color:var(--gold2);letter-spacing:0.1em;text-transform:uppercase">🌎 Horarios por País</div>'+paisesHTML : ''}
+      <div class="aviso-exp">${expStr}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── PERFIL ─────────────────────────────────────────
+async function saveProfile(){
+  const name=v('i-name'),lv=n('i-lv'),cls=v('i-cls');
+  if(!name){showToast('⚠ Ingresa tu nombre');return;}
+  if(!lv){showToast('⚠ Ingresa tu nivel');return;}
+  if(!cls){showToast('⚠ Selecciona tu clase');return;}
+  const btn=document.getElementById('btnSave');
+  btn.disabled=true;btn.textContent='Guardando...';
+  const id=makeId(name);
+  const data=buildData(id,name,lv,cls,n('sk-mel'),n('sk-mag'),n('sk-dis'),n('sk-def'));
+  try{
+    await apiReq('/members','POST',data,{'Prefer':'return=representation,resolution=merge-duplicates'});
+    showToast('✅ Perfil guardado: '+name);
+    ['i-name','i-lv','i-cls','sk-mel','sk-mag','sk-dis','sk-def'].forEach(i=>{const e=document.getElementById(i);if(e)e.value='';});
+    await loadAll();
+  }catch(e){showToast('⚠ Error: '+e.message);}
+  btn.disabled=false;btn.textContent='🔥 Guardar / Actualizar';
+}
+
+// ── MODAL EDITAR ───────────────────────────────────
 function openEdit(mid){
-  const m = members.find(x=>x.id===mid);
-  if(!m) return;
-  set('edit-id',   m.id);
-  set('edit-name', m.name);
-  set('edit-lv',   m.level);
-  set('edit-cls',  m.class);
-  set('edit-mel',  m.sk_melee);
-  set('edit-mag',  m.sk_magic);
-  set('edit-dis',  m.sk_dist);
-  set('edit-def',  m.sk_def);
+  const m=members.find(x=>x.id===mid);if(!m)return;
+  set('edit-id',m.id);set('edit-name',m.name);set('edit-lv',m.level);
+  set('edit-cls',m.class);set('edit-mel',m.sk_melee);set('edit-mag',m.sk_magic);
+  set('edit-dis',m.sk_dist);set('edit-def',m.sk_def);
   document.getElementById('editModal').classList.add('open');
 }
-function closeEdit(){ document.getElementById('editModal').classList.remove('open'); }
-
+function closeEdit(){document.getElementById('editModal').classList.remove('open');}
 async function saveEdit(){
-  const id=v('edit-id'), name=v('edit-name');
-  if(!id) return;
+  const id=v('edit-id'),name=v('edit-name');if(!id)return;
   const btn=document.getElementById('btnEditSave');
-  btn.disabled=true; btn.textContent='Guardando...';
-  const data = buildData(id, name, n('edit-lv'), v('edit-cls'),
-    n('edit-mel'), n('edit-mag'), n('edit-dis'), n('edit-def'));
+  btn.disabled=true;btn.textContent='Guardando...';
+  const data=buildData(id,name,n('edit-lv'),v('edit-cls'),n('edit-mel'),n('edit-mag'),n('edit-dis'),n('edit-def'));
   try{
-    // Ejecuta Upsert en la edición para no causar el error 23505
-    await req('/members', 'POST', data, {
-      'Prefer': 'return=representation,resolution=merge-duplicates'
-    });
-    
+    await apiReq('/members','POST',data,{'Prefer':'return=representation,resolution=merge-duplicates'});
     showToast('✅ Stats actualizados: '+name);
-    closeEdit();
-    await loadMembers();
-  }catch(e){
-    showToast('⚠ Error: '+e.message);
-  }
-  btn.disabled=false; btn.textContent='🔥 Guardar Cambios';
+    closeEdit();await loadAll();
+  }catch(e){showToast('⚠ Error: '+e.message);}
+  btn.disabled=false;btn.textContent='🔥 Guardar Cambios';
 }
 
-// ── UPDATE ALL ─────────────────────────────────────────────
+// ── UPDATE ALL ─────────────────────────────────────
 function updateAll(){
   updatePortal();
+  renderAvisos();
   if(document.getElementById('s-ranking').classList.contains('active')) renderRanking(curRank);
   if(document.getElementById('s-members').classList.contains('active')) renderMembers();
   updateCmpSelects();
@@ -410,34 +607,32 @@ function updateAll(){
   document.getElementById('gUpd').textContent='Act. '+timeAgo(Date.now());
 }
 
-// ── PORTAL ─────────────────────────────────────────────────
+// ── PORTAL ─────────────────────────────────────────
 function updatePortal(){
   const m=members;
   document.getElementById('gTotal').textContent=m.length;
   if(!m.length){
     ['gAvg','gTop'].forEach(id=>document.getElementById(id).textContent='-');
     ['pMelee','pMage','pDist'].forEach(id=>document.getElementById(id).innerHTML='<div class="empty">Sin datos aún</div>');
-    document.getElementById('pR').innerHTML='<div class="empty">¡Sé el primero en registrarte!</div>';
+    document.getElementById('pR').innerHTML='<div class="empty">¡Sé el primero!</div>';
     return;
   }
   document.getElementById('gAvg').textContent=Math.round(m.reduce((a,x)=>a+x.level,0)/m.length);
   const top=m.reduce((a,x)=>x.level>a.level?x:a,m[0]);
   document.getElementById('gTop').textContent=top.name+' (Lv.'+top.level+')';
-
-  const topOf=(sk,skLabel,elId)=>{
+  const topOf=(sk,lbl,elId)=>{
     const f=[...m].sort((a,b)=>b[sk]-a[sk]);
     document.getElementById(elId).innerHTML=f.length
       ?`<div class="mn">${clsEmoji(f[0].class)} ${f[0].name}</div>
         <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.4rem">
           <span style="padding:2px 8px;background:rgba(44,31,15,0.8);border:1px solid var(--border);font-size:0.75rem;color:var(--text2)">Lv.<span style="color:var(--gold);font-weight:bold"> ${f[0].level}</span></span>
-          <span style="padding:2px 8px;background:rgba(44,31,15,0.8);border:1px solid var(--border);font-size:0.75rem;color:var(--text2)">${skLabel} <span style="color:var(--gold);font-weight:bold">${f[0][sk]}</span></span>
+          <span style="padding:2px 8px;background:rgba(44,31,15,0.8);border:1px solid var(--border);font-size:0.75rem;color:var(--text2)">${lbl} <span style="color:var(--gold);font-weight:bold">${f[0][sk]}</span></span>
         </div>`
       :'<div class="empty">Sin datos</div>';
   };
   topOf('sk_melee','Melee','pMelee');
   topOf('sk_magic','Magia','pMage');
   topOf('sk_dist','Dist','pDist');
-
   const rec=[...m].sort((a,b)=>b.updated_at-a.updated_at).slice(0,8);
   document.getElementById('pR').innerHTML=rec.map(x=>
     `<div style="display:flex;justify-content:space-between;align-items:center;padding:0.38rem 0;border-bottom:1px solid rgba(192,57,43,0.1);font-size:0.8rem">
@@ -447,17 +642,16 @@ function updatePortal(){
   ).join('');
 }
 
-// ── RANKING ────────────────────────────────────────────────
+// ── RANKING ────────────────────────────────────────
 function showRank(type,el){
   curRank=type;
   document.querySelectorAll('.rtab').forEach(t=>t.classList.remove('active'));
-  if(el) el.classList.add('active');
+  if(el)el.classList.add('active');
   renderRanking(type);
 }
-
 function renderRanking(type){
   const el=document.getElementById('rankCard');
-  if(!members.length){ el.innerHTML='<div class="empty">🔥 No hay miembros aún. ¡Sé el primero en registrarte!</div>'; return; }
+  if(!members.length){el.innerHTML='<div class="empty">🔥 No hay miembros aún</div>';return;}
   const labels={level:'Nivel',sk_melee:'Melee',sk_magic:'Magia',sk_dist:'Distancia',sk_def:'Defensa'};
   const sorted=[...members].sort((a,b)=>(b[type]??0)-(a[type]??0));
   const rows=sorted.map((m,i)=>{
@@ -471,86 +665,52 @@ function renderRanking(type){
       <td style="font-size:0.75rem;color:var(--text3)">Lv.${m.level}</td>
     </tr>`;
   }).join('');
-  el.innerHTML=`<table class="rt">
-    <thead><tr><th>#</th><th>Nombre</th><th>Clase</th><th>${labels[type]||type}</th><th>Nivel</th></tr></thead>
-    <tbody>${rows}</tbody>
-  </table>`;
+  el.innerHTML=`<table class="rt"><thead><tr><th>#</th><th>Nombre</th><th>Clase</th><th>${labels[type]||type}</th><th>Nivel</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-// ── MIEMBROS ───────────────────────────────────────────────
+// ── MIEMBROS ───────────────────────────────────────
 function renderMembers(){
   const srch=(document.getElementById('srch')?.value||'').toLowerCase();
   const fc=document.getElementById('fCls')?.value||'';
-  let list=members.filter(m=>
-    (!srch||m.name.toLowerCase().includes(srch))&&
-    (!fc||m.class===fc)
-  );
+  let list=members.filter(m=>(!srch||m.name.toLowerCase().includes(srch))&&(!fc||m.class===fc));
   list=[...list].sort((a,b)=>b.level-a.level);
-  if(!list.length){ document.getElementById('mGrid').innerHTML='<div class="empty">No se encontraron miembros</div>'; return; }
-
-  const skb=(lbl,val)=>{
-    const pct=Math.min(100,(val/999)*100);
-    return `<div class="skr">
-      <div class="skn">${lbl}</div>
-      <div class="skbg"><div class="skfill" style="width:${pct}%"></div></div>
-      <div class="skv">${val}</div>
-    </div>`;
-  };
-
+  if(!list.length){document.getElementById('mGrid').innerHTML='<div class="empty">No se encontraron miembros</div>';return;}
+  const skb=(lbl,val)=>{const pct=Math.min(100,(val/999)*100);return `<div class="skr"><div class="skn">${lbl}</div><div class="skbg"><div class="skfill" style="width:${pct}%"></div></div><div class="skv">${val}</div></div>`;};
   document.getElementById('mGrid').innerHTML=`<div class="mg2">${
     list.map(m=>`<div class="mc">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem">
-        <div>
-          <div class="mn">${clsEmoji(m.class)} ${m.name}</div>
-          <div class="mlv">Lv. ${m.level}</div>
-        </div>
+        <div><div class="mn">${clsEmoji(m.class)} ${m.name}</div><div class="mlv">Lv. ${m.level}</div></div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem">
-          ${clsBadge(m.class)}
-          <button class="btn-sm" onclick="openEdit('${m.id}')">✏ Editar</button>
+          ${clsBadge(m.class)}<button class="btn-sm" onclick="openEdit('${m.id}')">✏ Editar</button>
         </div>
       </div>
-      ${skb('⚔ Melee',   m.sk_melee)}
-      ${skb('🔮 Magia',  m.sk_magic)}
-      ${skb('🏹 Dist',   m.sk_dist)}
-      ${skb('🛡 Defensa',m.sk_def)}
+      ${skb('⚔ Melee',m.sk_melee)}${skb('🔮 Magia',m.sk_magic)}${skb('🏹 Dist',m.sk_dist)}${skb('🛡 Defensa',m.sk_def)}
       <div style="font-size:0.65rem;color:var(--text3);margin-top:0.4rem;text-align:right">${timeAgo(m.updated_at)}</div>
-    </div>`)
-    .join('')
+    </div>`).join('')
   }</div>`;
 }
 
-// ── COMPARAR ───────────────────────────────────────────────
+// ── COMPARAR ───────────────────────────────────────
 function updateCmpSelects(){
-  const opts='<option value="">Seleccionar...</option>'+
-    [...members].sort((a,b)=>b.level-a.level)
-      .map(m=>`<option value="${m.id}">${m.name} (Lv.${m.level})</option>`).join('');
-  ['c1','c2'].forEach(id=>{
-    const el=document.getElementById(id); if(!el) return;
-    const val=el.value; el.innerHTML=opts; el.value=val;
-  });
+  const opts='<option value="">Seleccionar...</option>'+[...members].sort((a,b)=>b.level-a.level).map(m=>`<option value="${m.id}">${m.name} (Lv.${m.level})</option>`).join('');
+  ['c1','c2'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const val=el.value;el.innerHTML=opts;el.value=val;});
 }
-
 function renderCompare(){
-  const k1=document.getElementById('c1')?.value;
-  const k2=document.getElementById('c2')?.value;
+  const k1=document.getElementById('c1')?.value,k2=document.getElementById('c2')?.value;
   const res=document.getElementById('cmpRes');
-  if(!k1||!k2){ res.innerHTML=''; return; }
-  const m1=members.find(m=>m.id===k1);
-  const m2=members.find(m=>m.id===k2);
-  if(!m1||!m2){ res.innerHTML='<div class="empty">Selecciona dos jugadores válidos</div>'; return; }
-
+  if(!k1||!k2){res.innerHTML='';return;}
+  const m1=members.find(m=>m.id===k1),m2=members.find(m=>m.id===k2);
+  if(!m1||!m2){res.innerHTML='<div class="empty">Selecciona dos jugadores</div>';return;}
   const stats=[
-    {l:'Nivel',    a:m1.level,    b:m2.level,    i:'⭐'},
-    {l:'Melee',    a:m1.sk_melee, b:m2.sk_melee, i:'⚔'},
-    {l:'Magia',    a:m1.sk_magic, b:m2.sk_magic, i:'🔮'},
-    {l:'Distancia',a:m1.sk_dist,  b:m2.sk_dist,  i:'🏹'},
-    {l:'Defensa',  a:m1.sk_def,   b:m2.sk_def,   i:'🛡'},
+    {l:'Nivel',a:m1.level,b:m2.level,i:'⭐'},
+    {l:'Melee',a:m1.sk_melee,b:m2.sk_melee,i:'⚔'},
+    {l:'Magia',a:m1.sk_magic,b:m2.sk_magic,i:'🔮'},
+    {l:'Distancia',a:m1.sk_dist,b:m2.sk_dist,i:'🏹'},
+    {l:'Defensa',a:m1.sk_def,b:m2.sk_def,i:'🛡'},
   ];
-
   let w1=0,w2=0;
-  stats.forEach(s=>{ if(s.a>s.b)w1++; else if(s.b>s.a)w2++; });
+  stats.forEach(s=>{if(s.a>s.b)w1++;else if(s.b>s.a)w2++;});
   const winner=w1>w2?m1.name:w2>w1?m2.name:'¡Empate!';
-
   res.innerHTML=`<div class="card" style="margin-top:0.8rem">
     <div style="display:flex;justify-content:space-around;align-items:center;margin-bottom:1.2rem;flex-wrap:wrap;gap:0.5rem">
       <div style="text-align:center">
@@ -569,8 +729,7 @@ function renderCompare(){
     </div>
     <div style="text-align:center;font-family:'Cinzel',serif;font-size:0.85rem;color:var(--gold);margin-bottom:1rem">🏆 Ganador: ${winner}</div>
     ${stats.map(s=>{
-      const mx=Math.max(s.a,s.b,1);
-      const p1=Math.round(s.a/mx*100);
+      const mx=Math.max(s.a,s.b,1),p1=Math.round(s.a/mx*100);
       return `<div style="margin-bottom:0.8rem">
         <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.25rem">
           <span style="color:${s.a>=s.b?'var(--gold)':'var(--text3)'};font-weight:${s.a>s.b?'bold':'normal'}">${s.a}</span>
@@ -585,29 +744,29 @@ function renderCompare(){
   </div>`;
 }
 
-// ── NAVEGACIÓN ─────────────────────────────────────────────
+// ── NAVEGACIÓN ─────────────────────────────────────
 function go(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById('s-'+id).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  if(id==='ranking') renderRanking(curRank);
-  if(id==='members') renderMembers();
-  if(id==='compare'){ updateCmpSelects(); renderCompare(); }
+  if(btn)btn.classList.add('active');
+  if(id==='ranking')renderRanking(curRank);
+  if(id==='members')renderMembers();
+  if(id==='compare'){updateCmpSelects();renderCompare();}
 }
 
-// ── TOAST ──────────────────────────────────────────────────
+// ── TOAST ──────────────────────────────────────────
 let toastTimer;
 function showToast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
+  t.textContent=msg;t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.classList.remove('show'),3500);
 }
 
-// ── AUTO REFRESH cada 30s ──────────────────────────────────
-setInterval(loadMembers, 30000);
-loadMembers();
+// ── ARRANQUE ───────────────────────────────────────
+setInterval(loadAll,30000);
+loadAll();
 </script>
 </body>
 </html>
