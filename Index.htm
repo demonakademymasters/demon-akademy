@@ -53,6 +53,7 @@ body::before{content:'';position:fixed;inset:0;background:
 .btn-fire{background:linear-gradient(135deg,rgba(192,57,43,0.9),rgba(120,0,0,0.8));color:var(--gold);border:1px solid var(--fire);clip-path:polygon(8px 0%,calc(100% - 8px) 0%,100% 50%,calc(100% - 8px) 100%,8px 100%,0% 50%);padding:0.7rem 2.2rem}
 .btn-fire:hover{background:linear-gradient(135deg,var(--fire),rgba(180,0,0,0.8));box-shadow:0 0 18px rgba(192,57,43,0.5)}
 .btn-fire:disabled{opacity:0.5;cursor:not-allowed}
+.btn-fire:disabled:hover{box-shadow:none}
 .btn-sm{font-family:'Cinzel',serif;font-size:0.6rem;padding:0.3rem 0.8rem;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.2s;border:1px solid var(--border);background:rgba(44,31,15,0.7);color:var(--text2)}
 .btn-sm:hover{background:rgba(192,57,43,0.3);color:var(--gold);border-color:var(--gold)}
 .bc{text-align:center;margin:1rem 0}
@@ -135,7 +136,6 @@ body::before{content:'';position:fixed;inset:0;background:
 
 <div class="main">
 
-  <!-- PORTAL -->
   <div class="section active" id="s-portal">
     <div class="gbanner">
       <div class="gcrest">🔥</div>
@@ -161,7 +161,6 @@ body::before{content:'';position:fixed;inset:0;background:
     <div class="card"><div class="fl">📜 Últimas Actualizaciones</div><div id="pR"><div class="loader">Cargando</div></div></div>
   </div>
 
-  <!-- MI PERFIL -->
   <div class="section" id="s-register">
     <div class="sec-title">Registrar / Actualizar Perfil</div>
     <div class="card">
@@ -197,7 +196,6 @@ body::before{content:'';position:fixed;inset:0;background:
     </div>
   </div>
 
-  <!-- RANKING -->
   <div class="section" id="s-ranking">
     <div class="sec-title">Rankings de la Guild</div>
     <div class="rtabs">
@@ -210,7 +208,6 @@ body::before{content:'';position:fixed;inset:0;background:
     <div class="card" id="rankCard"><div class="loader">Cargando ranking...</div></div>
   </div>
 
-  <!-- MIEMBROS -->
   <div class="section" id="s-members">
     <div class="sec-title">Miembros de la Guild</div>
     <div style="display:flex;gap:0.5rem;margin-bottom:0.9rem;flex-wrap:wrap">
@@ -225,7 +222,6 @@ body::before{content:'';position:fixed;inset:0;background:
     <div id="mGrid"><div class="loader">Cargando miembros...</div></div>
   </div>
 
-  <!-- COMPARAR -->
   <div class="section" id="s-compare">
     <div class="sec-title">Comparar Guerreros</div>
     <div class="card">
@@ -239,7 +235,6 @@ body::before{content:'';position:fixed;inset:0;background:
 
 </div>
 
-<!-- MODAL EDITAR -->
 <div class="modal-bg" id="editModal">
   <div class="modal">
     <button class="modal-close" onclick="closeEdit()">✕ Cerrar</button>
@@ -291,8 +286,8 @@ let members = [];
 let curRank = 'level';
 
 // ── API ────────────────────────────────────────────────────
-async function req(path, method='GET', body=null){
-  const opts = {method, headers:H};
+async function req(path, method='GET', body=null, customHeaders={}){
+  const opts = {method, headers:{...H, ...customHeaders}};
   if(body) opts.body = JSON.stringify(body);
   const r = await fetch(SUPA_URL + path, opts);
   if(!r.ok){ const e = await r.text(); throw new Error(e); }
@@ -335,7 +330,7 @@ function buildData(id,name,level,cls,mel,mag,dis,def){
     updated_at:Date.now() };
 }
 
-// ── GUARDAR PERFIL ─────────────────────────────────────────
+// ── GUARDAR PERFIL (CORREGIDO CON UPSERT DIRECTO) ──────────
 async function saveProfile(){
   const name=v('i-name'), lv=n('i-lv'), cls=v('i-cls');
   if(!name){ showToast('⚠ Ingresa tu nombre de personaje'); return; }
@@ -347,10 +342,15 @@ async function saveProfile(){
 
   const id = makeId(name);
   const data = buildData(id, name, lv, cls, n('sk-mel'), n('sk-mag'), n('sk-dis'), n('sk-def'));
+  
   try{
-    await req('/members?id=eq.'+id,'DELETE');
-    await req('/members','POST',data);
+    // Ejecuta Upsert combinando duplicados usando la API REST nativa de PostgREST
+    await req('/members', 'POST', data, {
+      'Prefer': 'return=representation,resolution=merge-duplicates'
+    });
+    
     showToast('✅ Perfil guardado: '+name);
+    
     // Limpiar campos
     ['i-name','i-lv','i-cls','sk-mel','sk-mag','sk-dis','sk-def'].forEach(id=>{
       const e=document.getElementById(id); if(e) e.value='';
@@ -386,8 +386,11 @@ async function saveEdit(){
   const data = buildData(id, name, n('edit-lv'), v('edit-cls'),
     n('edit-mel'), n('edit-mag'), n('edit-dis'), n('edit-def'));
   try{
-    await req('/members?id=eq.'+id,'DELETE');
-    await req('/members','POST',data);
+    // Ejecuta Upsert en la edición para no causar el error 23505
+    await req('/members', 'POST', data, {
+      'Prefer': 'return=representation,resolution=merge-duplicates'
+    });
+    
     showToast('✅ Stats actualizados: '+name);
     closeEdit();
     await loadMembers();
