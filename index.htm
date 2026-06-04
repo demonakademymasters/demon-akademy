@@ -21,7 +21,6 @@ body::before{content:'';position:fixed;inset:0;background:
   radial-gradient(ellipse at 50% 0%,rgba(192,57,43,0.07) 0%,transparent 55%);
   pointer-events:none;z-index:0}
 
-/* HEADER */
 .header{position:relative;z-index:10;text-align:center;padding:2rem 1rem 1.2rem;border-bottom:1px solid var(--border)}
 .header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--fire),var(--gold),var(--fire),transparent)}
 .guild-logo{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,6vw,3.2rem);font-weight:700;color:var(--fire);text-shadow:0 0 20px rgba(192,57,43,0.8),0 0 40px rgba(192,57,43,0.3);animation:flicker 3s infinite}
@@ -29,22 +28,18 @@ body::before{content:'';position:fixed;inset:0;background:
 .guild-tag{font-style:italic;color:var(--text3);font-size:0.82rem;margin-top:0.4rem}
 @keyframes flicker{0%,100%{text-shadow:0 0 20px rgba(192,57,43,0.8),0 0 40px rgba(192,57,43,0.3)}50%{text-shadow:0 0 35px rgba(192,57,43,1),0 0 70px rgba(192,57,43,0.5)}}
 
-/* NAV */
 .nav{position:relative;z-index:10;display:flex;justify-content:center;flex-wrap:wrap;gap:0.4rem;padding:0.8rem;background:rgba(10,6,4,0.97);border-bottom:1px solid var(--border)}
 .nav-btn{font-family:'Cinzel',serif;font-size:0.68rem;padding:0.45rem 0.9rem;background:rgba(44,31,15,0.8);border:1px solid var(--border);color:var(--text2);cursor:pointer;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.25s;clip-path:polygon(8px 0%,calc(100% - 8px) 0%,100% 50%,calc(100% - 8px) 100%,8px 100%,0% 50%)}
 .nav-btn:hover,.nav-btn.active{background:linear-gradient(135deg,var(--fire),rgba(192,57,43,0.5));color:var(--gold);border-color:var(--gold)}
 
-/* MAIN */
 .main{position:relative;z-index:5;max-width:1100px;margin:0 auto;padding:1.2rem 0.8rem}
 .section{display:none}.section.active{display:block}
 .sec-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1rem,3vw,1.5rem);color:var(--gold);text-align:center;padding:0.8rem 0 1.2rem;text-shadow:0 0 12px rgba(241,196,15,0.3)}
 .sec-title::before,.sec-title::after{content:'✦';margin:0 0.8rem;color:var(--fire)}
 
-/* CARD */
 .card{background:linear-gradient(135deg,rgba(44,31,15,0.92),rgba(18,13,8,0.96));border:1px solid var(--border);padding:1.1rem;margin-bottom:1rem;position:relative;clip-path:polygon(0 6px,6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px))}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent)}
 
-/* FORM */
 .fl{font-family:'Cinzel',serif;font-size:0.72rem;color:var(--gold2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem;margin-top:0.3rem}
 .fg{display:flex;flex-direction:column;gap:0.35rem}
 .flb{font-family:'Cinzel',serif;font-size:0.65rem;color:var(--gold2);letter-spacing:0.08em;text-transform:uppercase}
@@ -54,7 +49,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem;margin-bottom:0.8rem}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0.8rem;margin-bottom:0.8rem}
 
-/* BUTTONS */
 .btn{font-family:'Cinzel',serif;font-size:0.78rem;padding:0.6rem 1.6rem;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.25s;border:none}
 .btn-fire{background:linear-gradient(135deg,rgba(192,57,43,0.9),rgba(120,0,0,0.8));color:var(--gold);border:1px solid var(--fire);clip-path:polygon(8px 0%,calc(100% - 8px) 0%,100% 50%,calc(100% - 8px) 100%,8px 100%,0% 50%);padding:0.7rem 2.2rem}
 .btn-fire:hover{background:linear-gradient(135deg,var(--fire),rgba(180,0,0,0.8));box-shadow:0 0 18px rgba(192,57,43,0.5)}
@@ -63,7 +57,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .btn-sm:hover{background:rgba(192,57,43,0.3);color:var(--gold);border-color:var(--gold)}
 .bc{text-align:center;margin:1rem 0}
 
-/* TABLE */
 .rt{width:100%;border-collapse:collapse;font-size:0.82rem}
 .rt th{font-family:'Cinzel',serif;color:var(--gold);padding:0.6rem 0.5rem;border-bottom:1px solid var(--border);text-align:left;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase}
 .rt td{padding:0.6rem 0.5rem;border-bottom:1px solid rgba(192,57,43,0.12);color:var(--text2)}
@@ -73,7 +66,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .rm{background:rgba(123,45,139,0.3);color:#c39bd3;border:1px solid rgba(123,45,139,0.5)}
 .ra{background:rgba(41,128,185,0.3);color:#85c1e9;border:1px solid rgba(41,128,185,0.5)}
 
-/* MEMBERS */
 .mg2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.9rem}
 .mc{background:linear-gradient(135deg,rgba(44,31,15,0.95),rgba(18,13,8,0.98));border:1px solid var(--border);padding:1rem;position:relative;overflow:hidden}
 .mc::after{content:'';position:absolute;top:0;right:0;width:50px;height:50px;background:radial-gradient(circle at top right,rgba(192,57,43,0.12),transparent 70%)}
@@ -85,22 +77,18 @@ body::before{content:'';position:fixed;inset:0;background:
 .skfill{height:100%;background:linear-gradient(90deg,var(--fire),var(--gold));border-radius:4px}
 .skv{min-width:32px;text-align:right;font-size:0.8rem;color:var(--text);font-weight:bold}
 
-/* RANKING TABS */
 .rtabs{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:1rem}
 .rtab{font-family:'Cinzel',serif;font-size:0.65rem;padding:0.38rem 0.8rem;background:rgba(44,31,15,0.7);border:1px solid var(--border);color:var(--text3);cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.2s}
 .rtab:hover,.rtab.active{background:rgba(192,57,43,0.3);color:var(--gold);border-color:var(--gold)}
 
-/* ONLINE DOT */
 .odot{width:7px;height:7px;border-radius:50%;background:#2ecc71;display:inline-block;margin-right:4px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(46,204,113,0.4)}50%{box-shadow:0 0 0 5px rgba(46,204,113,0)}}
 
-/* TOAST */
 .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:linear-gradient(135deg,rgba(44,31,15,0.98),rgba(10,6,4,0.98));border:1px solid var(--gold);color:var(--gold);padding:0.75rem 1.1rem;font-family:'Cinzel',serif;font-size:0.75rem;z-index:9999;transform:translateY(80px);opacity:0;transition:all 0.35s;max-width:280px;border-radius:2px}
 .toast.show{transform:translateY(0);opacity:1}
 .empty{text-align:center;padding:1.5rem;color:var(--text3);font-style:italic;font-size:0.85rem}
 .loader{text-align:center;padding:1.5rem;color:var(--text3);font-style:italic}
 
-/* PORTAL BANNER */
 .gbanner{background:linear-gradient(135deg,rgba(44,31,15,0.92),rgba(18,13,8,0.96));border:1px solid var(--border);border-top:2px solid var(--fire);padding:1.1rem;margin-bottom:1.2rem;display:flex;flex-wrap:wrap;align-items:center;gap:0.8rem}
 .gcrest{font-size:2.8rem;filter:drop-shadow(0 0 8px rgba(192,57,43,0.5))}
 .ginfo{flex:1;min-width:180px}
@@ -108,7 +96,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .gsr{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.4rem}
 .gs{font-size:0.75rem;color:var(--text3)}.gs span{color:var(--gold)}
 
-/* AVISOS */
 .aviso-wrap{margin-bottom:1rem}
 .aviso-form{background:linear-gradient(135deg,rgba(50,25,5,0.98),rgba(18,13,8,0.99));border:2px solid var(--gold);padding:1.1rem;margin-bottom:0.8rem;position:relative;clip-path:polygon(0 6px,6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px));display:none}
 .aviso-form.open{display:block}
@@ -129,7 +116,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .pais-item{font-size:0.72rem;color:var(--text2);padding:0.15rem 0}
 .pais-item span{color:var(--gold);font-weight:bold}
 
-/* ── SISTEMA DE RANGOS ── */
 .rank-badge{display:inline-flex;align-items:center;gap:0.35rem;padding:3px 10px;border-radius:2px;font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.08em;font-weight:bold;border:1px solid}
 .rank-novato{background:rgba(100,100,100,0.2);color:#aaa;border-color:rgba(150,150,150,0.4)}
 .rank-aprendiz{background:rgba(41,128,185,0.2);color:#85c1e9;border-color:rgba(41,128,185,0.5)}
@@ -140,7 +126,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .rank-maestro{background:rgba(200,120,0,0.25);color:var(--gold);border-color:rgba(241,196,15,0.6)}
 .rank-leyenda{background:rgba(192,57,43,0.35);color:#fff;border-color:var(--gold);box-shadow:0 0 8px rgba(241,196,15,0.3)}
 
-/* ── INSIGNIA PERFIL ── */
 .insignia-box{background:linear-gradient(135deg,rgba(50,30,5,0.98),rgba(10,6,4,0.99));border:2px solid var(--gold);padding:1.4rem;text-align:center;margin-bottom:1rem;position:relative;clip-path:polygon(0 8px,8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px));animation:insigGlow 3s infinite}
 @keyframes insigGlow{0%,100%{box-shadow:0 0 10px rgba(241,196,15,0.2)}50%{box-shadow:0 0 25px rgba(241,196,15,0.45)}}
 .insignia-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
@@ -152,7 +137,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .insig-prog-bar{height:6px;background:rgba(44,31,15,0.8);border:1px solid var(--border);border-radius:3px;overflow:hidden}
 .insig-prog-fill{height:100%;background:linear-gradient(90deg,var(--fire),var(--gold));border-radius:3px;transition:width 0.8s ease}
 
-/* ── RUTA DE RANGOS ── */
 .ruta-rangos{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.6rem;margin-top:0.8rem}
 .ruta-item{background:rgba(44,31,15,0.6);border:1px solid var(--border);padding:0.7rem;text-align:center;position:relative;opacity:0.5;transition:all 0.3s}
 .ruta-item.unlocked{opacity:1;border-color:var(--gold2)}
@@ -162,11 +146,11 @@ body::before{content:'';position:fixed;inset:0;background:
 .ruta-req{font-size:0.58rem;color:var(--text3);margin-top:0.2rem;font-family:'Cinzel',serif}
 .ruta-lock{position:absolute;top:4px;right:4px;font-size:0.6rem;color:var(--text3)}
 
-/* ── CHAT INTERNO ── */
+/* CHAT EN TIEMPO REAL */
 .chat-wrap{background:linear-gradient(135deg,rgba(18,10,5,0.98),rgba(10,6,4,0.99));border:1px solid var(--border);padding:0;overflow:hidden;margin-bottom:1rem}
 .chat-header{background:linear-gradient(135deg,rgba(44,31,15,0.95),rgba(18,13,8,0.98));padding:0.7rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .chat-title{font-family:'Cinzel',serif;font-size:0.78rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase}
-.chat-messages{height:280px;overflow-y:auto;padding:0.8rem;display:flex;flex-direction:column;gap:0.55rem}
+.chat-messages{height:300px;overflow-y:auto;padding:0.8rem;display:flex;flex-direction:column;gap:0.55rem}
 .chat-msg{display:flex;gap:0.5rem;align-items:flex-start}
 .chat-avatar{width:32px;height:32px;border-radius:2px;background:rgba(44,31,15,0.9);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
 .chat-bubble{flex:1;background:rgba(44,31,15,0.6);border:1px solid rgba(192,57,43,0.15);padding:0.45rem 0.7rem;border-radius:0 4px 4px 4px}
@@ -180,8 +164,8 @@ body::before{content:'';position:fixed;inset:0;background:
 .chat-send-btn{font-family:'Cinzel',serif;font-size:0.65rem;padding:0.5rem 1rem;cursor:pointer;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.25s;border:1px solid var(--fire);background:rgba(192,57,43,0.3);color:var(--gold);white-space:nowrap}
 .chat-send-btn:hover{background:rgba(192,57,43,0.6);box-shadow:0 0 10px rgba(192,57,43,0.3)}
 .chat-anon{display:flex;align-items:center;gap:0.4rem;font-family:'Cinzel',serif;font-size:0.58rem;color:var(--text3);padding:0 0.7rem 0.4rem;font-style:italic}
+.chat-online{font-size:0.6rem;color:#2ecc71;font-family:'Cinzel',serif}
 
-/* ── MODAL ── */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:500;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
 .modal{background:linear-gradient(135deg,rgba(44,31,15,0.99),rgba(10,6,4,0.99));border:1px solid var(--gold);padding:1.5rem;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
@@ -190,7 +174,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .modal-close{position:absolute;top:0.8rem;right:0.8rem;background:none;border:1px solid var(--border);color:var(--text3);cursor:pointer;font-family:'Cinzel',serif;font-size:0.65rem;padding:0.25rem 0.6rem}
 .modal-close:hover{color:var(--fire);border-color:var(--fire)}
 
-/* ── PROGRESO MENSUAL ── */
 .mes-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem}
 .mes-badge{font-family:'Cinzel',serif;font-size:.65rem;padding:.3rem .9rem;background:rgba(192,57,43,.25);border:1px solid var(--fire);color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
 .mes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.8rem}
@@ -204,7 +187,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .mes-tab{font-family:'Cinzel',serif;font-size:.62rem;padding:.32rem .75rem;background:rgba(44,31,15,.7);border:1px solid var(--border);color:var(--text3);cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
 .mes-tab:hover,.mes-tab.active{background:rgba(192,57,43,.3);color:var(--gold);border-color:var(--gold)}
 
-/* ── ARENA ── */
 .arena-tabs{display:flex;gap:.4rem;margin-bottom:1.1rem;flex-wrap:wrap}
 .arena-tab{font-family:'Cinzel',serif;font-size:.68rem;padding:.45rem 1.1rem;background:rgba(44,31,15,.8);border:1px solid var(--border);color:var(--text2);cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:all .25s;clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 50%,calc(100% - 6px) 100%,6px 100%,0 50%)}
 .arena-tab:hover,.arena-tab.active{background:linear-gradient(135deg,var(--fire),rgba(192,57,43,.5));color:var(--gold);border-color:var(--gold)}
@@ -222,7 +204,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .fight-log{background:rgba(10,6,4,.9);border:1px solid var(--border);padding:.8rem;max-height:160px;overflow-y:auto;font-size:.75rem;color:var(--text2);line-height:1.7;font-family:'IM Fell English',serif;margin-top:.8rem}
 .fight-log .hit{color:#e74c3c}.fight-log .crit{color:var(--gold);font-weight:bold}.fight-log .end{color:#2ecc71}
 
-/* ── TRIVIA ── */
 .trivia-card{background:linear-gradient(135deg,rgba(44,31,15,.95),rgba(18,13,8,.98));border:1px solid var(--border);padding:1.3rem;margin-bottom:.8rem;clip-path:polygon(0 6px,6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px))}
 .trivia-q{font-family:'Cinzel',serif;font-size:.92rem;color:var(--text);margin-bottom:1rem;line-height:1.5}
 .trivia-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
@@ -238,10 +219,9 @@ body::before{content:'';position:fixed;inset:0;background:
 .trivia-final{font-family:'Cinzel Decorative',serif;font-size:1.6rem;color:var(--gold);text-shadow:0 0 20px rgba(241,196,15,.4)}
 .trivia-sub{font-family:'Cinzel',serif;font-size:.8rem;color:var(--text3);margin-top:.5rem}
 
-/* ── JUEGO: ESCAPA DEL DUNGEON ── */
 .dungeon-wrap{background:linear-gradient(135deg,rgba(18,10,5,0.98),rgba(10,6,4,0.99));border:1px solid var(--border);padding:1.2rem}
 .dungeon-map{display:grid;gap:2px;margin:0.8rem auto;width:fit-content}
-.dungeon-cell{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:1px solid rgba(192,57,43,0.12);background:rgba(44,31,15,0.4);cursor:default;transition:background 0.15s;border-radius:2px;user-select:none}
+.dungeon-cell{width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:1px solid rgba(192,57,43,0.12);background:rgba(44,31,15,0.4);cursor:default;transition:background 0.15s;border-radius:2px;user-select:none}
 .dungeon-cell.wall{background:rgba(10,6,4,0.9);border-color:rgba(44,31,15,0.6)}
 .dungeon-cell.player{background:rgba(192,57,43,0.3);border-color:var(--fire)}
 .dungeon-cell.exit{background:rgba(241,196,15,0.15);border-color:var(--gold)}
@@ -254,8 +234,8 @@ body::before{content:'';position:fixed;inset:0;background:
 .dungeon-hud{display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:0.6rem;font-family:'Cinzel',serif;font-size:0.68rem;color:var(--text2)}
 .dungeon-hud span{color:var(--gold);font-weight:bold}
 .dungeon-log{background:rgba(10,6,4,0.8);border:1px solid var(--border);padding:0.5rem 0.8rem;font-size:0.72rem;color:var(--text3);font-family:'Cinzel',serif;min-height:2rem;text-align:center}
+.dungeon-level-badge{font-family:'Cinzel Decorative',serif;font-size:0.8rem;color:var(--gold);text-align:center;margin-bottom:0.5rem}
 
-/* ── RULETA ── */
 .ruleta-wrap{display:flex;flex-direction:column;align-items:center;gap:1.2rem;padding:1rem 0}
 .ruleta-canvas-wrap{position:relative;width:280px;height:280px}
 #ruletaCanvas{border-radius:50%;display:block}
@@ -265,7 +245,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .ruleta-cat-btn{font-family:'Cinzel',serif;font-size:.6rem;padding:.28rem .7rem;background:rgba(44,31,15,.7);border:1px solid var(--border);color:var(--text3);cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
 .ruleta-cat-btn.active{background:rgba(192,57,43,.3);color:var(--gold);border-color:var(--gold)}
 
-/* ── GUERRAS ── */
 .war-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:.6rem;margin-bottom:1.2rem}
 .war-stat{background:rgba(44,31,15,.8);border:1px solid var(--border);padding:.7rem;text-align:center}
 .war-stat-n{font-family:'Cinzel Decorative',serif;font-size:1.5rem}
@@ -281,7 +260,6 @@ body::before{content:'';position:fixed;inset:0;background:
 .war-del{background:none;border:none;color:rgba(192,57,43,.6);cursor:pointer;font-size:.75rem;padding:0 .4rem;transition:color .2s}
 .war-del:hover{color:#e74c3c}
 
-/* ── MURO ── */
 .muro-form{background:linear-gradient(135deg,rgba(44,31,15,.95),rgba(18,13,8,.98));border:1px solid var(--border);padding:1rem;margin-bottom:1rem;display:none}
 .muro-form.open{display:block}
 .muro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.9rem}
@@ -337,7 +315,7 @@ body::before{content:'';position:fixed;inset:0;background:
 
 <div class="main">
 
-<!-- ===== PORTAL ===== -->
+<!-- PORTAL -->
 <div class="section active" id="s-portal">
   <div class="aviso-wrap">
     <button class="btn-aviso" onclick="toggleAvisoForm()">📢 AGREGAR AVISO DE GUILD</button>
@@ -363,16 +341,18 @@ body::before{content:'';position:fixed;inset:0;background:
     <div id="avisosList"></div>
   </div>
 
-  <!-- CHAT INTERNO -->
+  <!-- CHAT EN TIEMPO REAL — Supabase -->
   <div class="chat-wrap">
     <div class="chat-header">
-      <div class="chat-title">💬 Chat de la Guild</div>
-      <div style="font-size:0.62rem;color:var(--text3);font-family:'Cinzel',serif"><span class="odot"></span>Tu rango aparece automáticamente</div>
+      <div class="chat-title">💬 Chat de la Guild — En Vivo</div>
+      <div class="chat-online"><span class="odot"></span>Tiempo Real — Todos lo ven</div>
     </div>
-    <div class="chat-messages" id="chatMessages"></div>
-    <div class="chat-anon">⚠ Escribe tu nick exacto de Rucoy para que aparezca tu rango e insignia</div>
+    <div class="chat-messages" id="chatMessages">
+      <div style="text-align:center;font-size:0.68rem;color:var(--text3);font-family:'Cinzel',serif;font-style:italic;padding:0.5rem">⚙ Cargando mensajes...</div>
+    </div>
+    <div class="chat-anon">⚔ Usa tu nick exacto de Rucoy para ver tu rango automáticamente</div>
     <div class="chat-input-row">
-      <input class="fi chat-name-input" id="chatNick" type="text" placeholder="Tu nick..." maxlength="30">
+      <input class="fi chat-name-input" id="chatNick" type="text" placeholder="Tu nick de Rucoy..." maxlength="30">
       <input class="fi chat-msg-input" id="chatText" type="text" placeholder="Escribe un mensaje..." maxlength="200" onkeydown="if(event.key==='Enter')sendChat()">
       <button class="chat-send-btn" onclick="sendChat()">⚔ Enviar</button>
     </div>
@@ -403,11 +383,9 @@ body::before{content:'';position:fixed;inset:0;background:
   <div class="card"><div class="fl">📜 Últimas Actualizaciones</div><div id="pR"><div class="loader">Cargando</div></div></div>
 </div>
 
-<!-- ===== MI PERFIL ===== -->
+<!-- MI PERFIL -->
 <div class="section" id="s-register">
   <div class="sec-title">Registrar / Actualizar Perfil</div>
-
-  <!-- INSIGNIA DINÁMICA -->
   <div id="insigPreview" style="display:none">
     <div class="insignia-box" id="insigBox">
       <span class="insig-icon" id="insigIcon">🗡️</span>
@@ -421,42 +399,37 @@ body::before{content:'';position:fixed;inset:0;background:
       </div>
     </div>
     <div class="card" style="margin-bottom:1rem">
-      <div class="fl">🛡 Ruta de Rangos — Rucoy Online</div>
-      <div style="font-size:0.75rem;color:var(--text3);font-style:italic;margin-bottom:0.6rem">Desbloquea rangos subiendo tu nivel y dominando los skills de combate</div>
+      <div class="fl">🛡 Ruta de Rangos</div>
       <div class="ruta-rangos" id="rutaRangos"></div>
     </div>
   </div>
-
   <div class="card">
-    <div style="font-size:0.8rem;color:var(--text3);font-style:italic;margin-bottom:1.2rem">Ingresa tu nombre exactamente igual cada vez para actualizar tus stats. Tu insignia y rango se muestran automáticamente.</div>
+    <div style="font-size:0.8rem;color:var(--text3);font-style:italic;margin-bottom:1.2rem">Ingresa tu nombre exactamente igual cada vez para actualizar tus stats.</div>
     <div class="fl">👤 Datos del Personaje</div>
     <div class="grid2">
-      <div class="fg"><label class="flb">Nombre de Personaje *</label><input class="fi" id="i-name" type="text" placeholder="Tu nick en Rucoy..." maxlength="30"></div>
+      <div class="fg"><label class="flb">Nombre *</label><input class="fi" id="i-name" type="text" placeholder="Tu nick en Rucoy..." maxlength="30"></div>
       <div class="fg"><label class="flb">Nivel *</label><input class="fi" id="i-lv" type="number" placeholder="Ej: 350" min="1" max="9999" oninput="previewInsignia()"></div>
       <div class="fg"><label class="flb">Clase *</label>
         <select class="fi" id="i-cls">
           <option value="">Seleccionar...</option>
-          <option value="warrior">⚔ Warrior (Melee)</option>
-          <option value="mage">🔮 Mage (Magia)</option>
-          <option value="archer">🏹 Archer (Distancia)</option>
+          <option value="warrior">⚔ Warrior</option>
+          <option value="mage">🔮 Mage</option>
+          <option value="archer">🏹 Archer</option>
         </select>
       </div>
     </div>
-    <div class="fl">🌟 Skills de Combate</div>
+    <div class="fl">🌟 Skills</div>
     <div class="grid3">
       <div class="fg"><label class="flb">⚔ Melee</label><input class="fi" id="sk-mel" type="number" placeholder="0" min="0" max="999" oninput="previewInsignia()"></div>
       <div class="fg"><label class="flb">🔮 Magia</label><input class="fi" id="sk-mag" type="number" placeholder="0" min="0" max="999" oninput="previewInsignia()"></div>
       <div class="fg"><label class="flb">🏹 Distancia</label><input class="fi" id="sk-dis" type="number" placeholder="0" min="0" max="999" oninput="previewInsignia()"></div>
       <div class="fg"><label class="flb">🛡 Defensa</label><input class="fi" id="sk-def" type="number" placeholder="0" min="0" max="999" oninput="previewInsignia()"></div>
     </div>
-    <div class="bc">
-      <button class="btn btn-fire" id="btnSave" onclick="saveProfile()">🔥 Guardar / Actualizar</button>
-    </div>
-    <div style="text-align:center;font-size:0.72rem;color:var(--text3);font-style:italic">⚠ Usa siempre el mismo nombre para actualizar sin crear duplicados.</div>
+    <div class="bc"><button class="btn btn-fire" id="btnSave" onclick="saveProfile()">🔥 Guardar / Actualizar</button></div>
   </div>
 </div>
 
-<!-- ===== RANKING ===== -->
+<!-- RANKING -->
 <div class="section" id="s-ranking">
   <div class="sec-title">Rankings de la Guild</div>
   <div class="rtabs">
@@ -466,10 +439,10 @@ body::before{content:'';position:fixed;inset:0;background:
     <button class="rtab" onclick="showRank('sk_dist',this)">🏹 Top Distancia</button>
     <button class="rtab" onclick="showRank('sk_def',this)">🛡 Top Defensa</button>
   </div>
-  <div class="card" id="rankCard"><div class="loader">Cargando ranking...</div></div>
+  <div class="card" id="rankCard"><div class="loader">Cargando...</div></div>
 </div>
 
-<!-- ===== MIEMBROS ===== -->
+<!-- MIEMBROS -->
 <div class="section" id="s-members">
   <div class="sec-title">Miembros de la Guild</div>
   <div style="display:flex;gap:0.5rem;margin-bottom:0.9rem;flex-wrap:wrap">
@@ -481,10 +454,10 @@ body::before{content:'';position:fixed;inset:0;background:
       <option value="archer">🏹 Archer</option>
     </select>
   </div>
-  <div id="mGrid"><div class="loader">Cargando miembros...</div></div>
+  <div id="mGrid"><div class="loader">Cargando...</div></div>
 </div>
 
-<!-- ===== COMPARAR ===== -->
+<!-- COMPARAR -->
 <div class="section" id="s-compare">
   <div class="sec-title">Comparar Guerreros</div>
   <div class="card">
@@ -496,12 +469,12 @@ body::before{content:'';position:fixed;inset:0;background:
   <div id="cmpRes"></div>
 </div>
 
-<!-- ===== PROGRESO MENSUAL ===== -->
+<!-- PROGRESO MENSUAL -->
 <div class="section" id="s-progreso">
   <div class="sec-title">📅 Progreso Mensual</div>
   <div class="mes-header">
     <div class="mes-badge" id="mesBadge">Mes Actual</div>
-    <div style="font-size:.72rem;color:var(--text3);font-style:italic">Basado en los datos registrados este mes</div>
+    <div style="font-size:.72rem;color:var(--text3);font-style:italic">Basado en datos registrados</div>
   </div>
   <div class="mes-tabs">
     <button class="mes-tab active" onclick="showMesTab('level',this)">⭐ Nivel</button>
@@ -513,13 +486,13 @@ body::before{content:'';position:fixed;inset:0;background:
   <div id="mesGrid" class="mes-grid"></div>
 </div>
 
-<!-- ===== ARENA ===== -->
+<!-- ARENA -->
 <div class="section" id="s-arena">
   <div class="sec-title">🎮 Arena</div>
   <div class="arena-tabs">
     <button class="arena-tab active" onclick="switchArena('combat',this)">⚔ Combate 1v1</button>
     <button class="arena-tab" onclick="switchArena('trivia',this)">🧠 Trivia Rucoy</button>
-    <button class="arena-tab" onclick="switchArena('dungeon',this)">🗺 Escapa del Dungeon</button>
+    <button class="arena-tab" onclick="switchArena('dungeon',this)">🗺 Dungeon</button>
   </div>
   <div class="arena-panel active" id="arena-combat">
     <div class="card">
@@ -528,26 +501,26 @@ body::before{content:'';position:fixed;inset:0;background:
         <div class="fg"><label class="flb">Guerrero 1</label><select class="fi" id="f1"></select></div>
         <div class="fg"><label class="flb">Guerrero 2</label><select class="fi" id="f2"></select></div>
       </div>
-      <div class="bc" style="margin-top:.8rem">
-        <button class="btn btn-fire" onclick="startFight()">⚔ ¡COMBATIR!</button>
-      </div>
+      <div class="bc" style="margin-top:.8rem"><button class="btn btn-fire" onclick="startFight()">⚔ ¡COMBATIR!</button></div>
     </div>
     <div id="fightResult" style="margin-top:.8rem"></div>
   </div>
   <div class="arena-panel" id="arena-trivia">
-    <div class="trivia-score">Puntuación: <span id="tScore">0</span> / <span id="tTotal">10</span></div>
+    <div class="trivia-score">Puntuación: <span id="tScore">0</span> / <span id="tTotal">12</span></div>
     <div class="trivia-progress"><div class="trivia-prog-fill" id="tProgBar" style="width:0%"></div></div>
     <div id="triviaArea"></div>
   </div>
   <div class="arena-panel" id="arena-dungeon">
     <div class="dungeon-wrap">
-      <div style="font-family:'Cinzel',serif;font-size:0.72rem;color:var(--text3);text-align:center;margin-bottom:0.8rem;font-style:italic">Llega a la salida 🔑 evitando trampas 🔥 y monstruos 💀 — usa las flechas o los botones</div>
+      <div style="font-family:'Cinzel',serif;font-size:0.72rem;color:var(--text3);text-align:center;margin-bottom:0.4rem;font-style:italic">Llega a 🔑 — evita trampas 🔥 y monstruos 💀</div>
+      <div class="dungeon-level-badge" id="dungeonLevelBadge">Nivel 1</div>
       <div class="dungeon-hud">
         <span>❤️ HP: <span id="dHP">3</span></span>
         <span>⚔ Pasos: <span id="dSteps">0</span></span>
         <span>💀 Kills: <span id="dKills">0</span></span>
+        <span>🏆 Nivel: <span id="dLevel">1</span></span>
       </div>
-      <div class="dungeon-map" id="dungeonMap" style="grid-template-columns:repeat(10,36px)"></div>
+      <div class="dungeon-map" id="dungeonMap"></div>
       <div class="dungeon-log" id="dungeonLog">Mueve tu personaje hacia la salida 🔑</div>
       <div class="dungeon-controls">
         <div class="dctrl-row"><button class="dctrl-btn" onclick="movePlayer('up')">▲</button></div>
@@ -556,32 +529,30 @@ body::before{content:'';position:fixed;inset:0;background:
           <button class="dctrl-btn" onclick="movePlayer('down')">▼</button>
           <button class="dctrl-btn" onclick="movePlayer('right')">►</button>
         </div>
-        <div style="margin-top:0.6rem"><button class="btn-sm" onclick="initDungeon()">🔄 Nuevo Mapa</button></div>
+        <div style="margin-top:0.6rem"><button class="btn-sm" onclick="resetDungeon()">🔄 Reiniciar</button></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== RULETA ===== -->
+<!-- RULETA -->
 <div class="section" id="s-ruleta">
   <div class="sec-title">🎲 Ruleta de Guild</div>
   <div class="card" style="text-align:center">
-    <div style="font-size:.8rem;color:var(--text3);font-style:italic;margin-bottom:.9rem">Gira la ruleta para asignar roles, misiones o castigos épicos a la guild</div>
+    <div style="font-size:.8rem;color:var(--text3);font-style:italic;margin-bottom:.9rem">Gira la ruleta para asignar roles, misiones o castigos épicos</div>
     <div class="ruleta-cats" id="ruletaCats"></div>
     <div class="ruleta-wrap">
       <div class="ruleta-canvas-wrap">
         <div class="ruleta-needle"></div>
         <canvas id="ruletaCanvas" width="280" height="280"></canvas>
       </div>
-      <div class="bc">
-        <button class="btn btn-fire" id="btnGirar" onclick="girarRuleta()">🎲 ¡GIRAR!</button>
-      </div>
+      <div class="bc"><button class="btn btn-fire" id="btnGirar" onclick="girarRuleta()">🎲 ¡GIRAR!</button></div>
       <div class="ruleta-result" id="ruletaResult"></div>
     </div>
   </div>
 </div>
 
-<!-- ===== GUERRAS ===== -->
+<!-- GUERRAS — Supabase -->
 <div class="section" id="s-guerra">
   <div class="sec-title">🗺 Registro de Guerras</div>
   <div class="war-stats">
@@ -615,12 +586,12 @@ body::before{content:'';position:fixed;inset:0;background:
   <div class="war-table-wrap">
     <table class="rt" style="min-width:500px">
       <thead><tr><th>Guild Enemiga</th><th>Resultado</th><th>Kills DA</th><th>Kills Enemigo</th><th>Notas</th><th>Fecha</th><th></th></tr></thead>
-      <tbody id="warTable"><tr><td colspan="7" class="empty">Sin guerras registradas aún</td></tr></tbody>
+      <tbody id="warTable"><tr><td colspan="7" class="empty">Cargando guerras...</td></tr></tbody>
     </table>
   </div>
 </div>
 
-<!-- ===== MURO DE LA FAMA ===== -->
+<!-- MURO DE LA FAMA — Supabase -->
 <div class="section" id="s-muro">
   <div class="sec-title">💀 Muro de la Fama</div>
   <button class="btn-aviso" onclick="toggleMuroForm()" style="margin-bottom:.8rem">💀 AGREGAR MOMENTO ÉPICO</button>
@@ -646,7 +617,7 @@ body::before{content:'';position:fixed;inset:0;background:
     </div>
   </div>
   <div class="muro-grid" id="muroGrid">
-    <div class="empty" style="grid-column:1/-1">Sé el primero en inmortalizar un momento épico de Demon Akademy</div>
+    <div class="empty" style="grid-column:1/-1">Cargando momentos épicos...</div>
   </div>
 </div>
 
@@ -676,9 +647,7 @@ body::before{content:'';position:fixed;inset:0;background:
       <div class="fg"><label class="flb">🏹 Distancia</label><input class="fi" id="edit-dis" type="number" min="0" max="999"></div>
       <div class="fg"><label class="flb">🛡 Defensa</label><input class="fi" id="edit-def" type="number" min="0" max="999"></div>
     </div>
-    <div class="bc">
-      <button class="btn btn-fire" id="btnEditSave" onclick="saveEdit()">🔥 Guardar Cambios</button>
-    </div>
+    <div class="bc"><button class="btn btn-fire" id="btnEditSave" onclick="saveEdit()">🔥 Guardar Cambios</button></div>
   </div>
 </div>
 
@@ -690,7 +659,9 @@ body::before{content:'';position:fixed;inset:0;background:
 </div>
 
 <script>
-// ── CONFIG ─────────────────────────────────────────
+// ══════════════════════════════════════════════════════
+// CONFIG SUPABASE
+// ══════════════════════════════════════════════════════
 const SUPA_URL = 'https://mgffuphsbjsvjocdiqps.supabase.co/rest/v1';
 const SUPA_KEY = 'sb_publishable_LAD7Rh3pzvdgW9d5kMh6WA_WGG6x2DJ';
 const H = {
@@ -714,172 +685,164 @@ const PAISES = [
   {n:'🇪🇸 España',tz:'Europe/Madrid'},
 ];
 
-// ── SISTEMA DE RANGOS RUCOY ─────────────────────────
-// Basado en nivel + suma de skills de combate
+// ══════════════════════════════════════════════════════
+// RANGOS
+// ══════════════════════════════════════════════════════
 const RANGOS = [
-  {
-    id:'novato', nombre:'Novato', icon:'🗡️', clase:'rank-novato',
-    desc:'Apenas comienzas tu camino en Rucoy Online',
-    reqNivel:1, reqSkillTotal:0,
-    tips:['Sube tu nivel farmeando en zonas seguras','Únete a otros miembros para misiones','Aprende los controles básicos de Rucoy']
-  },
-  {
-    id:'aprendiz', nombre:'Aprendiz', icon:'⚔️', clase:'rank-aprendiz',
-    desc:'Ya empiezas a conocer los secretos del combate',
-    reqNivel:50, reqSkillTotal:100,
-    tips:['Empieza a especializarte en tu clase','Participa en guerras de bajo riesgo','Aprende a usar pociones eficientemente']
-  },
-  {
-    id:'soldado', nombre:'Soldado', icon:'🛡️', clase:'rank-soldado',
-    desc:'Un guerrero probado en los campos de batalla',
-    reqNivel:150, reqSkillTotal:300,
-    tips:['Ayuda a guiar a los novatos','Participa en todas las guerras de guild','Mejora tu skill de defensa']
-  },
-  {
-    id:'guerrero', nombre:'Guerrero', icon:'⚔', clase:'rank-guerrero',
-    desc:'Tu nombre ya genera respeto en el reino',
-    reqNivel:300, reqSkillTotal:600,
-    tips:['Lidera grupos en dungeons','Organiza estrategias de war','Entrena tu build al máximo']
-  },
-  {
-    id:'elite', nombre:'Élite', icon:'🔥', clase:'rank-elite',
-    desc:'Pocos alcanzan este nivel de dominio',
-    reqNivel:500, reqSkillTotal:1000,
-    tips:['Sé el pilar de la guild en guerras','Domina los mapas más difíciles','Enseña tus builds a los demás']
-  },
-  {
-    id:'veterano', nombre:'Veterano', icon:'💀', clase:'rank-veterano',
-    desc:'Una leyenda viva del servidor de Rucoy',
-    reqNivel:750, reqSkillTotal:1500,
-    tips:['Coordina las guerras de alto nivel','Representa a Demon Akademy','Tu presencia en batalla cambia el resultado']
-  },
-  {
-    id:'maestro', nombre:'Maestro', icon:'👑', clase:'rank-maestro',
-    desc:'El dominio absoluto de las artes de combate',
-    reqNivel:1000, reqSkillTotal:2200,
-    tips:['Forja la estrategia global de la guild','Entrena a los Élite','Tu leyenda trasciende el servidor']
-  },
-  {
-    id:'leyenda', nombre:'Leyenda', icon:'🌟', clase:'rank-leyenda',
-    desc:'Has alcanzado lo que muy pocos pueden soñar',
-    reqNivel:1500, reqSkillTotal:3000,
-    tips:['Eres historia viva de Demon Akademy','El servidor te conoce','Nadie cuestiona tu poder']
-  },
+  {id:'novato',nombre:'Novato',icon:'🗡️',clase:'rank-novato',desc:'Apenas comienzas tu camino',reqNivel:1,reqSkillTotal:0},
+  {id:'aprendiz',nombre:'Aprendiz',icon:'⚔️',clase:'rank-aprendiz',desc:'Empiezas a conocer el combate',reqNivel:50,reqSkillTotal:100},
+  {id:'soldado',nombre:'Soldado',icon:'🛡️',clase:'rank-soldado',desc:'Guerrero probado en batalla',reqNivel:150,reqSkillTotal:300},
+  {id:'guerrero',nombre:'Guerrero',icon:'⚔',clase:'rank-guerrero',desc:'Tu nombre genera respeto',reqNivel:300,reqSkillTotal:600},
+  {id:'elite',nombre:'Élite',icon:'🔥',clase:'rank-elite',desc:'Pocos alcanzan este nivel',reqNivel:500,reqSkillTotal:1000},
+  {id:'veterano',nombre:'Veterano',icon:'💀',clase:'rank-veterano',desc:'Una leyenda viva del servidor',reqNivel:750,reqSkillTotal:1500},
+  {id:'maestro',nombre:'Maestro',icon:'👑',clase:'rank-maestro',desc:'Dominio absoluto del combate',reqNivel:1000,reqSkillTotal:2200},
+  {id:'leyenda',nombre:'Leyenda',icon:'🌟',clase:'rank-leyenda',desc:'Lo que muy pocos pueden soñar',reqNivel:1500,reqSkillTotal:3000},
 ];
 
-function calcRango(nivel, skMelee, skMagic, skDist, skDef){
-  const skillTotal = (skMelee||0) + (skMagic||0) + (skDist||0) + (skDef||0);
-  let rangoActual = RANGOS[0];
+function calcRango(nivel,skMelee,skMagic,skDist,skDef){
+  const skillTotal=(skMelee||0)+(skMagic||0)+(skDist||0)+(skDef||0);
+  let rangoActual=RANGOS[0];
   for(const r of RANGOS){
-    if(nivel >= r.reqNivel && skillTotal >= r.reqSkillTotal) rangoActual = r;
+    if(nivel>=r.reqNivel&&skillTotal>=r.reqSkillTotal) rangoActual=r;
     else break;
   }
-  return {rango: rangoActual, skillTotal};
+  return {rango:rangoActual,skillTotal};
 }
-
-function calcProgreso(nivel, skillTotal){
-  let idx = 0;
-  for(let i = 0; i < RANGOS.length; i++){
-    if(nivel >= RANGOS[i].reqNivel && skillTotal >= RANGOS[i].reqSkillTotal) idx = i;
+function calcProgreso(nivel,skillTotal){
+  let idx=0;
+  for(let i=0;i<RANGOS.length;i++){
+    if(nivel>=RANGOS[i].reqNivel&&skillTotal>=RANGOS[i].reqSkillTotal) idx=i;
     else break;
   }
-  if(idx >= RANGOS.length - 1) return {pct:100, label:'¡Rango Máximo Alcanzado!'};
-  const curr = RANGOS[idx], next = RANGOS[idx+1];
-  const pctNivel = Math.min(1, nivel / next.reqNivel);
-  const pctSkill = next.reqSkillTotal > 0 ? Math.min(1, skillTotal / next.reqSkillTotal) : 1;
-  const pct = Math.round(((pctNivel + pctSkill) / 2) * 100);
-  return {pct, label:`Siguiente: ${next.icon} ${next.nombre} — Nivel ${next.reqNivel} · Skills ${next.reqSkillTotal}`};
+  if(idx>=RANGOS.length-1) return {pct:100,label:'¡Rango Máximo!'};
+  const next=RANGOS[idx+1];
+  const pctNivel=Math.min(1,nivel/next.reqNivel);
+  const pctSkill=next.reqSkillTotal>0?Math.min(1,skillTotal/next.reqSkillTotal):1;
+  const pct=Math.round(((pctNivel+pctSkill)/2)*100);
+  return {pct,label:`Siguiente: ${next.icon} ${next.nombre} — Lv.${next.reqNivel} · Sk.${next.reqSkillTotal}`};
 }
-
 function previewInsignia(){
-  const nivel = parseInt(document.getElementById('i-lv')?.value)||0;
-  const mel = parseInt(document.getElementById('sk-mel')?.value)||0;
-  const mag = parseInt(document.getElementById('sk-mag')?.value)||0;
-  const dis = parseInt(document.getElementById('sk-dis')?.value)||0;
-  const def = parseInt(document.getElementById('sk-def')?.value)||0;
+  const nivel=parseInt(document.getElementById('i-lv')?.value)||0;
+  const mel=parseInt(document.getElementById('sk-mel')?.value)||0;
+  const mag=parseInt(document.getElementById('sk-mag')?.value)||0;
+  const dis=parseInt(document.getElementById('sk-dis')?.value)||0;
+  const def=parseInt(document.getElementById('sk-def')?.value)||0;
   if(!nivel) return;
-  const {rango, skillTotal} = calcRango(nivel, mel, mag, dis, def);
-  const {pct, label} = calcProgreso(nivel, skillTotal);
+  const {rango,skillTotal}=calcRango(nivel,mel,mag,dis,def);
+  const {pct,label}=calcProgreso(nivel,skillTotal);
   document.getElementById('insigPreview').style.display='block';
-  document.getElementById('insigIcon').textContent = rango.icon;
-  document.getElementById('insigName').textContent = rango.nombre;
-  document.getElementById('insigDesc').textContent = rango.desc;
-  document.getElementById('insigBadgeWrap').innerHTML = `<span class="rank-badge ${rango.clase}">${rango.icon} ${rango.nombre}</span>`;
-  document.getElementById('insigProgFill').style.width = pct+'%';
-  document.getElementById('insigProgLabel').textContent = label;
-  renderRutaRangos(nivel, skillTotal);
+  document.getElementById('insigIcon').textContent=rango.icon;
+  document.getElementById('insigName').textContent=rango.nombre;
+  document.getElementById('insigDesc').textContent=rango.desc;
+  document.getElementById('insigBadgeWrap').innerHTML=`<span class="rank-badge ${rango.clase}">${rango.icon} ${rango.nombre}</span>`;
+  document.getElementById('insigProgFill').style.width=pct+'%';
+  document.getElementById('insigProgLabel').textContent=label;
+  renderRutaRangos(nivel,skillTotal);
 }
-
-function renderRutaRangos(nivel, skillTotal){
-  const el = document.getElementById('rutaRangos');
-  if(!el) return;
-  el.innerHTML = RANGOS.map((r,i)=>{
-    const unlocked = nivel >= r.reqNivel && skillTotal >= r.reqSkillTotal;
-    let isCurrent = false;
-    if(unlocked){
-      const next = RANGOS[i+1];
-      if(!next || nivel < next.reqNivel || skillTotal < next.reqSkillTotal) isCurrent = true;
-    }
+function renderRutaRangos(nivel,skillTotal){
+  const el=document.getElementById('rutaRangos');if(!el)return;
+  el.innerHTML=RANGOS.map((r,i)=>{
+    const unlocked=nivel>=r.reqNivel&&skillTotal>=r.reqSkillTotal;
+    let isCurrent=false;
+    if(unlocked){const next=RANGOS[i+1];if(!next||nivel<next.reqNivel||skillTotal<next.reqSkillTotal) isCurrent=true;}
     return `<div class="ruta-item ${unlocked?'unlocked':''} ${isCurrent?'current':''}">
-      ${!unlocked ? '<div class="ruta-lock">🔒</div>' : ''}
+      ${!unlocked?'<div class="ruta-lock">🔒</div>':''}
       <span class="ruta-icon">${r.icon}</span>
       <div class="ruta-name">${r.nombre}</div>
-      <div class="ruta-req">Lv.${r.reqNivel} · Sk.${r.reqSkillTotal}</div>
+      <div class="ruta-req">Lv.${r.reqNivel}·Sk.${r.reqSkillTotal}</div>
     </div>`;
   }).join('');
 }
-
 function getRangoBadgeHtml(m){
-  const {rango} = calcRango(m.level, m.sk_melee, m.sk_magic, m.sk_dist, m.sk_def);
+  const {rango}=calcRango(m.level,m.sk_melee,m.sk_magic,m.sk_dist,m.sk_def);
   return `<span class="rank-badge ${rango.clase}">${rango.icon} ${rango.nombre}</span>`;
 }
 
-// ── CHAT INTERNO ────────────────────────────────────
-let chatMessages = [];
-
-function loadChat(){
-  try{ chatMessages = JSON.parse(localStorage.getItem('da_chat')||'[]'); }catch(e){ chatMessages = []; }
-  // Mensajes demo si está vacío
-  if(!chatMessages.length){
-    chatMessages = [
-      {nick:'Sistema', text:'¡Bienvenidos al chat de Demon Akademy! Aquí se muestran los rangos reales de cada miembro.', time:Date.now()-3600000, isSystem:true},
-    ];
-  }
-  renderChat();
+// ══════════════════════════════════════════════════════
+// API SUPABASE — función base
+// ══════════════════════════════════════════════════════
+async function apiReq(path,method='GET',body=null,extraH={}){
+  const opts={method,headers:{...H,...extraH}};
+  if(body) opts.body=JSON.stringify(body);
+  const r=await fetch(SUPA_URL+path,opts);
+  if(!r.ok){const e=await r.text();throw new Error(e);}
+  const t=await r.text();
+  return t?JSON.parse(t):[];
 }
 
-function saveChatLS(){ localStorage.setItem('da_chat', JSON.stringify(chatMessages.slice(-80))); }
+let members=[],avisos=[],curRank='level';
 
-function sendChat(){
-  const nick = (document.getElementById('chatNick')?.value||'').trim();
-  const text = (document.getElementById('chatText')?.value||'').trim();
-  if(!nick){ showToast('⚠ Escribe tu nick de Rucoy'); return; }
-  if(!text){ showToast('⚠ Escribe un mensaje'); return; }
-  const msg = {nick, text, time: Date.now()};
-  chatMessages.push(msg);
-  saveChatLS();
-  document.getElementById('chatText').value = '';
-  renderChat();
-  showToast('💬 Mensaje enviado');
+async function loadAll(){
+  try{
+    const [m,a]=await Promise.all([
+      apiReq('/members?select=*&order=level.desc'),
+      apiReq('/announcements?select=*&order=created_at.desc')
+    ]);
+    members=m;
+    const now=new Date();
+    avisos=a.filter(x=>!x.expires_at||new Date(x.expires_at)>now);
+    updateAll();
+  }catch(e){
+    console.error('Error Supabase:',e);
+    showToast('⚠ Error al conectar');
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// CHAT EN TIEMPO REAL — Supabase (tabla chat_messages)
+// Se refresca cada 5 segundos para que todos vean los mensajes
+// ══════════════════════════════════════════════════════
+let chatCache=[];
+let chatInterval=null;
+
+async function loadChat(){
+  try{
+    const msgs=await apiReq('/chat_messages?select=*&order=created_at.asc&limit=60');
+    chatCache=msgs;
+    renderChat();
+  }catch(e){
+    console.error('Chat error:',e);
+  }
+}
+
+async function sendChat(){
+  const nick=(document.getElementById('chatNick')?.value||'').trim();
+  const text=(document.getElementById('chatText')?.value||'').trim();
+  if(!nick){showToast('⚠ Escribe tu nick de Rucoy');return;}
+  if(!text){showToast('⚠ Escribe un mensaje');return;}
+  const btn=document.querySelector('.chat-send-btn');
+  if(btn){btn.disabled=true;btn.textContent='...';}
+  try{
+    await apiReq('/chat_messages','POST',{nick,message:text},{'Prefer':'return=minimal'});
+    document.getElementById('chatText').value='';
+    await loadChat();
+    showToast('💬 Mensaje enviado');
+  }catch(e){
+    showToast('⚠ Error al enviar: '+e.message);
+  }
+  if(btn){btn.disabled=false;btn.textContent='⚔ Enviar';}
+}
+
+async function deleteChat(id){
+  try{
+    await apiReq('/chat_messages?id=eq.'+id,'DELETE',null,{'Prefer':'return=minimal'});
+    await loadChat();
+  }catch(e){showToast('⚠ Error: '+e.message);}
 }
 
 function renderChat(){
-  const el = document.getElementById('chatMessages');
-  if(!el) return;
-  const clsEmojiFn = c => c==='warrior'?'⚔':c==='mage'?'🔮':c==='archer'?'🏹':'👤';
-  if(!chatMessages.length){
-    el.innerHTML = '<div class="empty">¡Sé el primero en hablar!</div>';
+  const el=document.getElementById('chatMessages');if(!el)return;
+  const clsEmojiFn=c=>c==='warrior'?'⚔':c==='mage'?'🔮':c==='archer'?'🏹':'👤';
+  if(!chatCache.length){
+    el.innerHTML='<div style="text-align:center;font-size:0.68rem;color:var(--text3);font-family:Cinzel,serif;font-style:italic;padding:0.5rem">⚙ ¡Bienvenidos al chat de Demon Akademy! Sé el primero en escribir.</div>';
     return;
   }
-  el.innerHTML = chatMessages.slice(-40).map(msg=>{
-    if(msg.isSystem){
-      return `<div style="text-align:center;font-size:0.68rem;color:var(--text3);font-family:'Cinzel',serif;font-style:italic;padding:0.3rem">⚙ ${msg.text}</div>`;
-    }
-    // Buscar si existe en la guild para mostrar rango
-    const member = members.find(m => m.name.toLowerCase() === msg.nick.toLowerCase());
-    const rangoHtml = member ? getRangoBadgeHtml(member) : `<span class="rank-badge rank-novato">👤 Visitante</span>`;
-    const clsIcon = member ? clsEmojiFn(member.class) : '👤';
-    const timeStr = new Date(msg.time).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+  const isNearBottom=el.scrollHeight-el.scrollTop-el.clientHeight<80;
+  el.innerHTML=chatCache.map(msg=>{
+    const member=members.find(m=>m.name.toLowerCase()===msg.nick.toLowerCase());
+    const rangoHtml=member?getRangoBadgeHtml(member):`<span class="rank-badge rank-novato">👤 Visitante</span>`;
+    const clsIcon=member?clsEmojiFn(member.class):'👤';
+    const timeStr=new Date(msg.created_at).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
     return `<div class="chat-msg">
       <div class="chat-avatar">${clsIcon}</div>
       <div class="chat-bubble">
@@ -887,47 +850,31 @@ function renderChat(){
           <span class="chat-author">${msg.nick}</span>
           ${rangoHtml}
           <span class="chat-time">${timeStr}</span>
+          <button onclick="deleteChat(${msg.id})" style="background:none;border:none;color:rgba(192,57,43,0.5);cursor:pointer;font-size:0.58rem;padding:0 0.3rem;margin-left:auto" title="Borrar">✕</button>
         </div>
-        <div class="chat-text">${msg.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+        <div class="chat-text">${msg.message.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
       </div>
     </div>`;
   }).join('');
-  el.scrollTop = el.scrollHeight;
+  if(isNearBottom) el.scrollTop=el.scrollHeight;
 }
 
-// ── API ─────────────────────────────────────────────
-async function apiReq(path, method='GET', body=null, extraH={}){
-  const opts = {method, headers:{...H,...extraH}};
-  if(body) opts.body = JSON.stringify(body);
-  const r = await fetch(SUPA_URL+path, opts);
-  if(!r.ok){ const e=await r.text(); throw new Error(e); }
-  const t = await r.text();
-  return t ? JSON.parse(t) : [];
+function startChatPolling(){
+  loadChat();
+  if(chatInterval) clearInterval(chatInterval);
+  chatInterval=setInterval(loadChat,5000);
 }
 
-let members = [], avisos = [], curRank = 'level';
-
-async function loadAll(){
-  try{
-    const [m, a] = await Promise.all([
-      apiReq('/members?select=*&order=level.desc'),
-      apiReq('/announcements?select=*&order=created_at.desc')
-    ]);
-    members = m;
-    const now = new Date();
-    avisos = a.filter(x => !x.expires_at || new Date(x.expires_at) > now);
-    updateAll();
-  }catch(e){ showToast('⚠ Error al conectar'); console.error(e); }
-}
-
-// ── HELPERS ─────────────────────────────────────────
-function v(id){ return (document.getElementById(id)?.value||'').trim(); }
-function n(id){ return parseInt(document.getElementById(id)?.value)||0; }
-function set(id,val){ const e=document.getElementById(id); if(e) e.value=val; }
-function makeId(name){ return name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,''); }
-function clsEmoji(c){ return c==='warrior'?'⚔':c==='mage'?'🔮':c==='archer'?'🏹':'⚡'; }
-function clsLabel(c){ return c==='warrior'?'Warrior':c==='mage'?'Mage':c==='archer'?'Archer':c||''; }
-function clsBadge(c){ const cl=c==='warrior'?'rw':c==='mage'?'rm':'ra'; return `<span class="rb ${cl}">${clsEmoji(c)} ${clsLabel(c)}</span>`; }
+// ══════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════
+function v(id){return(document.getElementById(id)?.value||'').trim();}
+function n(id){return parseInt(document.getElementById(id)?.value)||0;}
+function set(id,val){const e=document.getElementById(id);if(e)e.value=val;}
+function makeId(name){return name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');}
+function clsEmoji(c){return c==='warrior'?'⚔':c==='mage'?'🔮':c==='archer'?'🏹':'⚡';}
+function clsLabel(c){return c==='warrior'?'Warrior':c==='mage'?'Mage':c==='archer'?'Archer':c||'';}
+function clsBadge(c){const cl=c==='warrior'?'rw':c==='mage'?'rm':'ra';return `<span class="rb ${cl}">${clsEmoji(c)} ${clsLabel(c)}</span>`;}
 function timeAgo(ts){
   const d=Date.now()-ts;
   if(d<60000) return 'hace unos segundos';
@@ -936,60 +883,56 @@ function timeAgo(ts){
   return 'hace '+Math.floor(d/86400000)+'d';
 }
 function buildData(id,name,level,cls,mel,mag,dis,def){
-  return {id,name,guild:'Demon Akademy',level,class:cls,
-    sk_melee:mel,sk_magic:mag,sk_dist:dis,sk_def:def,updated_at:Date.now()};
+  return {id,name,guild:'Demon Akademy',level,class:cls,sk_melee:mel,sk_magic:mag,sk_dist:dis,sk_def:def,updated_at:Date.now()};
 }
-
-// ── ZONAS HORARIAS ──────────────────────────────────
-function calcPaises(dateStr, hourVzla){
-  const fecha = new Date(`${dateStr}T${String(hourVzla).padStart(2,'0')}:00:00-04:00`);
+function calcPaises(dateStr,hourVzla){
+  const fecha=new Date(`${dateStr}T${String(hourVzla).padStart(2,'0')}:00:00-04:00`);
   return PAISES.map(p=>{
-    const hora = fecha.toLocaleTimeString('es-ES',{timeZone:p.tz,hour:'2-digit',minute:'2-digit',hour12:true});
-    const dia  = fecha.toLocaleDateString('es-ES',{timeZone:p.tz,weekday:'short',day:'numeric',month:'short'});
-    return {n:p.n, hora, dia};
+    const hora=fecha.toLocaleTimeString('es-ES',{timeZone:p.tz,hour:'2-digit',minute:'2-digit',hour12:true});
+    const dia=fecha.toLocaleDateString('es-ES',{timeZone:p.tz,weekday:'short',day:'numeric',month:'short'});
+    return {n:p.n,hora,dia};
   });
 }
 
-// ── AVISOS ──────────────────────────────────────────
+// ══════════════════════════════════════════════════════
+// AVISOS
+// ══════════════════════════════════════════════════════
 function toggleAvisoForm(){
-  const f = document.getElementById('avisoForm');
+  const f=document.getElementById('avisoForm');
   f.classList.toggle('open');
-  if(f.classList.contains('open') && !document.getElementById('av-date').value)
-    document.getElementById('av-date').value = new Date().toISOString().split('T')[0];
+  if(f.classList.contains('open')&&!document.getElementById('av-date').value)
+    document.getElementById('av-date').value=new Date().toISOString().split('T')[0];
 }
-
 async function publicarAviso(){
-  const msg=v('av-msg'), date=v('av-date'), hourS=document.getElementById('av-hour').value.trim();
-  if(!msg){ showToast('⚠ Escribe el mensaje del aviso'); return; }
+  const msg=v('av-msg'),date=v('av-date'),hourS=document.getElementById('av-hour').value.trim();
+  if(!msg){showToast('⚠ Escribe el mensaje del aviso');return;}
   const btn=document.getElementById('btnPublicar');
-  btn.disabled=true; btn.textContent='Publicando...';
-  let eventTime=null, expiresAt=null;
+  btn.disabled=true;btn.textContent='Publicando...';
+  let eventTime=null,expiresAt=null;
   if(date){
-    const exp=new Date(date+'T23:59:59-04:00'); exp.setDate(exp.getDate()+1);
+    const exp=new Date(date+'T23:59:59-04:00');exp.setDate(exp.getDate()+1);
     expiresAt=exp.toISOString();
-    if(hourS!==''){ const h=parseInt(hourS); if(h>=0&&h<=23) eventTime=`${date}T${String(h).padStart(2,'0')}:00:00-04:00`; }
+    if(hourS!==''){const h=parseInt(hourS);if(h>=0&&h<=23)eventTime=`${date}T${String(h).padStart(2,'0')}:00:00-04:00`;}
   }
   try{
-    await apiReq('/announcements','POST',{message:msg, event_time:eventTime, expires_at:expiresAt});
+    await apiReq('/announcements','POST',{message:msg,event_time:eventTime,expires_at:expiresAt});
     showToast('✅ Aviso publicado');
     ['av-msg','av-hour','av-date'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
     document.getElementById('avisoForm').classList.remove('open');
     await loadAll();
-  }catch(e){ showToast('⚠ Error: '+e.message); }
-  btn.disabled=false; btn.textContent='🔥 Publicar Aviso';
+  }catch(e){showToast('⚠ Error: '+e.message);}
+  btn.disabled=false;btn.textContent='🔥 Publicar Aviso';
 }
-
 async function borrarAviso(id){
   if(!confirm('¿Borrar este aviso?')) return;
   try{
     await apiReq('/announcements?id=eq.'+id,'DELETE',null,{'Prefer':'return=minimal'});
-    showToast('🗑 Aviso borrado'); await loadAll();
-  }catch(e){ showToast('⚠ Error: '+e.message); }
+    showToast('🗑 Aviso borrado');await loadAll();
+  }catch(e){showToast('⚠ Error: '+e.message);}
 }
-
 function renderAvisos(){
   const el=document.getElementById('avisosList');
-  if(!avisos.length){ el.innerHTML=''; return; }
+  if(!avisos.length){el.innerHTML='';return;}
   const sorted=[...avisos].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
   el.innerHTML=sorted.map(a=>{
     const hasTime=!!a.event_time;
@@ -1012,28 +955,28 @@ function renderAvisos(){
   }).join('');
 }
 
-// ── PERFIL ──────────────────────────────────────────
+// ══════════════════════════════════════════════════════
+// PERFIL / MIEMBROS
+// ══════════════════════════════════════════════════════
 async function saveProfile(){
   const name=v('i-name'),lv=n('i-lv'),cls=v('i-cls');
   if(!name){showToast('⚠ Ingresa tu nombre');return;}
   if(!lv){showToast('⚠ Ingresa tu nivel');return;}
   if(!cls){showToast('⚠ Selecciona tu clase');return;}
   const btn=document.getElementById('btnSave');
-  btn.disabled=true; btn.textContent='Guardando...';
+  btn.disabled=true;btn.textContent='Guardando...';
   const id=makeId(name);
   const data=buildData(id,name,lv,cls,n('sk-mel'),n('sk-mag'),n('sk-dis'),n('sk-def'));
   try{
     await apiReq('/members','POST',data,{'Prefer':'return=representation,resolution=merge-duplicates'});
     const {rango}=calcRango(lv,n('sk-mel'),n('sk-mag'),n('sk-dis'),n('sk-def'));
-    showToast(`✅ ${name} — Rango: ${rango.icon} ${rango.nombre}`);
+    showToast(`✅ ${name} — ${rango.icon} ${rango.nombre}`);
     ['i-name','i-lv','i-cls','sk-mel','sk-mag','sk-dis','sk-def'].forEach(i=>{const e=document.getElementById(i);if(e)e.value='';});
     document.getElementById('insigPreview').style.display='none';
     await loadAll();
   }catch(e){showToast('⚠ Error: '+e.message);}
-  btn.disabled=false; btn.textContent='🔥 Guardar / Actualizar';
+  btn.disabled=false;btn.textContent='🔥 Guardar / Actualizar';
 }
-
-// ── MODAL EDITAR ────────────────────────────────────
 function openEdit(mid){
   const m=members.find(x=>x.id===mid);if(!m)return;
   set('edit-id',m.id);set('edit-name',m.name);set('edit-lv',m.level);
@@ -1045,17 +988,16 @@ function closeEdit(){document.getElementById('editModal').classList.remove('open
 async function saveEdit(){
   const id=v('edit-id'),name=v('edit-name');if(!id)return;
   const btn=document.getElementById('btnEditSave');
-  btn.disabled=true; btn.textContent='Guardando...';
+  btn.disabled=true;btn.textContent='Guardando...';
   const data=buildData(id,name,n('edit-lv'),v('edit-cls'),n('edit-mel'),n('edit-mag'),n('edit-dis'),n('edit-def'));
   try{
     await apiReq('/members','POST',data,{'Prefer':'return=representation,resolution=merge-duplicates'});
     showToast('✅ Stats actualizados: '+name);
-    closeEdit(); await loadAll();
+    closeEdit();await loadAll();
   }catch(e){showToast('⚠ Error: '+e.message);}
-  btn.disabled=false; btn.textContent='🔥 Guardar Cambios';
+  btn.disabled=false;btn.textContent='🔥 Guardar Cambios';
 }
 
-// ── UPDATE ALL ───────────────────────────────────────
 function updateAll(){
   updatePortal();
   renderAvisos();
@@ -1069,14 +1011,13 @@ function updateAll(){
   document.getElementById('gUpd').textContent='Act. '+timeAgo(Date.now());
 }
 
-// ── PORTAL ──────────────────────────────────────────
 function updatePortal(){
   const m=members;
   document.getElementById('gTotal').textContent=m.length;
   if(!m.length){
     ['gAvg','gTop'].forEach(id=>document.getElementById(id).textContent='-');
     ['pMelee','pMage','pDist'].forEach(id=>document.getElementById(id).innerHTML='<div class="empty">Sin datos aún</div>');
-    document.getElementById('pR').innerHTML='<div class="empty">¡Sé el primero!</div>';
+    document.getElementById('pR').innerHTML='<div class="empty">¡Sé el primero en registrarse!</div>';
     return;
   }
   document.getElementById('gAvg').textContent=Math.round(m.reduce((a,x)=>a+x.level,0)/m.length);
@@ -1105,7 +1046,6 @@ function updatePortal(){
   ).join('');
 }
 
-// ── RANKING ─────────────────────────────────────────
 function showRank(type,el){
   curRank=type;
   document.querySelectorAll('.rtab').forEach(t=>t.classList.remove('active'));
@@ -1114,7 +1054,7 @@ function showRank(type,el){
 }
 function renderRanking(type){
   const el=document.getElementById('rankCard');
-  if(!members.length){el.innerHTML='<div class="empty">🔥 No hay miembros aún</div>';return;}
+  if(!members.length){el.innerHTML='<div class="empty">No hay miembros aún</div>';return;}
   const labels={level:'Nivel',sk_melee:'Melee',sk_magic:'Magia',sk_dist:'Distancia',sk_def:'Defensa'};
   const sorted=[...members].sort((a,b)=>(b[type]??0)-(a[type]??0));
   const rows=sorted.map((m,i)=>{
@@ -1132,7 +1072,6 @@ function renderRanking(type){
   el.innerHTML=`<table class="rt"><thead><tr><th>#</th><th>Nombre</th><th>Clase</th><th>Rango</th><th>${labels[type]||type}</th><th>Nivel</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-// ── MIEMBROS ─────────────────────────────────────────
 function renderMembers(){
   const srch=(document.getElementById('srch')?.value||'').toLowerCase();
   const fc=document.getElementById('fCls')?.value||'';
@@ -1141,9 +1080,7 @@ function renderMembers(){
   if(!list.length){document.getElementById('mGrid').innerHTML='<div class="empty">No se encontraron miembros</div>';return;}
   const skb=(lbl,val)=>{const pct=Math.min(100,(val/999)*100);return `<div class="skr"><div class="skn">${lbl}</div><div class="skbg"><div class="skfill" style="width:${pct}%"></div></div><div class="skv">${val}</div></div>`;};
   document.getElementById('mGrid').innerHTML=`<div class="mg2">${
-    list.map(m=>{
-      const {rango} = calcRango(m.level, m.sk_melee, m.sk_magic, m.sk_dist, m.sk_def);
-      return `<div class="mc">
+    list.map(m=>`<div class="mc">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem">
           <div>
             <div class="mn">${clsEmoji(m.class)} ${m.name}</div>
@@ -1156,12 +1093,11 @@ function renderMembers(){
         </div>
         ${skb('⚔ Melee',m.sk_melee)}${skb('🔮 Magia',m.sk_magic)}${skb('🏹 Dist',m.sk_dist)}${skb('🛡 Defensa',m.sk_def)}
         <div style="font-size:0.65rem;color:var(--text3);margin-top:0.4rem;text-align:right">${timeAgo(m.updated_at)}</div>
-      </div>`;
-    }).join('')
+      </div>`
+    ).join('')
   }</div>`;
 }
 
-// ── COMPARAR ─────────────────────────────────────────
 function updateCmpSelects(){
   const opts='<option value="">Seleccionar...</option>'+[...members].sort((a,b)=>b.level-a.level).map(m=>`<option value="${m.id}">${m.name} (Lv.${m.level})</option>`).join('');
   ['c1','c2'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const val=el.value;el.innerHTML=opts;el.value=val;});
@@ -1187,14 +1123,14 @@ function renderCompare(){
       <div style="text-align:center">
         <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold)">${clsEmoji(m1.class)} ${m1.name}</div>
         <div style="margin:0.4rem 0">${getRangoBadgeHtml(m1)}</div>
-        <div style="font-size:1.6rem;color:var(--fire);font-family:'Cinzel Decorative',serif;margin-top:0.4rem">${w1}</div>
+        <div style="font-size:1.6rem;color:var(--fire);font-family:'Cinzel Decorative',serif">${w1}</div>
         <div style="font-size:0.65rem;color:var(--text3)">victorias</div>
       </div>
       <div style="font-family:'Cinzel Decorative',serif;font-size:1.5rem;color:var(--text3)">VS</div>
       <div style="text-align:center">
         <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold)">${clsEmoji(m2.class)} ${m2.name}</div>
         <div style="margin:0.4rem 0">${getRangoBadgeHtml(m2)}</div>
-        <div style="font-size:1.6rem;color:var(--fire);font-family:'Cinzel Decorative',serif;margin-top:0.4rem">${w2}</div>
+        <div style="font-size:1.6rem;color:var(--fire);font-family:'Cinzel Decorative',serif">${w2}</div>
         <div style="font-size:0.65rem;color:var(--text3)">victorias</div>
       </div>
     </div>
@@ -1215,7 +1151,6 @@ function renderCompare(){
   </div>`;
 }
 
-// ── NAVEGACIÓN ───────────────────────────────────────
 function go(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById('s-'+id).classList.add('active');
@@ -1225,17 +1160,16 @@ function go(id,btn){
   if(id==='members') renderMembers();
   if(id==='compare'){updateCmpSelects();renderCompare();}
   if(id==='progreso') renderMes();
-  if(id==='arena'){ fillFightSelects(); }
-  if(id==='ruleta'){ initRuleta(); }
-  if(id==='guerra'){ loadWars(); }
-  if(id==='muro'){ loadMuro(); }
+  if(id==='arena') fillFightSelects();
+  if(id==='ruleta') initRuleta();
+  if(id==='guerra') loadWars();
+  if(id==='muro') loadMuro();
 }
 
-// ── TOAST ────────────────────────────────────────────
 let toastTimer;
 function showToast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
+  t.textContent=msg;t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.classList.remove('show'),3500);
 }
@@ -1256,7 +1190,7 @@ function renderMes(){
   const mesNombre=now.toLocaleDateString('es-ES',{month:'long',year:'numeric'});
   const badge=document.getElementById('mesBadge');
   if(badge) badge.textContent=mesNombre.charAt(0).toUpperCase()+mesNombre.slice(1);
-  if(!members||!members.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text3);font-style:italic">Sin miembros registrados aún</div>';return;}
+  if(!members||!members.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text3)">Sin miembros aún</div>';return;}
   const labels={level:'Nivel',sk_melee:'Melee',sk_magic:'Magia',sk_dist:'Distancia',sk_def:'Defensa'};
   const sorted=[...members].sort((a,b)=>(b[mesField]||0)-(a[mesField]||0));
   const medals=['🥇','🥈','🥉'];
@@ -1268,7 +1202,7 @@ function renderMes(){
       <div style="margin:0.3rem 0">${getRangoBadgeHtml(m)}</div>
       <div class="mes-skill">${labels[mesField]}</div>
       <div class="mes-val">${m[mesField]||0}</div>
-      <div style="font-size:.68rem;color:#2ecc71;font-family:'Cinzel',serif">↑ Activo este mes</div>
+      <div style="font-size:.68rem;color:#2ecc71;font-family:'Cinzel',serif">↑ Activo</div>
     </div>
   `).join('');
 }
@@ -1284,29 +1218,26 @@ function switchArena(panel,el){
   if(panel==='trivia') startTrivia();
   if(panel==='dungeon') initDungeon();
 }
-
 function fillFightSelects(){
   const opts='<option value="">Seleccionar...</option>'+
     [...members].sort((a,b)=>b.level-a.level)
       .map(m=>`<option value="${m.id}">${clsEmoji(m.class)} ${m.name} (Lv.${m.level})</option>`).join('');
   ['f1','f2'].forEach(id=>{
     const el=document.getElementById(id);if(!el)return;
-    const val=el.value; el.innerHTML=opts; el.value=val;
+    const val=el.value;el.innerHTML=opts;el.value=val;
   });
 }
-
 function calcPower(m){
   const clsBonus=m.class==='warrior'?(m.sk_melee*1.4+m.sk_def):
                  m.class==='mage'?(m.sk_magic*1.4+m.sk_def*.8):
                  (m.sk_dist*1.4+m.sk_def*.9);
   return Math.floor(m.level*2+clsBonus+(m.sk_melee+m.sk_magic+m.sk_dist+m.sk_def)*.3);
 }
-
 function startFight(){
   const id1=document.getElementById('f1').value,id2=document.getElementById('f2').value;
   if(!id1||!id2||id1===id2){showToast('⚠ Selecciona dos guerreros distintos');return;}
   const m1=members.find(m=>m.id===id1),m2=members.find(m=>m.id===id2);
-  if(!m1||!m2)return;
+  if(!m1||!m2) return;
   const p1=calcPower(m1),p2=calcPower(m2);
   const r=Math.random()*(p1+p2);
   const won1=r<p1;
@@ -1349,10 +1280,7 @@ function startFight(){
   const logEl=document.getElementById('fightLog');
   let delay=0;
   attacks.forEach(a=>{
-    setTimeout(()=>{
-      logEl.innerHTML+=`<div>⚔ ${a.log1}</div><div>🛡 ${a.log2}</div>`;
-      logEl.scrollTop=logEl.scrollHeight;
-    },delay);
+    setTimeout(()=>{logEl.innerHTML+=`<div>⚔ ${a.log1}</div><div>🛡 ${a.log2}</div>`;logEl.scrollTop=logEl.scrollHeight;},delay);
     delay+=600;
   });
   setTimeout(()=>{
@@ -1364,30 +1292,24 @@ function startFight(){
   },delay+200);
 }
 
-// ══════════════════════════════════════════════════════
 // TRIVIA
-// ══════════════════════════════════════════════════════
 const TRIVIA_QUESTIONS=[
-  {q:'¿Cuántas clases hay en Rucoy Online?',ops:['2','3','4','5'],a:1},
-  {q:'¿Cuál es la habilidad principal de los Warrior?',ops:['Magic','Melee','Range','Spirit'],a:1},
-  {q:'¿Qué recurso se usa para moverse y atacar en Rucoy?',ops:['Stamina','Energy','Mana','HP'],a:0},
-  {q:'¿Cuál es el nivel máximo oficial en Rucoy Online?',ops:['500','999','1000','Sin límite'],a:3},
-  {q:'¿Para qué sirven las pociones en Rucoy?',ops:['Subir nivel','Recuperar HP/MP','Comprar ítems','Entrar al PvP'],a:1},
-  {q:'¿Qué clase usa magia de ataque por defecto?',ops:['Warrior','Archer','Mage','Todas'],a:2},
-  {q:'¿Qué skill aumenta la resistencia a ataques físicos?',ops:['Melee','Magic','Defense','Stamina'],a:2},
-  {q:'¿Cómo se gana XP principalmente en Rucoy Online?',ops:['Comprando items','Matando monstruos','Solo en guilds','Solo PvP'],a:1},
-  {q:'¿Qué tipo de ataques usa el Archer?',ops:['Melee','Magia','Distancia/Ranged','Todos'],a:2},
-  {q:'¿Qué le pasa a tu personaje cuando mueres en zona PvP?',ops:['Pierdes items','Respawneas en ciudad','Pierdes experiencia','Pierdes personaje'],a:1},
-  {q:'¿Qué estadística aumenta el daño del Mage?',ops:['Melee','Defense','Magic','Stamina'],a:2},
-  {q:'¿Qué necesitas para crear una guild en Rucoy?',ops:['Nivel 50','Oro y nivel mínimo','Solo nivel 100','Es gratis siempre'],a:1},
-  {q:'¿Qué clase tiene naturalmente más HP base?',ops:['Mage','Archer','Warrior','Son iguales'],a:2},
-  {q:'¿Cuál es el elemento clave para subir de nivel rápido en Rucoy?',ops:['Comprar items caros','Farmear monstruos constantemente','Esperar eventos','Solo guerras de guild'],a:1},
-  {q:'¿Qué hace el skill de Defensa en Rucoy?',ops:['Aumenta el daño','Aumenta la velocidad','Reduce el daño recibido','Aumenta el HP máximo'],a:2},
+  {q:'¿Cuántas clases hay en Rucoy Online?',ops:['2','3','4','5'],a:1,exp:'Warrior, Mage y Archer — exactamente 3 clases.'},
+  {q:'¿Qué recurso se consume al atacar en Rucoy Online?',ops:['HP','Mana','SP (Stamina)','Gold'],a:2,exp:'SP (Stamina Points) es el recurso de acción en Rucoy.'},
+  {q:'¿Cuál es la skill principal del Warrior?',ops:['Magic','Range','Melee','Stealth'],a:2,exp:'El Warrior usa Melee para atacar cuerpo a cuerpo.'},
+  {q:'¿Qué clase usa arcos en Rucoy Online?',ops:['Warrior','Mage','Archer','Hunter'],a:2,exp:'El Archer es la clase de distancia con arcos y ballestas.'},
+  {q:'¿Para qué sirve la skill Defense?',ops:['Más daño','Más HP máximo','Reduce daño recibido','Más velocidad'],a:2,exp:'Defense reduce el daño físico entrante de enemigos.'},
+  {q:'¿Cómo se gana XP principalmente en Rucoy?',ops:['Solo quests','Matando monstruos','Comprando boosters','Solo PvP'],a:1,exp:'El farmeo de monstruos es el método principal de XP.'},
+  {q:'¿Qué pasa al morir en Full PvP?',ops:['Pierdes el personaje','Pierdes ítems equipados','Respawneas y puedes perder ítems','Solo pierdes oro'],a:2,exp:'En Full PvP respawneas pero puedes perder ítems.'},
+  {q:'¿Qué skill usa el Mage para hacer daño?',ops:['Melee','Defense','Magic','Range'],a:2,exp:'El Mage usa Magic para atacar con hechizos.'},
+  {q:'En Rucoy, ¿cómo se recupera HP en combate?',ops:['Pociones de vida','Pergaminos','Runas','Cristales'],a:0,exp:'Las Health Potions son esenciales para farmear.'},
+  {q:'¿Qué diferencia Full PvP de Safe PvP?',ops:['Más monstruos','Puedes perder ítems al morir','Sube nivel más rápido','No hay diferencia'],a:1,exp:'Full PvP: riesgo de perder equipo. Safe PvP: sin pérdida de ítems.'},
+  {q:'¿Para qué sirve subir de nivel en Rucoy?',ops:['Solo apariencia','Aumenta HP/SP y permite mejor equipo','Solo guilds','Sin efecto'],a:1,exp:'El nivel aumenta estadísticas base y permite usar equipo mejor.'},
+  {q:'¿Qué zona es conocida como la más difícil de alto nivel?',ops:['Grassfield inicial','Dungeon of Hell','Ciudad inicial','Tutorial'],a:1,exp:'El Hell Dungeon tiene monstruos de nivel muy alto.'},
 ];
-
 let triviaIdx=0,triviaScore=0,triviaAnswered=false,triviaShuffled=[];
 function startTrivia(){
-  triviaShuffled=[...TRIVIA_QUESTIONS].sort(()=>Math.random()-.5).slice(0,10);
+  triviaShuffled=[...TRIVIA_QUESTIONS].sort(()=>Math.random()-.5);
   triviaIdx=0;triviaScore=0;triviaAnswered=false;
   document.getElementById('tScore').textContent='0';
   document.getElementById('tTotal').textContent=triviaShuffled.length;
@@ -1408,133 +1330,103 @@ function renderTrivia(){
   }
   const q=triviaShuffled[triviaIdx];
   document.getElementById('tScore').textContent=triviaScore;
-  const prog=((triviaIdx)/triviaShuffled.length*100).toFixed(0);
-  document.getElementById('tProgBar').style.width=prog+'%';
+  document.getElementById('tProgBar').style.width=((triviaIdx)/triviaShuffled.length*100).toFixed(0)+'%';
   area.innerHTML=`<div class="trivia-card">
     <div style="font-size:.65rem;color:var(--text3);font-family:Cinzel,serif;margin-bottom:.4rem">PREGUNTA ${triviaIdx+1} DE ${triviaShuffled.length}</div>
     <div class="trivia-q">${q.q}</div>
-    <div class="trivia-opts">
-      ${q.ops.map((op,i)=>`<button class="trivia-opt" id="topt${i}" onclick="answerTrivia(${i})">${op}</button>`).join('')}
-    </div>
-    <div id="triviaFeedback" style="text-align:center;margin-top:.8rem;min-height:1.2rem;font-size:.78rem;font-family:Cinzel,serif"></div>
+    <div class="trivia-opts">${q.ops.map((op,i)=>`<button class="trivia-opt" id="topt${i}" onclick="answerTrivia(${i})">${op}</button>`).join('')}</div>
+    <div id="triviaFeedback" style="text-align:center;margin-top:.8rem;min-height:1.2rem;font-size:.75rem;font-family:Cinzel,serif;color:var(--text3);line-height:1.4"></div>
   </div>`;
   triviaAnswered=false;
 }
 function answerTrivia(idx){
-  if(triviaAnswered)return;
+  if(triviaAnswered) return;
   triviaAnswered=true;
   const q=triviaShuffled[triviaIdx];
   const correct=idx===q.a;
-  if(correct)triviaScore++;
+  if(correct) triviaScore++;
   document.querySelectorAll('.trivia-opt').forEach((b,i)=>{
     b.disabled=true;
     if(i===q.a) b.classList.add('correct');
     else if(i===idx&&!correct) b.classList.add('wrong');
   });
   const fb=document.getElementById('triviaFeedback');
-  if(fb) fb.innerHTML=correct?'<span style="color:#2ecc71">✓ ¡Correcto!</span>':'<span style="color:#e74c3c">✗ Incorrecto — La respuesta era: '+q.ops[q.a]+'</span>';
-  setTimeout(()=>{triviaIdx++;renderTrivia();},1400);
+  if(fb){
+    fb.innerHTML=(correct?'<span style="color:#2ecc71">✓ ¡Correcto!</span>':'<span style="color:#e74c3c">✗ Incorrecto — Resp: <strong style="color:var(--gold)">'+q.ops[q.a]+'</strong></span>')+(q.exp?`<div style="margin-top:.4rem;color:var(--text3);font-size:.7rem">${q.exp}</div>`:'');
+  }
+  setTimeout(()=>{triviaIdx++;renderTrivia();},2200);
 }
 
-// ══════════════════════════════════════════════════════
-// JUEGO: ESCAPA DEL DUNGEON
-// ══════════════════════════════════════════════════════
-const DGRID = 10, DCOLS = 10;
-let dMap=[], dPlayer={x:1,y:1}, dHP=3, dSteps=0, dKills=0, dGameOver=false;
-
-const DCELL = {WALL:1,FLOOR:0,MONSTER:2,TRAP:3,EXIT:4};
-
-function initDungeon(){
-  dHP=3; dSteps=0; dKills=0; dGameOver=false;
-  dMap=[];
-  // Generar mapa
-  for(let y=0;y<DGRID;y++){
-    dMap.push([]);
-    for(let x=0;x<DCOLS;x++){
-      if(y===0||y===DGRID-1||x===0||x===DCOLS-1) dMap[y].push(DCELL.WALL);
-      else dMap[y].push(Math.random()<0.2?DCELL.WALL:DCELL.FLOOR);
+// DUNGEON
+const DGRID=10,DCOLS=10;
+let dMap=[],dPlayer={x:1,y:1},dHP=3,dSteps=0,dKills=0,dGameOver=false,dDungeonLevel=1;
+const DCELL={WALL:1,FLOOR:0,MONSTER:2,TRAP:3,EXIT:4};
+function generateMap(level){
+  const map=[];
+  for(let y=0;y<DGRID;y++){map.push([]);for(let x=0;x<DCOLS;x++) map[y].push(DCELL.WALL);}
+  function carve(x,y){
+    map[y][x]=DCELL.FLOOR;
+    const dirs=[[0,-2],[0,2],[-2,0],[2,0]].sort(()=>Math.random()-.5);
+    for(const [dx,dy] of dirs){
+      const nx=x+dx,ny=y+dy;
+      if(nx>0&&nx<DCOLS-1&&ny>0&&ny<DGRID-1&&map[ny][nx]===DCELL.WALL){
+        map[y+dy/2][x+dx/2]=DCELL.FLOOR;carve(nx,ny);
+      }
     }
   }
-  // Player
-  dPlayer={x:1,y:1}; dMap[1][1]=DCELL.FLOOR;
-  // Exit
-  dMap[DGRID-2][DCOLS-2]=DCELL.EXIT;
-  // Monstruos
-  for(let i=0;i<6;i++){
-    let mx,my;
-    do{mx=Math.floor(Math.random()*(DCOLS-2))+1;my=Math.floor(Math.random()*(DGRID-2))+1;}
-    while(dMap[my][mx]!==DCELL.FLOOR||(mx<3&&my<3));
-    dMap[my][mx]=DCELL.MONSTER;
+  carve(1,1);
+  map[DGRID-2][DCOLS-2]=DCELL.EXIT;
+  if(map[DGRID-3][DCOLS-2]===DCELL.WALL&&map[DGRID-2][DCOLS-3]===DCELL.WALL){
+    map[DGRID-3][DCOLS-2]=DCELL.FLOOR;map[DGRID-2][DCOLS-3]=DCELL.FLOOR;
   }
-  // Trampas
-  for(let i=0;i<5;i++){
-    let tx,ty;
-    do{tx=Math.floor(Math.random()*(DCOLS-2))+1;ty=Math.floor(Math.random()*(DGRID-2))+1;}
-    while(dMap[ty][tx]!==DCELL.FLOOR||(tx<3&&ty<3));
-    dMap[ty][tx]=DCELL.TRAP;
-  }
-  updateDungeonHUD();
-  renderDungeon();
-  document.getElementById('dungeonLog').textContent='Mueve tu personaje hacia la salida 🔑';
+  let placed=0,attempts=0;
+  const numM=Math.min(3+Math.floor(level*.8),8);
+  while(placed<numM&&attempts<200){attempts++;const mx=Math.floor(Math.random()*(DCOLS-2))+1,my=Math.floor(Math.random()*(DGRID-2))+1;if(map[my][mx]===DCELL.FLOOR&&!(mx<=2&&my<=2)){map[my][mx]=DCELL.MONSTER;placed++;}}
+  placed=0;attempts=0;
+  const numT=Math.min(2+Math.floor(level*.5),6);
+  while(placed<numT&&attempts<200){attempts++;const tx=Math.floor(Math.random()*(DCOLS-2))+1,ty=Math.floor(Math.random()*(DGRID-2))+1;if(map[ty][tx]===DCELL.FLOOR&&!(tx<=2&&ty<=2)){map[ty][tx]=DCELL.TRAP;placed++;}}
+  map[1][1]=DCELL.FLOOR;
+  return map;
 }
-
+function initDungeon(){dDungeonLevel=1;dHP=3;dSteps=0;dKills=0;dGameOver=false;dPlayer={x:1,y:1};dMap=generateMap(1);updateDungeonHUD();renderDungeon();setDungeonLog('Mueve hacia la salida 🔑 — Nivel 1');}
+function resetDungeon(){initDungeon();}
+function nextDungeonLevel(){dDungeonLevel++;dPlayer={x:1,y:1};dGameOver=false;dHP=Math.min(dHP+1,5);dMap=generateMap(dDungeonLevel);updateDungeonHUD();renderDungeon();setDungeonLog(`🏆 ¡Nivel ${dDungeonLevel}! HP +1 recuperado.`);document.getElementById('dungeonLevelBadge').textContent=`Nivel ${dDungeonLevel}`;}
+function setDungeonLog(msg){const el=document.getElementById('dungeonLog');if(el)el.textContent=msg;}
 function renderDungeon(){
-  const grid=document.getElementById('dungeonMap');
-  if(!grid)return;
+  const grid=document.getElementById('dungeonMap');if(!grid)return;
+  grid.style.gridTemplateColumns=`repeat(${DCOLS},34px)`;
   const ICONS={[DCELL.WALL]:'⬛',[DCELL.FLOOR]:'⬜',[DCELL.MONSTER]:'💀',[DCELL.TRAP]:'🔥',[DCELL.EXIT]:'🔑'};
   grid.innerHTML='';
-  for(let y=0;y<DGRID;y++){
-    for(let x=0;x<DCOLS;x++){
-      const div=document.createElement('div');
-      const isPlayer=dPlayer.x===x&&dPlayer.y===y;
-      if(isPlayer){div.className='dungeon-cell player';div.textContent='🧙';}
-      else{
-        const t=dMap[y][x];
-        div.className='dungeon-cell '+(t===DCELL.WALL?'wall':t===DCELL.EXIT?'exit':t===DCELL.MONSTER?'monster':t===DCELL.TRAP?'trap':'');
-        div.textContent=ICONS[t]||'⬜';
-      }
-      grid.appendChild(div);
-    }
-  }
+  for(let y=0;y<DGRID;y++){for(let x=0;x<DCOLS;x++){
+    const div=document.createElement('div');
+    const isPlayer=dPlayer.x===x&&dPlayer.y===y;
+    if(isPlayer){div.className='dungeon-cell player';div.textContent='🧙';}
+    else{const t=dMap[y][x];div.className='dungeon-cell '+(t===DCELL.WALL?'wall':t===DCELL.EXIT?'exit':t===DCELL.MONSTER?'monster':t===DCELL.TRAP?'trap':'');div.textContent=ICONS[t]||'⬜';}
+    grid.appendChild(div);
+  }}
 }
-
 function movePlayer(dir){
   if(dGameOver)return;
   let nx=dPlayer.x,ny=dPlayer.y;
-  if(dir==='up')ny--;else if(dir==='down')ny++;
-  else if(dir==='left')nx--;else if(dir==='right')nx++;
+  if(dir==='up')ny--;else if(dir==='down')ny++;else if(dir==='left')nx--;else if(dir==='right')nx++;
   if(nx<0||nx>=DCOLS||ny<0||ny>=DGRID)return;
   const cell=dMap[ny][nx];
   if(cell===DCELL.WALL)return;
   dPlayer={x:nx,y:ny};dSteps++;
-  if(cell===DCELL.MONSTER){
-    dKills++;dMap[ny][nx]=DCELL.FLOOR;
-    document.getElementById('dungeonLog').textContent='⚔ ¡Derrotaste un monstruo! +1 Kill';
-  }else if(cell===DCELL.TRAP){
-    dHP--;dMap[ny][nx]=DCELL.FLOOR;
-    document.getElementById('dungeonLog').textContent='🔥 ¡Trampa! Perdiste 1 HP. HP restante: '+dHP;
-    if(dHP<=0){
-      dGameOver=true;
-      document.getElementById('dungeonLog').textContent='💀 ¡Moriste en el dungeon! Pasos: '+dSteps+' · Kills: '+dKills;
-    }
-  }else if(cell===DCELL.EXIT){
-    dGameOver=true;
-    document.getElementById('dungeonLog').textContent='🏆 ¡Escapaste del dungeon! Pasos: '+dSteps+' · Kills: '+dKills+' · HP: '+dHP;
-    showToast('🏆 ¡Escapaste! Kills: '+dKills);
-  }else{
-    document.getElementById('dungeonLog').textContent='Explorando... HP: '+dHP+' · Pasos: '+dSteps;
-  }
-  updateDungeonHUD();
-  renderDungeon();
+  if(cell===DCELL.MONSTER){dKills++;dMap[ny][nx]=DCELL.FLOOR;setDungeonLog(`⚔ Kill #${dKills} — HP: ${dHP}`);}
+  else if(cell===DCELL.TRAP){dHP--;dMap[ny][nx]=DCELL.FLOOR;if(dHP<=0){dGameOver=true;setDungeonLog(`💀 ¡Moriste! Lv.${dDungeonLevel}·${dSteps} pasos·${dKills} kills`);showToast('💀 Game Over — Nivel '+dDungeonLevel);}else setDungeonLog(`🔥 Trampa! HP: ${dHP}`);}
+  else if(cell===DCELL.EXIT){showToast(`🏆 Nivel ${dDungeonLevel} superado!`);setTimeout(()=>nextDungeonLevel(),800);setDungeonLog(`🔑 ¡Salida! Preparando nivel ${dDungeonLevel+1}...`);}
+  else setDungeonLog(`Nivel ${dDungeonLevel} · HP: ${dHP} · Pasos: ${dSteps}`);
+  updateDungeonHUD();renderDungeon();
 }
-
 function updateDungeonHUD(){
   document.getElementById('dHP').textContent=dHP;
   document.getElementById('dSteps').textContent=dSteps;
   document.getElementById('dKills').textContent=dKills;
+  document.getElementById('dLevel').textContent=dDungeonLevel;
+  const badge=document.getElementById('dungeonLevelBadge');
+  if(badge) badge.textContent=`Nivel ${dDungeonLevel}`;
 }
-
-// Teclado
 document.addEventListener('keydown',e=>{
   if(!document.getElementById('s-arena').classList.contains('active'))return;
   if(!document.getElementById('arena-dungeon').classList.contains('active'))return;
@@ -1542,9 +1434,7 @@ document.addEventListener('keydown',e=>{
   if(map[e.key]){e.preventDefault();movePlayer(map[e.key]);}
 });
 
-// ══════════════════════════════════════════════════════
 // RULETA
-// ══════════════════════════════════════════════════════
 const RULETA_DATA={
   misiones:[
     {t:'Cazar 50 monstruos',c:'#c0392b'},{t:'Farmear XP 1 hora',c:'#8e44ad'},
@@ -1565,28 +1455,22 @@ const RULETA_DATA={
     {t:'Anunciar derrota en chat',c:'#f39c12'},{t:'Misión suicida épica',c:'#922b21'},
   ],
 };
-
 let ruletaActiva='misiones',ruletaGirando=false,ruletaAngle=0,ruletaInit=false;
-
 function initRuleta(){
   if(ruletaInit)return;
   ruletaInit=true;
   const cats=document.getElementById('ruletaCats');if(!cats)return;
   const labels={misiones:'⚔ Misiones',roles:'👑 Roles',castigos:'💀 Castigos'};
-  cats.innerHTML=Object.keys(RULETA_DATA).map(k=>
-    `<button class="ruleta-cat-btn ${k===ruletaActiva?'active':''}" onclick="setRuletaCat('${k}',this)">${labels[k]}</button>`
-  ).join('');
+  cats.innerHTML=Object.keys(RULETA_DATA).map(k=>`<button class="ruleta-cat-btn ${k===ruletaActiva?'active':''}" onclick="setRuletaCat('${k}',this)">${labels[k]}</button>`).join('');
   drawRuleta();
 }
-
 function setRuletaCat(cat,el){
   ruletaActiva=cat;
   document.querySelectorAll('.ruleta-cat-btn').forEach(b=>b.classList.remove('active'));
-  if(el) el.classList.add('active');
-  ruletaAngle=0; drawRuleta();
+  if(el)el.classList.add('active');
+  ruletaAngle=0;drawRuleta();
   document.getElementById('ruletaResult').textContent='';
 }
-
 function drawRuleta(highlightIdx=-1){
   const canvas=document.getElementById('ruletaCanvas');if(!canvas)return;
   const ctx=canvas.getContext('2d');
@@ -1607,17 +1491,12 @@ function drawRuleta(highlightIdx=-1){
     ctx.restore();
   });
   ctx.beginPath();ctx.arc(cx,cy,20,0,2*Math.PI);
-  ctx.fillStyle='#0a0604';ctx.fill();
-  ctx.strokeStyle='#f1c40f';ctx.lineWidth=2.5;ctx.stroke();
-  ctx.fillStyle='#f1c40f';ctx.font='bold 11px Cinzel,serif';
-  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('DA',cx,cy);
+  ctx.fillStyle='#0a0604';ctx.fill();ctx.strokeStyle='#f1c40f';ctx.lineWidth=2.5;ctx.stroke();
+  ctx.fillStyle='#f1c40f';ctx.font='bold 11px Cinzel,serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('DA',cx,cy);
 }
-
 function girarRuleta(){
-  if(ruletaGirando)return;
-  ruletaGirando=true;
-  document.getElementById('btnGirar').disabled=true;
-  document.getElementById('ruletaResult').textContent='';
+  if(ruletaGirando)return;ruletaGirando=true;
+  document.getElementById('btnGirar').disabled=true;document.getElementById('ruletaResult').textContent='';
   const items=RULETA_DATA[ruletaActiva],n=items.length;
   const extraSpins=5+Math.floor(Math.random()*6);
   const targetIdx=Math.floor(Math.random()*n);
@@ -1642,33 +1521,60 @@ function girarRuleta(){
 }
 
 // ══════════════════════════════════════════════════════
-// GUERRAS (localStorage)
+// GUERRAS — Supabase (tabla guild_wars)
+// Todos los miembros pueden ver y agregar desde sus teléfonos
 // ══════════════════════════════════════════════════════
 let wars=[];
-function loadWars(){
-  try{wars=JSON.parse(localStorage.getItem('da_wars')||'[]');}catch(e){wars=[];}
-  renderWars();
+
+async function loadWars(){
+  try{
+    const data=await apiReq('/guild_wars?select=*&order=created_at.desc');
+    wars=data;
+    renderWars();
+  }catch(e){
+    showToast('⚠ Error al cargar guerras');
+    console.error(e);
+  }
 }
-function saveWarsLS(){localStorage.setItem('da_wars',JSON.stringify(wars));}
+
 function toggleWarForm(){document.getElementById('warForm').classList.toggle('open');}
-function saveWar(){
-  const enemy=document.getElementById('w-enemy').value.trim(),res=document.getElementById('w-res').value;
+
+async function saveWar(){
+  const enemy=document.getElementById('w-enemy').value.trim();
+  const res=document.getElementById('w-res').value;
   if(!enemy||!res){showToast('⚠ Completa la guild enemiga y el resultado');return;}
-  const war={id:Date.now(),enemy,res,kills:parseInt(document.getElementById('w-kills').value)||0,ekills:parseInt(document.getElementById('w-ekills').value)||0,notes:document.getElementById('w-notes').value.trim(),date:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'})};
-  wars.unshift(war);saveWarsLS();renderWars();
-  document.getElementById('warForm').classList.remove('open');
-  ['w-enemy','w-res','w-kills','w-ekills','w-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  showToast('⚔ Guerra registrada');
+  const btn=document.getElementById('btnWarSave');
+  btn.disabled=true;btn.textContent='Guardando...';
+  try{
+    await apiReq('/guild_wars','POST',{
+      enemy,
+      result:res,
+      kills_da:parseInt(document.getElementById('w-kills').value)||0,
+      kills_enemy:parseInt(document.getElementById('w-ekills').value)||0,
+      notes:document.getElementById('w-notes').value.trim()||null
+    },{'Prefer':'return=minimal'});
+    showToast('⚔ ¡Guerra registrada! Todos la pueden ver');
+    document.getElementById('warForm').classList.remove('open');
+    ['w-enemy','w-res','w-kills','w-ekills','w-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    await loadWars();
+  }catch(e){showToast('⚠ Error: '+e.message);}
+  btn.disabled=false;btn.textContent='⚔ Guardar Guerra';
 }
-function deleteWar(id){
+
+async function deleteWar(id){
   if(!confirm('¿Borrar esta guerra?'))return;
-  wars=wars.filter(w=>w.id!==id);saveWarsLS();renderWars();
+  try{
+    await apiReq('/guild_wars?id=eq.'+id,'DELETE',null,{'Prefer':'return=minimal'});
+    showToast('🗑 Guerra borrada');
+    await loadWars();
+  }catch(e){showToast('⚠ Error: '+e.message);}
 }
+
 function renderWars(){
   const tbody=document.getElementById('warTable');if(!tbody)return;
-  const vic=wars.filter(w=>w.res==='victoria').length;
-  const der=wars.filter(w=>w.res==='derrota').length;
-  const emp=wars.filter(w=>w.res==='empate').length;
+  const vic=wars.filter(w=>w.result==='victoria').length;
+  const der=wars.filter(w=>w.result==='derrota').length;
+  const emp=wars.filter(w=>w.result==='empate').length;
   document.getElementById('ws-v').textContent=vic;
   document.getElementById('ws-d').textContent=der;
   document.getElementById('ws-e').textContent=emp;
@@ -1676,62 +1582,95 @@ function renderWars(){
   if(!wars.length){tbody.innerHTML='<tr><td colspan="7" class="empty">Sin guerras registradas aún</td></tr>';return;}
   const bc={victoria:'war-w',derrota:'war-l',empate:'war-d'};
   const bl={victoria:'VICTORIA',derrota:'DERROTA',empate:'EMPATE'};
-  tbody.innerHTML=wars.map(w=>`<tr>
-    <td style="color:var(--text);font-weight:bold">${w.enemy}</td>
-    <td><span class="war-badge ${bc[w.res]||''}">${bl[w.res]||w.res}</span></td>
-    <td style="color:#2ecc71;font-weight:bold">${w.kills}</td>
-    <td style="color:#e74c3c;font-weight:bold">${w.ekills}</td>
-    <td style="font-size:.72rem;color:var(--text3)">${w.notes||'—'}</td>
-    <td style="font-size:.68rem;color:var(--text3)">${w.date}</td>
-    <td><button class="war-del" onclick="deleteWar(${w.id})">🗑</button></td>
-  </tr>`).join('');
+  tbody.innerHTML=wars.map(w=>{
+    const fecha=new Date(w.created_at).toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'});
+    return `<tr>
+      <td style="color:var(--text);font-weight:bold">${w.enemy}</td>
+      <td><span class="war-badge ${bc[w.result]||''}">${bl[w.result]||w.result}</span></td>
+      <td style="color:#2ecc71;font-weight:bold">${w.kills_da}</td>
+      <td style="color:#e74c3c;font-weight:bold">${w.kills_enemy}</td>
+      <td style="font-size:.72rem;color:var(--text3)">${w.notes||'—'}</td>
+      <td style="font-size:.68rem;color:var(--text3)">${fecha}</td>
+      <td><button class="war-del" onclick="deleteWar(${w.id})">🗑</button></td>
+    </tr>`;
+  }).join('');
 }
 
 // ══════════════════════════════════════════════════════
-// MURO DE LA FAMA (localStorage)
+// MURO DE LA FAMA — Supabase (tabla hall_of_fame)
+// Todos los miembros pueden ver y agregar desde sus teléfonos
 // ══════════════════════════════════════════════════════
 let muros=[];
-function loadMuro(){
-  try{muros=JSON.parse(localStorage.getItem('da_muro')||'[]');}catch(e){muros=[];}
-  renderMuro();
-}
-function saveMurosLS(){localStorage.setItem('da_muro',JSON.stringify(muros));}
-function toggleMuroForm(){document.getElementById('muroForm').classList.toggle('open');}
-function saveMuro(){
-  const titulo=document.getElementById('m-titulo').value.trim(),tipo=document.getElementById('m-tipo').value,desc=document.getElementById('m-desc').value.trim();
-  if(!titulo||!tipo||!desc){showToast('⚠ Completa título, tipo y descripción');return;}
-  const m={id:Date.now(),titulo,tipo,desc,autor:document.getElementById('m-autor').value.trim()||'Anónimo',date:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'})};
-  muros.unshift(m);saveMurosLS();renderMuro();
-  document.getElementById('muroForm').classList.remove('open');
-  ['m-titulo','m-tipo','m-desc','m-autor'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  showToast('💀 Momento inmortalizado');
-}
-function deleteMuro(id){
-  if(!confirm('¿Borrar este momento?'))return;
-  muros=muros.filter(m=>m.id!==id);saveMurosLS();renderMuro();
-}
-function renderMuro(){
-  const grid=document.getElementById('muroGrid');if(!grid)return;
-  if(!muros.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1">Sé el primero en inmortalizar un momento épico de Demon Akademy</div>';return;}
-  const icons={kill:'💀',momento:'⚡',logro:'🏆',epico:'👑'};
-  const labels={kill:'Kill Épico',momento:'Momento de Gloria',logro:'Logro de Guild',epico:'Legendario'};
-  grid.innerHTML=muros.map(m=>`<div class="muro-card">
-    <div class="muro-icon">${icons[m.tipo]||'🔥'}</div>
-    <div class="muro-type ${m.tipo}">${labels[m.tipo]||m.tipo}</div>
-    <div class="muro-titulo">${m.titulo}</div>
-    <div class="muro-desc">${m.desc}</div>
-    <div class="muro-autor">👤 ${m.autor}</div>
-    <div class="muro-date">📅 ${m.date}</div>
-    <button class="muro-del" onclick="deleteMuro(${m.id})">🗑 Borrar</button>
-  </div>`).join('');
+
+async function loadMuro(){
+  try{
+    const data=await apiReq('/hall_of_fame?select=*&order=created_at.desc');
+    muros=data;
+    renderMuro();
+  }catch(e){
+    showToast('⚠ Error al cargar el Muro de Fama');
+    console.error(e);
+  }
 }
 
-// ── ARRANQUE ─────────────────────────────────────────
+function toggleMuroForm(){document.getElementById('muroForm').classList.toggle('open');}
+
+async function saveMuro(){
+  const titulo=document.getElementById('m-titulo').value.trim();
+  const tipo=document.getElementById('m-tipo').value;
+  const desc=document.getElementById('m-desc').value.trim();
+  if(!titulo||!tipo||!desc){showToast('⚠ Completa título, tipo y descripción');return;}
+  const btn=document.getElementById('btnMuroSave');
+  btn.disabled=true;btn.textContent='Inmortalizando...';
+  try{
+    await apiReq('/hall_of_fame','POST',{
+      titulo,
+      tipo,
+      descripcion:desc,
+      autor:document.getElementById('m-autor').value.trim()||'Anónimo'
+    },{'Prefer':'return=minimal'});
+    showToast('💀 ¡Momento inmortalizado! Toda la guild lo verá');
+    document.getElementById('muroForm').classList.remove('open');
+    ['m-titulo','m-tipo','m-desc','m-autor'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    await loadMuro();
+  }catch(e){showToast('⚠ Error: '+e.message);}
+  btn.disabled=false;btn.textContent='💀 Inmortalizar';
+}
+
+async function deleteMuro(id){
+  if(!confirm('¿Borrar este momento épico?'))return;
+  try{
+    await apiReq('/hall_of_fame?id=eq.'+id,'DELETE',null,{'Prefer':'return=minimal'});
+    showToast('🗑 Momento borrado');
+    await loadMuro();
+  }catch(e){showToast('⚠ Error: '+e.message);}
+}
+
+function renderMuro(){
+  const grid=document.getElementById('muroGrid');if(!grid)return;
+  if(!muros.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1">Sé el primero en inmortalizar un momento épico de Demon Akademy 🔥</div>';return;}
+  const icons={kill:'💀',momento:'⚡',logro:'🏆',epico:'👑'};
+  const labels={kill:'Kill Épico',momento:'Momento de Gloria',logro:'Logro de Guild',epico:'Legendario'};
+  grid.innerHTML=muros.map(m=>{
+    const fecha=new Date(m.created_at).toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'});
+    return `<div class="muro-card">
+      <div class="muro-icon">${icons[m.tipo]||'🔥'}</div>
+      <div class="muro-type ${m.tipo}">${labels[m.tipo]||m.tipo}</div>
+      <div class="muro-titulo">${m.titulo}</div>
+      <div class="muro-desc">${m.descripcion}</div>
+      <div class="muro-autor">👤 ${m.autor}</div>
+      <div class="muro-date">📅 ${fecha}</div>
+      <button class="muro-del" onclick="deleteMuro(${m.id})">🗑 Borrar</button>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════
+// ARRANQUE — Carga todo al inicio
+// ══════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded',()=>{
-  loadChat();
-  loadWars();
-  loadMuro();
   loadAll();
+  startChatPolling();
   setInterval(loadAll,30000);
 });
 </script>
