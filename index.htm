@@ -106,6 +106,19 @@ body::before{content:'';position:fixed;inset:0;background:
 .sk-8{background:linear-gradient(90deg,rgba(100,0,0,0.4),rgba(80,0,120,0.4));color:#fff;border-color:var(--gold);animation:legGlow 1.5s infinite}
 .sk-9{background:linear-gradient(90deg,rgba(192,57,43,0.5),rgba(50,0,80,0.5));color:#ffd;border-color:#fff;animation:legGlow 1s infinite}
 
+/* Rango por Poder Total (suma de Nivel + 4 Skills) — EXCLUSIVO */
+.total-badge{display:inline-flex;align-items:center;gap:0.3rem;padding:3px 10px;border-radius:2px;font-family:'Cinzel Decorative',serif;font-size:0.6rem;letter-spacing:0.04em;font-weight:bold;border:1.5px solid;white-space:nowrap}
+.tk-0{background:rgba(80,80,80,0.22);color:#aaa;border-color:rgba(150,150,150,0.4)}
+.tk-1{background:rgba(41,128,185,0.25);color:#85c1e9;border-color:rgba(41,128,185,0.5)}
+.tk-2{background:rgba(39,174,96,0.25);color:#82e0aa;border-color:rgba(39,174,96,0.5)}
+.tk-3{background:rgba(230,126,34,0.25);color:#f0b27a;border-color:rgba(230,126,34,0.5)}
+.tk-4{background:rgba(192,57,43,0.3);color:#f1948a;border-color:rgba(192,57,43,0.6)}
+.tk-5{background:rgba(123,45,139,0.3);color:#c39bd3;border-color:rgba(123,45,139,0.6)}
+.tk-6{background:linear-gradient(90deg,rgba(192,57,43,0.35),rgba(123,45,139,0.35));color:#fff;border-color:var(--gold);box-shadow:0 0 8px rgba(241,196,15,0.3)}
+.tk-7{background:linear-gradient(90deg,rgba(192,57,43,0.45),rgba(80,0,150,0.4));color:#fff;border-color:var(--gold);box-shadow:0 0 12px rgba(241,196,15,0.4);animation:legGlow 2s infinite}
+.tk-8{background:linear-gradient(90deg,rgba(220,30,30,0.5),rgba(120,0,180,0.5),rgba(241,196,15,0.3));color:#fff;border-color:#fff;box-shadow:0 0 16px rgba(241,196,15,0.5);animation:legGlow 1.5s infinite}
+.tk-9{background:linear-gradient(90deg,#c0392b,#7b2d8b,#f1c40f);color:#fff;border-color:#fff;box-shadow:0 0 22px rgba(241,196,15,0.7);animation:legGlow 1s infinite}
+
 /* Insignia preview */
 .insignia-box{background:linear-gradient(135deg,rgba(50,30,5,0.98),rgba(10,6,4,0.99));border:2px solid var(--gold);padding:1.4rem;text-align:center;margin-bottom:1rem;position:relative;clip-path:polygon(0 8px,8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px));animation:insigGlow 3s infinite}
 @keyframes insigGlow{0%,100%{box-shadow:0 0 10px rgba(241,196,15,0.2)}50%{box-shadow:0 0 25px rgba(241,196,15,0.45)}}
@@ -363,9 +376,50 @@ body::before{content:'';position:fixed;inset:0;background:
   .dungeon-cell{width:26px;height:26px;font-size:0.78rem}.puz-cell{width:52px;height:52px;font-size:1.2rem}
   .cls-select-grid{grid-template-columns:1fr}
 }
+
+/* PANTALLA DE BIENVENIDA */
+.welcome-overlay{position:fixed;inset:0;z-index:99999;background:
+  radial-gradient(ellipse at 50% 30%,rgba(192,57,43,0.18) 0%,transparent 55%),
+  radial-gradient(ellipse at 20% 90%,rgba(123,45,139,0.12) 0%,transparent 50%),
+  #060302;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem;
+  transition:opacity 0.9s ease,visibility 0.9s ease}
+.welcome-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.welcome-overlay::before{content:'';position:absolute;inset:0;background:
+  repeating-linear-gradient(0deg,rgba(192,57,43,0.03) 0px,transparent 2px,transparent 4px);
+  pointer-events:none}
+.welcome-emblem{font-size:clamp(2.2rem,9vw,4rem);margin-bottom:0.6rem;filter:drop-shadow(0 0 25px rgba(192,57,43,0.7));animation:emblemPulse 2.6s infinite}
+@keyframes emblemPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.welcome-title{font-family:'Cinzel Decorative',serif;font-weight:700;font-size:clamp(1.6rem,6vw,3rem);color:var(--gold);text-shadow:0 0 25px rgba(241,196,15,0.5),0 0 50px rgba(192,57,43,0.4);letter-spacing:0.04em;margin-bottom:0.5rem}
+.welcome-sub{font-family:'Cinzel',serif;font-size:clamp(0.65rem,2.4vw,0.95rem);color:var(--fire);letter-spacing:0.35em;text-transform:uppercase;margin-bottom:0.9rem}
+.welcome-tag{font-style:italic;color:var(--text3);font-size:clamp(0.78rem,2.4vw,0.95rem);max-width:480px;margin-bottom:2.2rem;line-height:1.6}
+.welcome-divider{width:160px;height:1px;background:linear-gradient(90deg,transparent,var(--fire),var(--gold),var(--fire),transparent);margin-bottom:2.2rem}
+.btn-epic{position:relative;font-family:'Cinzel Decorative',serif;font-size:clamp(0.85rem,2.6vw,1.05rem);padding:1rem 2.2rem;cursor:pointer;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);background:linear-gradient(135deg,rgba(60,20,5,0.95),rgba(15,8,4,0.98));border:2px solid var(--gold);clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%);transition:all 0.3s;text-shadow:0 0 10px rgba(241,196,15,0.4);animation:glowBtn 2.5s infinite}
+.btn-epic:hover{background:linear-gradient(135deg,rgba(192,57,43,0.55),rgba(60,20,5,0.95));box-shadow:0 0 30px rgba(241,196,15,0.4);transform:translateY(-2px)}
+.btn-epic:active{transform:translateY(0)}
+.welcome-hint{margin-top:1rem;font-family:'Cinzel',serif;font-size:0.62rem;color:var(--text3);letter-spacing:0.1em}
+
+/* Control flotante de música */
+.music-toggle{position:fixed;bottom:1.5rem;left:1.5rem;z-index:400;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(44,31,15,0.95),rgba(10,6,4,0.97));border:1px solid var(--gold);color:var(--gold);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.25s;box-shadow:0 0 12px rgba(241,196,15,0.15)}
+.music-toggle:hover{box-shadow:0 0 18px rgba(241,196,15,0.4)}
+.music-toggle.muted{color:var(--text3);border-color:var(--border)}
 </style>
 </head>
 <body>
+
+<!-- ===== PANTALLA DE BIENVENIDA ===== -->
+<div class="welcome-overlay" id="welcomeOverlay">
+  <div class="welcome-emblem">⚔🔥⚔</div>
+  <div class="welcome-title">Bienvenidos a Demon Akademy</div>
+  <div class="welcome-sub">Rucoy Online · Guild Portal</div>
+  <div class="welcome-tag">"Los que dominan las sombras, dominan el mundo." Entra al portal oficial de la guild, consulta tu rango, compite en la Arena y vive la guerra junto a tus hermanos de armas.</div>
+  <div class="welcome-divider"></div>
+  <button class="btn-epic" id="btnEnterEpic" onclick="enterPortal()">🔊 Escucha lo épico que suena</button>
+  <div class="welcome-hint">Activa el sonido para la experiencia completa</div>
+</div>
+
+<button class="music-toggle" id="musicToggleBtn" onclick="toggleMusic()" style="display:none" title="Silenciar / Activar música">🔊</button>
+
 <div class="header">
   <div class="guild-logo">⚔ Demon Akademy ⚔</div>
   <div class="guild-sub">Rucoy Online — Guild Portal</div>
@@ -436,6 +490,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <div class="card"><div class="fl">⚔ Top Melee</div><div id="pMelee"><div class="loader">Cargando</div></div></div>
     <div class="card"><div class="fl">🔮 Top Magia</div><div id="pMage"><div class="loader">Cargando</div></div></div>
     <div class="card"><div class="fl">🏹 Top Distancia</div><div id="pDist"><div class="loader">Cargando</div></div></div>
+    <div class="card"><div class="fl">💪 Top Poder Total</div><div id="pPower"><div class="loader">Cargando</div></div></div>
   </div>
   <div class="card"><div class="fl">📜 Últimas Actualizaciones</div><div id="pR"><div class="loader">Cargando</div></div></div>
 </div>
@@ -459,6 +514,12 @@ body::before{content:'';position:fixed;inset:0;background:
       <div class="fl" style="margin-top:1rem">🌟 Rango de Skill — Tu Skill Más Alto</div>
       <div style="font-size:0.7rem;color:var(--text3);font-style:italic;margin-bottom:0.5rem">El skill dominante se clasifica cada 100 puntos. ¡Máximo 999!</div>
       <div id="skillRankRow" style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center"></div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <div class="fl">💪 Rango de Poder Total — EXCLUSIVO (Nivel + 4 Skills)</div>
+      <div style="font-size:0.7rem;color:var(--text3);font-style:italic;margin-bottom:0.5rem">Suma de Nivel + Melee + Magia + Distancia + Defensa. El rango más prestigioso de la guild.</div>
+      <div id="totalRankRow" style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:0.8rem"></div>
+      <div class="ruta-rangos" id="rutaTotal"></div>
     </div>
   </div>
   <div class="card">
@@ -497,6 +558,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <button class="rtab" onclick="showRank('sk_magic',this)">🔮 Magia</button>
     <button class="rtab" onclick="showRank('sk_dist',this)">🏹 Distancia</button>
     <button class="rtab" onclick="showRank('sk_def',this)">🛡 Defensa</button>
+    <button class="rtab" onclick="showRank('total',this)">💪 Poder Total</button>
   </div>
   <div class="card" id="rankCard"><div class="loader">Cargando...</div></div>
 </div>
@@ -541,6 +603,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <button class="mes-tab" onclick="showMesTab('sk_magic',this)">🔮 Magia</button>
     <button class="mes-tab" onclick="showMesTab('sk_dist',this)">🏹 Distancia</button>
     <button class="mes-tab" onclick="showMesTab('sk_def',this)">🛡 Defensa</button>
+    <button class="mes-tab" onclick="showMesTab('total',this)">💪 Poder Total</button>
   </div>
   <div class="card" style="padding:0.3rem 0"><div id="mesList"></div></div>
 </div>
@@ -858,6 +921,19 @@ const SKILL_RANGOS=[
   {min:800, nombre:'Legendario',   icon:'Ⅷ',  cls:'sk-8'},
   {min:900, nombre:'Dios',         icon:'Ⅸ',  cls:'sk-9'},
 ];
+// Rangos de PODER TOTAL — EXCLUSIVO (suma de Nivel + 4 Skills)
+const TOTAL_RANGOS=[
+  {min:0,    nombre:'Sombra Errante',        icon:'🌑', cls:'tk-0', desc:'Apenas inicias tu leyenda en Demon Akademy'},
+  {min:500,  nombre:'Custodio Novato',       icon:'🗡️', cls:'tk-1', desc:'Tu poder combinado empieza a notarse'},
+  {min:1000, nombre:'Guardián de Sombras',   icon:'⚔️', cls:'tk-2', desc:'Nivel y skills crecen en equilibrio'},
+  {min:1750, nombre:'Centinela de Akademy',  icon:'🛡️', cls:'tk-3', desc:'Un pilar confiable de la guild'},
+  {min:2500, nombre:'Verdugo Infernal',      icon:'🔥', cls:'tk-4', desc:'Tu poder total infunde respeto'},
+  {min:3500, nombre:'Comandante de Guerra',  icon:'👹', cls:'tk-5', desc:'Liderazgo forjado en combate'},
+  {min:4500, nombre:'Señor de la Oscuridad', icon:'💀', cls:'tk-6', desc:'Pocos alcanzan este poder combinado'},
+  {min:6000, nombre:'Archonte Demoníaco',    icon:'👑', cls:'tk-7', desc:'Una autoridad indiscutible de DA'},
+  {min:8000, nombre:'Semidiós de Rucoy',     icon:'🌟', cls:'tk-8', desc:'Tu poder total es prácticamente mítico'},
+  {min:10000,nombre:'Trascendente',          icon:'⚡', cls:'tk-9', desc:'El rango exclusivo más alto de Demon Akademy'},
+];
 
 function getNivelRango(nivel){
   let r=NIVEL_RANGOS[0];
@@ -882,7 +958,21 @@ function getSkillRangoBadge(m){
   const ms=getMaxSkill(m);const r=getSkillRango(ms);const sn=getMaxSkillName(m);
   return`<span class="sk-badge ${r.cls}">${r.icon} ${r.nombre} ${sn}</span>`;
 }
+// Poder Total = Nivel + Melee + Magia + Distancia + Defensa
+function getTotalPoder(m){
+  return (m.level||0)+(m.sk_melee||0)+(m.sk_magic||0)+(m.sk_dist||0)+(m.sk_def||0);
+}
+function getTotalRango(val){
+  let r=TOTAL_RANGOS[0];
+  for(const rr of TOTAL_RANGOS){if(val>=rr.min)r=rr;else break;}
+  return r;
+}
+function getTotalBadge(m){
+  const val=getTotalPoder(m);const r=getTotalRango(val);
+  return`<span class="total-badge ${r.cls}">${r.icon} ${r.nombre}</span>`;
+}
 function getAllBadges(m){return getNivelRangoBadge(m)+'&nbsp;'+getSkillRangoBadge(m);}
+function getAllBadgesFull(m){return getNivelRangoBadge(m)+'&nbsp;'+getSkillRangoBadge(m)+'&nbsp;'+getTotalBadge(m);}
 
 function previewInsignia(){
   const nivel=parseInt(document.getElementById('i-lv')?.value)||0;
@@ -897,7 +987,7 @@ function previewInsignia(){
   document.getElementById('insigIcon').textContent=nrango.icon;
   document.getElementById('insigName').textContent=nrango.nombre;
   document.getElementById('insigDesc').textContent=nrango.desc;
-  document.getElementById('insigBadgesRow').innerHTML=getNivelRangoBadge(fakeM)+'&nbsp;'+getSkillRangoBadge(fakeM);
+  document.getElementById('insigBadgesRow').innerHTML=getNivelRangoBadge(fakeM)+'&nbsp;'+getSkillRangoBadge(fakeM)+'&nbsp;'+getTotalBadge(fakeM);
   // Progreso hacia siguiente rango de nivel
   const idx=NIVEL_RANGOS.findIndex(r=>r===nrango);
   const next=NIVEL_RANGOS[idx+1];
@@ -932,6 +1022,34 @@ function previewInsignia(){
       <div style="flex:1;min-width:100px;height:5px;background:rgba(44,31,15,0.8);border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-top:2px">
         <div style="width:${skPct}%;height:100%;background:linear-gradient(90deg,var(--fire),var(--gold));border-radius:3px"></div>
       </div>`;
+  }
+  // Total power rank row + ruta
+  const totalVal=getTotalPoder(fakeM);
+  const tr=getTotalRango(totalVal);
+  const trIdx=TOTAL_RANGOS.findIndex(r=>r===tr);
+  const trNext=TOTAL_RANGOS[trIdx+1];
+  const trPct=trNext?Math.round((totalVal-tr.min)/(trNext.min-tr.min)*100):100;
+  const totalRow=document.getElementById('totalRankRow');
+  if(totalRow){
+    totalRow.innerHTML=`
+      ${getTotalBadge(fakeM)}
+      <span style="font-size:0.7rem;color:var(--text3);font-family:'Cinzel',serif">Poder Total: ${totalVal} pts · ${trNext?`Siguiente: ${trNext.nombre} en ${trNext.min}`:'¡Rango máximo!'}</span>
+      <div style="flex:1;min-width:100px;height:5px;background:rgba(44,31,15,0.8);border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-top:2px">
+        <div style="width:${trPct}%;height:100%;background:linear-gradient(90deg,var(--fire),var(--gold));border-radius:3px"></div>
+      </div>`;
+  }
+  const rutaTotalEl=document.getElementById('rutaTotal');
+  if(rutaTotalEl){
+    rutaTotalEl.innerHTML=TOTAL_RANGOS.map((r)=>{
+      const unlocked=totalVal>=r.min;
+      const isCurr=r===tr;
+      return`<div class="ruta-item ${unlocked?'unlocked':''} ${isCurr?'current':''}">
+        ${!unlocked?'<div class="ruta-lock">🔒</div>':''}
+        <span class="ruta-icon">${r.icon}</span>
+        <div class="ruta-name">${r.nombre}</div>
+        <div class="ruta-req">${r.min}+ pts</div>
+      </div>`;
+    }).join('');
   }
 }
 
@@ -1131,7 +1249,7 @@ function updateAll(){
 }
 function updatePortal(){
   const m=members;document.getElementById('gTotal').textContent=m.length;
-  if(!m.length){['gAvg','gTop'].forEach(id=>document.getElementById(id).textContent='-');['pMelee','pMage','pDist'].forEach(id=>document.getElementById(id).innerHTML='<div class="empty">Sin datos</div>');document.getElementById('pR').innerHTML='<div class="empty">¡Sé el primero!</div>';return;}
+  if(!m.length){['gAvg','gTop'].forEach(id=>document.getElementById(id).textContent='-');['pMelee','pMage','pDist','pPower'].forEach(id=>document.getElementById(id).innerHTML='<div class="empty">Sin datos</div>');document.getElementById('pR').innerHTML='<div class="empty">¡Sé el primero!</div>';return;}
   document.getElementById('gAvg').textContent=Math.round(m.reduce((a,x)=>a+x.level,0)/m.length);
   const top=m.reduce((a,x)=>x.level>a.level?x:a,m[0]);
   document.getElementById('gTop').textContent=top.name+' (Lv.'+top.level+')';
@@ -1145,6 +1263,13 @@ function updatePortal(){
       </div>`:'<div class="empty">Sin datos</div>';
   };
   topOf('sk_melee','Melee','pMelee');topOf('sk_magic','Magia','pMage');topOf('sk_dist','Dist','pDist');
+  // Top Poder Total (suma de stats)
+  const fPow=[...m].sort((a,b)=>getTotalPoder(b)-getTotalPoder(a));
+  document.getElementById('pPower').innerHTML=fPow.length?`<div class="mn">${clsEmoji(fPow[0].class)} ${fPow[0].name}</div>
+    <div style="display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.4rem;align-items:center">
+      <span style="padding:2px 7px;background:rgba(44,31,15,0.8);border:1px solid var(--border);font-size:0.73rem;color:var(--text2)">Poder <span style="color:var(--gold);font-weight:bold">${getTotalPoder(fPow[0])}</span></span>
+      ${getTotalBadge(fPow[0])}
+    </div>`:'<div class="empty">Sin datos</div>';
   const rec=[...m].sort((a,b)=>b.updated_at-a.updated_at).slice(0,8);
   document.getElementById('pR').innerHTML=rec.map(x=>`
     <div style="display:flex;justify-content:space-between;align-items:center;padding:0.38rem 0.4rem;border-bottom:1px solid rgba(192,57,43,0.1);gap:0.4rem;flex-wrap:wrap">
@@ -1156,8 +1281,9 @@ function showRank(type,el){curRank=type;document.querySelectorAll('.rtab').forEa
 function renderRanking(type){
   const el=document.getElementById('rankCard');
   if(!members.length){el.innerHTML='<div class="empty">Sin miembros</div>';return;}
-  const labels={level:'Nivel',sk_melee:'Melee',sk_magic:'Magia',sk_dist:'Distancia',sk_def:'Defensa'};
-  const sorted=[...members].sort((a,b)=>(b[type]??0)-(a[type]??0));
+  const labels={level:'Nivel',sk_melee:'Melee',sk_magic:'Magia',sk_dist:'Distancia',sk_def:'Defensa',total:'Poder Total'};
+  const getVal=(m)=>type==='total'?getTotalPoder(m):(m[type]??0);
+  const sorted=[...members].sort((a,b)=>getVal(b)-getVal(a));
   const rows=sorted.map((m,i)=>{
     const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1);
     const vc=i===0?'var(--gold)':i===1?'#c0c0c0':i===2?'#cd7f32':'var(--text2)';
@@ -1167,10 +1293,11 @@ function renderRanking(type){
       <td>${clsBadge(m.class)}</td>
       <td>${getNivelRangoBadge(m)}</td>
       <td>${getSkillRangoBadge(m)}</td>
-      <td style="color:${vc};font-weight:bold;font-size:${i<3?'1.02':'0.85'}rem">${m[type]??0}</td>
+      <td>${getTotalBadge(m)}</td>
+      <td style="color:${vc};font-weight:bold;font-size:${i<3?'1.02':'0.85'}rem">${getVal(m)}</td>
     </tr>`;
   }).join('');
-  el.innerHTML=`<div style="overflow-x:auto"><table class="rt" style="min-width:480px"><thead><tr><th>#</th><th>Nombre</th><th>Clase</th><th>Rango Nivel</th><th>Rango Skill</th><th>${labels[type]}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  el.innerHTML=`<div style="overflow-x:auto"><table class="rt" style="min-width:560px"><thead><tr><th>#</th><th>Nombre</th><th>Clase</th><th>Rango Nivel</th><th>Rango Skill</th><th>Rango Poder</th><th>${labels[type]}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 function renderMembers(){
   const srch=(document.getElementById('srch')?.value||'').toLowerCase();
@@ -1184,12 +1311,15 @@ function renderMembers(){
       <div>
         <div class="mn">${clsEmoji(m.class)} ${m.name}</div>
         <div class="mlv">Lv. ${m.level}</div>
-        <div style="margin-top:0.3rem;display:flex;gap:0.3rem;flex-wrap:wrap">${getNivelRangoBadge(m)}${getSkillRangoBadge(m)}</div>
+        <div style="margin-top:0.3rem;display:flex;gap:0.3rem;flex-wrap:wrap">${getAllBadgesFull(m)}</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem">${clsBadge(m.class)}<button class="btn-sm" onclick="openEdit('${m.id}')">✏ Editar</button></div>
     </div>
     ${skb('⚔ Melee',m.sk_melee)}${skb('🔮 Magia',m.sk_magic)}${skb('🏹 Dist',m.sk_dist)}${skb('🛡 Def',m.sk_def)}
-    <div style="font-size:0.63rem;color:var(--text3);margin-top:0.4rem;text-align:right">${timeAgo(m.updated_at)}</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem">
+      <span style="font-family:'Cinzel',serif;font-size:0.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em">💪 Poder Total: <span style="color:var(--gold);font-weight:bold">${getTotalPoder(m)}</span></span>
+      <span style="font-size:0.63rem;color:var(--text3)">${timeAgo(m.updated_at)}</span>
+    </div>
   </div>`).join('')}</div>`;
 }
 function updateCmpSelects(){
@@ -1201,20 +1331,20 @@ function renderCompare(){
   const res=document.getElementById('cmpRes');if(!k1||!k2){res.innerHTML='';return;}
   const m1=members.find(m=>m.id===k1),m2=members.find(m=>m.id===k2);
   if(!m1||!m2){res.innerHTML='<div class="empty">Selecciona dos jugadores</div>';return;}
-  const stats=[{l:'Nivel',a:m1.level,b:m2.level,i:'⭐'},{l:'Melee',a:m1.sk_melee,b:m2.sk_melee,i:'⚔'},{l:'Magia',a:m1.sk_magic,b:m2.sk_magic,i:'🔮'},{l:'Dist',a:m1.sk_dist,b:m2.sk_dist,i:'🏹'},{l:'Defensa',a:m1.sk_def,b:m2.sk_def,i:'🛡'}];
+  const stats=[{l:'Nivel',a:m1.level,b:m2.level,i:'⭐'},{l:'Melee',a:m1.sk_melee,b:m2.sk_melee,i:'⚔'},{l:'Magia',a:m1.sk_magic,b:m2.sk_magic,i:'🔮'},{l:'Dist',a:m1.sk_dist,b:m2.sk_dist,i:'🏹'},{l:'Defensa',a:m1.sk_def,b:m2.sk_def,i:'🛡'},{l:'Poder Total',a:getTotalPoder(m1),b:getTotalPoder(m2),i:'💪'}];
   let w1=0,w2=0;stats.forEach(s=>{if(s.a>s.b)w1++;else if(s.b>s.a)w2++;});
   res.innerHTML=`<div class="card" style="margin-top:0.8rem">
     <div style="display:flex;justify-content:space-around;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem">
       <div style="text-align:center">
         <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold)">${clsEmoji(m1.class)} ${m1.name}</div>
-        <div style="margin:0.3rem 0;display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center">${getAllBadges(m1)}</div>
+        <div style="margin:0.3rem 0;display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center">${getAllBadgesFull(m1)}</div>
         <div style="font-size:1.5rem;color:var(--fire);font-family:'Cinzel Decorative',serif">${w1}</div>
         <div style="font-size:0.62rem;color:var(--text3)">victorias</div>
       </div>
       <div style="font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:var(--text3)">VS</div>
       <div style="text-align:center">
         <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold)">${clsEmoji(m2.class)} ${m2.name}</div>
-        <div style="margin:0.3rem 0;display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center">${getAllBadges(m2)}</div>
+        <div style="margin:0.3rem 0;display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center">${getAllBadgesFull(m2)}</div>
         <div style="font-size:1.5rem;color:var(--fire);font-family:'Cinzel Decorative',serif">${w2}</div>
         <div style="font-size:0.62rem;color:var(--text3)">victorias</div>
       </div>
@@ -1245,25 +1375,20 @@ function renderMes(){
   const mn=now.toLocaleDateString('es-ES',{month:'long',year:'numeric'});
   const b=document.getElementById('mesBadge');if(b)b.textContent=mn.charAt(0).toUpperCase()+mn.slice(1);
   if(!members.length){el.innerHTML='<div class="empty">Sin miembros</div>';return;}
-  const labels={level:'Nivel',sk_melee:'⚔ Melee',sk_magic:'🔮 Magia',sk_dist:'🏹 Distancia',sk_def:'🛡 Defensa'};
-  const sorted=[...members].sort((a,b)=>(b[mesField]||0)-(a[mesField]||0));
+  const labels={level:'Nivel',sk_melee:'⚔ Melee',sk_magic:'🔮 Magia',sk_dist:'🏹 Distancia',sk_def:'🛡 Defensa',total:'💪 Poder Total'};
+  const getVal=(m)=>mesField==='total'?getTotalPoder(m):(m[mesField]||0);
+  const sorted=[...members].sort((a,b)=>getVal(b)-getVal(a));
   const medals=['🥇','🥈','🥉'];
-  // Diferencia entre rango de nivel/skill actual vs si tuviera -100 pts
-  const getDiff=(m,field)=>{
-    if(field==='level'){const cur=getNivelRango(m.level);const prev=getNivelRango(Math.max(0,m.level-100));return cur!==prev?`+1 rango ↑ ${cur.nombre}`:`${m.level} pts`;}
-    const val=m[field]||0;const cur=getSkillRango(val);const prev=getSkillRango(Math.max(0,val-50));
-    return cur!==prev?`+rango ${cur.nombre}`:`${val} pts`;
-  };
   el.innerHTML=sorted.map((m,i)=>`
     <div class="mes-list-item">
       <div class="mes-medal">${medals[i]||'<span style="font-family:Cinzel,serif;font-size:0.7rem;color:var(--text3)">#${i+1}</span>'}</div>
       <div class="mes-linfo">
         <div class="mes-lname">${clsEmoji(m.class)} ${m.name}</div>
-        <div class="mes-lsub">${getNivelRangoBadge(m)} ${getSkillRangoBadge(m)}</div>
+        <div class="mes-lsub">${getNivelRangoBadge(m)} ${getSkillRangoBadge(m)} ${getTotalBadge(m)}</div>
       </div>
       <div style="text-align:right;padding-right:0.3rem">
-        <div class="mes-lval">${m[mesField]||0}</div>
-        <div class="mes-ldiff" style="color:${i<3?'#2ecc71':'var(--text3)'}">↑ ${mesField!=='level'?((m[mesField]||0)/Math.max(m.level,1)).toFixed(1)+' ratio':'activo'}</div>
+        <div class="mes-lval">${getVal(m)}</div>
+        <div class="mes-ldiff" style="color:${i<3?'#2ecc71':'var(--text3)'}">↑ ${mesField!=='level'&&mesField!=='total'?((m[mesField]||0)/Math.max(m.level,1)).toFixed(1)+' ratio':'activo'}</div>
       </div>
     </div>`).join('');
 }
@@ -1403,7 +1528,7 @@ function startFight(){
     <div class="fight-stage">
       <div class="fighter-box ${won1?'winner':'loser'}">
         <div class="fighter-name">${clsEmoji(m1.class)} ${m1.name}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center;margin:0.3rem 0">${getAllBadges(m1)}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center;margin:0.3rem 0">${getAllBadgesFull(m1)}</div>
         <div class="fighter-lv">Lv.${m1.level} · ATK:${b1.atk} DEF:${b1.def}</div>
         ${buffNames1.length?`<div style="font-size:0.58rem;color:#f0b27a;font-family:'Cinzel',serif">${buffNames1.map(n=>'🔹'+n).join(' ')}</div>`:''}
         <div style="font-size:0.6rem;font-family:'Cinzel',serif;color:var(--text3);margin-top:0.3rem;margin-bottom:2px">HP</div>
@@ -1414,7 +1539,7 @@ function startFight(){
       <div class="vs-glyph">⚔<br>VS</div>
       <div class="fighter-box ${!won1?'winner':'loser'}">
         <div class="fighter-name">${clsEmoji(m2.class)} ${m2.name}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center;margin:0.3rem 0">${getAllBadges(m2)}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center;margin:0.3rem 0">${getAllBadgesFull(m2)}</div>
         <div class="fighter-lv">Lv.${m2.level} · ATK:${b2.atk} DEF:${b2.def}</div>
         ${buffNames2.length?`<div style="font-size:0.58rem;color:#f0b27a;font-family:'Cinzel',serif">${buffNames2.map(n=>'🔹'+n).join(' ')}</div>`:''}
         <div style="font-size:0.6rem;font-family:'Cinzel',serif;color:var(--text3);margin-top:0.3rem;margin-bottom:2px">HP</div>
@@ -1906,6 +2031,103 @@ function renderMuro(){
     <div class="muro-date">📅 ${new Date(m.created_at).toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'})}</div>
     <button class="muro-del" onclick="deleteMuro(${m.id})">🗑</button>
   </div>`).join('');
+}
+
+// ═══════════════════════════════════════════════
+// MÚSICA ÉPICA — generada con Web Audio API (sin copyright)
+// ═══════════════════════════════════════════════
+let audioCtx=null,musicGainMaster=null,musicInterval=null,musicPlaying=false,musicMuted=false;
+
+function initEpicMusic(){
+  if(audioCtx)return;
+  try{
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  }catch(e){return;}
+
+  musicGainMaster=audioCtx.createGain();
+  musicGainMaster.gain.value=0;
+  musicGainMaster.connect(audioCtx.destination);
+
+  // Eco/reverb sencillo con delay realimentado
+  const delay=audioCtx.createDelay(2.0);delay.delayTime.value=0.38;
+  const feedback=audioCtx.createGain();feedback.gain.value=0.32;
+  const delayFilter=audioCtx.createBiquadFilter();delayFilter.type='lowpass';delayFilter.frequency.value=1800;
+  delay.connect(feedback);feedback.connect(delayFilter);delayFilter.connect(delay);
+  delay.connect(musicGainMaster);
+
+  const dryGain=audioCtx.createGain();dryGain.gain.value=1;
+  dryGain.connect(musicGainMaster);dryGain.connect(delay);
+
+  // Progresión épica en La menor: Am - F - C - G
+  const chords=[
+    [220.00,261.63,329.63], // Am  (A3 C4 E4)
+    [174.61,220.00,261.63], // F   (F3 A3 C4)
+    [261.63,329.63,392.00], // C   (C4 E4 G4)
+    [196.00,246.94,293.66], // G   (G3 B3 D4)
+  ];
+  const chordDur=4.6;
+
+  function scheduleChord(freqs,startTime,dur){
+    freqs.forEach((f,i)=>{
+      const osc=audioCtx.createOscillator();
+      osc.type=i===0?'sawtooth':'sine';osc.frequency.value=f;
+      const osc2=audioCtx.createOscillator();
+      osc2.type='sine';osc2.frequency.value=f;osc2.detune.value=7;
+      const g=audioCtx.createGain();
+      g.gain.setValueAtTime(0,startTime);
+      g.gain.linearRampToValueAtTime(0.055,startTime+1.4);
+      g.gain.linearRampToValueAtTime(0.045,startTime+dur-1.6);
+      g.gain.linearRampToValueAtTime(0,startTime+dur);
+      const filt=audioCtx.createBiquadFilter();filt.type='lowpass';filt.frequency.value=1100;
+      osc.connect(filt);osc2.connect(filt);filt.connect(g);g.connect(dryGain);
+      osc.start(startTime);osc.stop(startTime+dur+0.15);
+      osc2.start(startTime);osc2.stop(startTime+dur+0.15);
+    });
+    // Bajo sub-grave
+    const sub=audioCtx.createOscillator();sub.type='sine';sub.frequency.value=freqs[0]/2;
+    const subG=audioCtx.createGain();
+    subG.gain.setValueAtTime(0,startTime);
+    subG.gain.linearRampToValueAtTime(0.13,startTime+1.6);
+    subG.gain.linearRampToValueAtTime(0,startTime+dur);
+    sub.connect(subG);subG.connect(dryGain);
+    sub.start(startTime);sub.stop(startTime+dur+0.15);
+    // Percusión sutil tipo "tambor de guerra" en cada cambio de acorde
+    const noiseDur=0.32;
+    const bufferSize=audioCtx.sampleRate*noiseDur;
+    const buffer=audioCtx.createBuffer(1,bufferSize,audioCtx.sampleRate);
+    const data=buffer.getChannelData(0);
+    for(let i=0;i<bufferSize;i++)data[i]=(Math.random()*2-1)*Math.pow(1-i/bufferSize,2.2);
+    const noise=audioCtx.createBufferSource();noise.buffer=buffer;
+    const noiseFilt=audioCtx.createBiquadFilter();noiseFilt.type='lowpass';noiseFilt.frequency.value=180;
+    const noiseG=audioCtx.createGain();noiseG.gain.value=0.22;
+    noise.connect(noiseFilt);noiseFilt.connect(noiseG);noiseG.connect(dryGain);
+    noise.start(startTime);
+  }
+
+  function scheduleLoop(){
+    let t=audioCtx.currentTime+0.15;
+    chords.forEach(c=>{scheduleChord(c,t,chordDur);t+=chordDur;});
+  }
+  scheduleLoop();
+  const loopLenMs=chordDur*chords.length*1000;
+  musicInterval=setInterval(scheduleLoop,loopLenMs);
+
+  musicGainMaster.gain.linearRampToValueAtTime(musicMuted?0:0.55,audioCtx.currentTime+2.2);
+  musicPlaying=true;
+}
+function toggleMusic(){
+  if(!audioCtx)return;
+  musicMuted=!musicMuted;
+  musicGainMaster.gain.linearRampToValueAtTime(musicMuted?0:0.55,audioCtx.currentTime+0.4);
+  const btn=document.getElementById('musicToggleBtn');
+  if(btn){btn.textContent=musicMuted?'🔇':'🔊';btn.classList.toggle('muted',musicMuted);}
+}
+function enterPortal(){
+  initEpicMusic();
+  const ov=document.getElementById('welcomeOverlay');
+  if(ov)ov.classList.add('hidden');
+  const mb=document.getElementById('musicToggleBtn');
+  if(mb)mb.style.display='flex';
 }
 
 // ═══════════════════════════════════════════════
