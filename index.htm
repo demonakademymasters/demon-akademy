@@ -511,7 +511,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <div class="chat-messages" id="chatMessages"><div class="loader">Cargando...</div></div>
     <div style="padding:0 0.7rem 0.35rem;font-family:'Cinzel',serif;font-size:0.57rem;color:var(--text3);font-style:italic">⚔ Usa tu nick exacto de Rucoy → tu rango aparece automáticamente</div>
     <div class="chat-input-row">
-      <input class="fi chat-name-input" id="chatNick" type="text" placeholder="Nick de Rucoy..." maxlength="30">
+      <input class="fi chat-name-input" id="chatNick" type="text" placeholder="Nick de Rucoy..." maxlength="30" list="dlMembers">
       <input class="fi chat-msg-input" id="chatText" type="text" placeholder="Escribe..." maxlength="200" onkeydown="if(event.key==='Enter')sendChat()">
       <button class="chat-send-btn" onclick="sendChat()">⚔ Enviar</button>
     </div>
@@ -538,6 +538,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <div class="card"><div class="fl">💪 Top Poder Total</div><div id="pPower"><div class="loader">Cargando</div></div></div>
   </div>
   <div class="card"><div class="fl">📜 Últimas Actualizaciones</div><div id="pR"><div class="loader">Cargando</div></div></div>
+  <div class="card"><div class="fl">🕰 Línea de Tiempo de la Guild</div><div id="timelineWrap"><div class="loader">Cargando...</div></div></div>
 </div>
 
 <!-- ===== MI PERFIL ===== -->
@@ -548,6 +549,7 @@ body::before{content:'';position:fixed;inset:0;background:
       <span class="insig-icon" id="insigIcon">🗡️</span>
       <div class="insig-name" id="insigName">Novato</div>
       <div class="insig-desc" id="insigDesc">Apenas comienzas tu camino</div>
+      <div style="margin:0.5rem 0"><span class="title-combo" id="insigTitleCombo">—</span></div>
       <div id="insigBadgesRow" style="display:flex;justify-content:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.7rem"></div>
       <div style="font-family:'Cinzel',serif;font-size:0.6rem;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem">Progreso → siguiente rango de nivel</div>
       <div class="insig-prog-bar"><div class="insig-prog-fill" id="insigProgFill" style="width:0%"></div></div>
@@ -562,16 +564,26 @@ body::before{content:'';position:fixed;inset:0;background:
     </div>
     <div class="card" style="margin-bottom:1rem">
       <div class="fl">💪 Rango de Poder Total — EXCLUSIVO (Nivel + 4 Skills)</div>
-      <div style="font-size:0.7rem;color:var(--text3);font-style:italic;margin-bottom:0.5rem">Suma de Nivel + Melee + Magia + Distancia + Defensa. El rango más prestigioso de la guild.</div>
+      <div style="font-size:0.7rem;color:var(--text3);font-style:italic;margin-bottom:0.5rem">Suma de Nivel + Melee + Magia + Distancia + Defensa. Cada rango tiene 3 sub-niveles (Ⅰ Ⅱ Ⅲ). El rango más prestigioso de la guild.</div>
       <div id="totalRankRow" style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:0.8rem"></div>
       <div class="ruta-rangos" id="rutaTotal"></div>
     </div>
   </div>
   <div class="card">
-    <div style="font-size:0.78rem;color:var(--text3);font-style:italic;margin-bottom:1.2rem">Mismo nombre siempre → actualiza sin duplicar. Tu insignia aparece en tiempo real.</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.2rem">
+      <div style="font-size:0.78rem;color:var(--text3);font-style:italic">Mismo nombre siempre → actualiza sin duplicar. Tu insignia aparece en tiempo real.</div>
+      <button class="btn-sm" onclick="toggleBulk()">⚡ Actualización en Lote</button>
+    </div>
+    <div class="bulk-wrap" id="bulkWrap" style="margin-bottom:1.2rem">
+      <div class="fl">⚡ Actualización Rápida en Lote</div>
+      <div style="font-size:0.7rem;color:var(--text3);font-style:italic;margin-bottom:0.5rem">Una línea por jugador: <strong>Nombre, Nivel, Clase(warrior/mage/archer), Melee, Magia, Distancia, Defensa</strong></div>
+      <textarea class="fi" id="bulkText" rows="5" placeholder="DemonKiller, 350, warrior, 220, 40, 60, 180&#10;ShadowMage, 410, mage, 30, 300, 90, 140" style="resize:vertical;font-family:'Cinzel',serif;font-size:0.78rem"></textarea>
+      <div class="bc" style="margin:0.7rem 0 0"><button class="btn-fire" id="btnBulkSave" onclick="processBulk()">⚡ Procesar Lote</button></div>
+      <div class="bulk-result" id="bulkResult" style="display:none"></div>
+    </div>
     <div class="fl">👤 Personaje</div>
     <div class="grid2">
-      <div class="fg"><label class="flb">Nombre *</label><input class="fi" id="i-name" type="text" placeholder="Nick exacto en Rucoy..." maxlength="30"></div>
+      <div class="fg"><label class="flb">Nombre *</label><input class="fi" id="i-name" type="text" placeholder="Nick exacto en Rucoy..." maxlength="30" list="dlMembers"></div>
       <div class="fg"><label class="flb">Nivel *</label><input class="fi" id="i-lv" type="number" placeholder="Ej: 350" min="1" max="9999" oninput="previewInsignia()"></div>
       <div class="fg"><label class="flb">Clase *</label>
         <select class="fi" id="i-cls">
@@ -619,6 +631,25 @@ body::before{content:'';position:fixed;inset:0;background:
       <option value="mage">🔮 Mage</option>
       <option value="archer">🏹 Archer</option>
     </select>
+    <button class="btn-sm" onclick="toggleLeaderPanel()">👑 Liderazgo</button>
+  </div>
+  <div class="card leader-panel" id="leaderPanel">
+    <div class="fl">👑 Panel de Liderazgo — Asignar Roles</div>
+    <div style="font-size:0.7rem;color:var(--text3);font-style:italic;margin-bottom:0.6rem">Asigna un tag especial a cualquier miembro (Líder, Colíder, Oficial, Veterano, Reclutador).</div>
+    <div class="grid2" style="grid-template-columns:2fr 1fr auto">
+      <div class="fg"><label class="flb">Nombre</label><input class="fi" id="ld-name" type="text" placeholder="Nick..." list="dlMembers"></div>
+      <div class="fg"><label class="flb">Rol</label>
+        <select class="fi" id="ld-role">
+          <option value="lider">👑 Líder</option>
+          <option value="colider">🔥 Colíder</option>
+          <option value="oficial">🛡 Oficial</option>
+          <option value="veterano">⚔ Veterano</option>
+          <option value="reclutador">📯 Reclutador</option>
+        </select>
+      </div>
+      <div class="fg"><label class="flb">&nbsp;</label><button class="btn-fire" style="padding:0.5rem 1rem" onclick="addLeaderRole()">+ Asignar</button></div>
+    </div>
+    <div id="leaderList" style="margin-top:0.6rem"></div>
   </div>
   <div id="mGrid"><div class="loader">Cargando...</div></div>
 </div>
@@ -703,7 +734,7 @@ body::before{content:'';position:fixed;inset:0;background:
         <div class="dungeon-start">
           <div class="dungeon-start-title">🗺 Dungeon de Demon Akademy</div>
           <div style="font-size:0.75rem;color:var(--text3);font-style:italic;margin-bottom:0.8rem">Lleva tu nombre para guardar tu récord en el Top Global</div>
-          <div class="fg" style="max-width:300px;margin:0 auto 0.8rem"><label class="flb">Tu nick de Rucoy</label><input class="fi" id="dungeonNick" type="text" placeholder="Ej: DemonKiller..." maxlength="25"></div>
+          <div class="fg" style="max-width:300px;margin:0 auto 0.8rem"><label class="flb">Tu nick de Rucoy</label><input class="fi" id="dungeonNick" type="text" placeholder="Ej: DemonKiller..." maxlength="25" list="dlMembers"></div>
           <div style="font-family:'Cinzel',serif;font-size:0.72rem;color:var(--gold2);margin-bottom:0.6rem;letter-spacing:0.08em;text-transform:uppercase">Elige tu Clase</div>
           <div class="cls-select-grid">
             <div class="cls-card" id="cls-warrior" onclick="selectDungeonClass('warrior')">
@@ -764,6 +795,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <div class="card">
       <div class="fl">🧩 Puzzle de Runas — Ordena el Símbolo Sagrado</div>
       <div style="font-size:0.72rem;color:var(--text3);font-style:italic;margin-bottom:0.7rem">Desliza las piezas para restaurar la runa. Haz clic en una pieza adyacente al espacio vacío para moverla.</div>
+      <div class="fg" style="max-width:280px;margin-bottom:0.6rem"><label class="flb">Tu nick (para el Top Global)</label><input class="fi" id="puzzleNick" type="text" placeholder="Nick de Rucoy..." maxlength="25" list="dlMembers"></div>
       <div class="puzzle-hud">
         <div>Movimientos: <span id="puzMoves">0</span></div>
         <div>Récord: <span id="puzRecord">-</span></div>
@@ -771,13 +803,17 @@ body::before{content:'';position:fixed;inset:0;background:
       </div>
       <div style="display:flex;gap:0.5rem;justify-content:center;margin-bottom:0.8rem;flex-wrap:wrap">
         <button class="btn-sm" onclick="setPuzzleSize(3)">3×3 Fácil</button>
-        <button class="btn-sm" onclick="setPuzzleSize(4)">4×4 Normal</button>
-        <button class="btn-sm active" id="puzSizeBtn" onclick="setPuzzleSize(4)">4×4</button>
+        <button class="btn-sm" id="puzSizeBtn" onclick="setPuzzleSize(4)">4×4 Normal</button>
         <button class="btn-sm" onclick="initPuzzle()">🔀 Mezclar</button>
+        <button class="btn-sm" onclick="document.getElementById('puzzleTopWrap').style.display=document.getElementById('puzzleTopWrap').style.display==='none'?'block':'none';renderPuzzleTop()">🏆 Top Global</button>
       </div>
       <div id="puzzleArea" class="puzzle-wrap">
         <div class="puzzle-grid" id="puzzleGrid"></div>
         <div class="puzzle-msg" id="puzzleMsg"></div>
+      </div>
+      <div id="puzzleTopWrap" style="display:none;margin-top:0.8rem">
+        <div class="dungeon-top-title">🏆 Top 10 — Menos Movimientos (4×4)</div>
+        <div id="puzzleTopList"></div>
       </div>
     </div>
   </div>
@@ -790,7 +826,7 @@ body::before{content:'';position:fixed;inset:0;background:
     <div style="font-size:0.78rem;color:var(--text3);font-style:italic;margin-bottom:0.8rem">Marca las misiones que ya completaste. Tu progreso se guarda localmente. ¡Pongan su nick para que todos vean quién las completa!</div>
     <div class="mis-nick-row">
       <label class="flb" style="white-space:nowrap">Tu nick:</label>
-      <input class="fi" id="misNick" type="text" placeholder="Nick de Rucoy..." maxlength="25" style="flex:1;max-width:220px" onchange="renderMisiones()">
+      <input class="fi" id="misNick" type="text" placeholder="Nick de Rucoy..." maxlength="25" style="flex:1;max-width:220px" onchange="renderMisiones()" list="dlMembers">
       <div style="font-size:0.65rem;color:var(--text3);font-family:'Cinzel',serif">Las misiones completadas se comparten en la guild</div>
     </div>
     <div id="misionesContainer"></div>
@@ -872,7 +908,7 @@ body::before{content:'';position:fixed;inset:0;background:
       </div>
     </div>
     <div class="fg" style="margin-bottom:.8rem"><label class="flb">Descripción *</label><textarea class="fi" id="m-desc" rows="2" placeholder="Cuéntanos qué pasó..."></textarea></div>
-    <div class="fg" style="margin-bottom:.8rem"><label class="flb">Protagonista(s)</label><input class="fi" id="m-autor" type="text" placeholder="Nicks..."></div>
+    <div class="fg" style="margin-bottom:.8rem"><label class="flb">Protagonista(s)</label><input class="fi" id="m-autor" type="text" placeholder="Nicks..." list="dlMembers"></div>
     <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
       <button class="btn-fire" id="btnMuroSave" onclick="saveMuro()">💀 Inmortalizar</button>
       <button class="btn-sm" onclick="toggleMuroForm()" style="padding:.6rem 1.2rem">✕ Cancelar</button>
@@ -882,6 +918,8 @@ body::before{content:'';position:fixed;inset:0;background:
 </div>
 
 </div><!-- /.main -->
+
+<datalist id="dlMembers"></datalist>
 
 <!-- MODAL EDITAR -->
 <div class="modal-bg" id="editModal">
@@ -911,1300 +949,10 @@ body::before{content:'';position:fixed;inset:0;background:
   </div>
 </div>
 <div class="toast" id="toast"></div>
+<canvas id="particlesCanvas"></canvas>
 <div style="text-align:center;padding:1.2rem;color:var(--text3);font-size:0.7rem;border-top:1px solid var(--border);position:relative;z-index:5;margin-top:1.5rem">
   <div style="font-family:'Cinzel',serif;color:var(--fire);margin-bottom:0.25rem">⚔ Demon Akademy ⚔</div>
   <div>Portal Oficial · Rucoy Online</div>
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════════
-const SUPA_URL='https://mgffuphsbjsvjocdiqps.supabase.co/rest/v1';
-const SUPA_KEY='sb_publishable_LAD7Rh3pzvdgW9d5kMh6WA_WGG6x2DJ';
-const H={'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=representation'};
-const PAISES=[
-  {n:'🇻🇪 Venezuela',tz:'America/Caracas'},{n:'🇲🇽 México',tz:'America/Mexico_City'},
-  {n:'🇨🇴 Colombia',tz:'America/Bogota'},{n:'🇵🇪 Perú',tz:'America/Lima'},
-  {n:'🇪🇨 Ecuador',tz:'America/Guayaquil'},{n:'🇨🇱 Chile',tz:'America/Santiago'},
-  {n:'🇦🇷 Argentina',tz:'America/Argentina/Buenos_Aires'},{n:'🇺🇾 Uruguay',tz:'America/Montevideo'},
-  {n:'🇧🇷 Brasil',tz:'America/Sao_Paulo'},{n:'🇧🇴 Bolivia',tz:'America/La_Paz'},
-  {n:'🇵🇾 Paraguay',tz:'America/Asuncion'},{n:'🇵🇦 Panamá',tz:'America/Panama'},
-  {n:'🇨🇷 Costa Rica',tz:'America/Costa_Rica'},{n:'🇬🇹 Guatemala',tz:'America/Guatemala'},
-  {n:'🇭🇳 Honduras',tz:'America/Tegucigalpa'},{n:'🇸🇻 El Salvador',tz:'America/El_Salvador'},
-  {n:'🇳🇮 Nicaragua',tz:'America/Managua'},{n:'🇩🇴 R.Dominicana',tz:'America/Santo_Domingo'},
-  {n:'🇵🇷 Puerto Rico',tz:'America/Puerto_Rico'},{n:'🇨🇺 Cuba',tz:'America/Havana'},
-  {n:'🇪🇸 España',tz:'Europe/Madrid'}
-];
-
-// ═══════════════════════════════════════════════
-// SISTEMA DE RANGOS — cada 100 niveles + por skill
-// ═══════════════════════════════════════════════
-// Rangos de NIVEL (cada 100 niveles) — 10 rangos: 0,100,200...900+
-const NIVEL_RANGOS=[
-  {min:0,   nombre:'Iniciado',    icon:'🗡️', cls:'rk-n0', desc:'Comienzas tu camino en Rucoy'},
-  {min:100, nombre:'Aprendiz',    icon:'⚔️', cls:'rk-n1', desc:'Tus primeros 100 niveles logrados'},
-  {min:200, nombre:'Soldado',     icon:'🛡️', cls:'rk-n2', desc:'Guerrero con experiencia real'},
-  {min:300, nombre:'Guerrero',    icon:'⚔',  cls:'rk-n3', desc:'Tu nombre ya genera respeto'},
-  {min:400, nombre:'Luchador',    icon:'🔥', cls:'rk-n4', desc:'Superas a la mayoría del servidor'},
-  {min:500, nombre:'Élite',       icon:'💀', cls:'rk-n4', desc:'La mitad del camino ha pasado'},
-  {min:600, nombre:'Campeón',     icon:'🏆', cls:'rk-n5', desc:'Pocos llegan a este rango'},
-  {min:700, nombre:'Veterano',    icon:'👑', cls:'rk-n6', desc:'Una leyenda del servidor'},
-  {min:800, nombre:'Maestro',     icon:'🌟', cls:'rk-n7', desc:'Dominio casi absoluto del juego'},
-  {min:900, nombre:'Inmortal',    icon:'⚡', cls:'rk-n8', desc:'Eres historia viva de Rucoy Online'},
-];
-// Rangos de SKILL (cada 100 pts del skill máximo)
-const SKILL_RANGOS=[
-  {min:0,   nombre:'Sin entrenar', icon:'·',  cls:'sk-0'},
-  {min:100, nombre:'Aprendiz',     icon:'Ⅰ',  cls:'sk-1'},
-  {min:200, nombre:'Adepto',       icon:'Ⅱ',  cls:'sk-2'},
-  {min:300, nombre:'Experto',      icon:'Ⅲ',  cls:'sk-3'},
-  {min:400, nombre:'Especialista', icon:'Ⅳ',  cls:'sk-4'},
-  {min:500, nombre:'Maestro',      icon:'Ⅴ',  cls:'sk-5'},
-  {min:600, nombre:'Élite',        icon:'Ⅵ',  cls:'sk-6'},
-  {min:700, nombre:'Grandmaestro', icon:'Ⅶ',  cls:'sk-7'},
-  {min:800, nombre:'Legendario',   icon:'Ⅷ',  cls:'sk-8'},
-  {min:900, nombre:'Dios',         icon:'Ⅸ',  cls:'sk-9'},
-];
-// Rangos de PODER TOTAL — EXCLUSIVO (suma de Nivel + 4 Skills)
-const TOTAL_RANGOS=[
-  {min:0,    nombre:'Sombra Errante',        icon:'🌑', cls:'tk-0', desc:'Apenas inicias tu leyenda en Demon Akademy'},
-  {min:500,  nombre:'Custodio Novato',       icon:'🗡️', cls:'tk-1', desc:'Tu poder combinado empieza a notarse'},
-  {min:1000, nombre:'Guardián de Sombras',   icon:'⚔️', cls:'tk-2', desc:'Nivel y skills crecen en equilibrio'},
-  {min:1750, nombre:'Centinela de Akademy',  icon:'🛡️', cls:'tk-3', desc:'Un pilar confiable de la guild'},
-  {min:2500, nombre:'Verdugo Infernal',      icon:'🔥', cls:'tk-4', desc:'Tu poder total infunde respeto'},
-  {min:3500, nombre:'Comandante de Guerra',  icon:'👹', cls:'tk-5', desc:'Liderazgo forjado en combate'},
-  {min:4500, nombre:'Señor de la Oscuridad', icon:'💀', cls:'tk-6', desc:'Pocos alcanzan este poder combinado'},
-  {min:6000, nombre:'Archonte Demoníaco',    icon:'👑', cls:'tk-7', desc:'Una autoridad indiscutible de DA'},
-  {min:8000, nombre:'Semidiós de Rucoy',     icon:'🌟', cls:'tk-8', desc:'Tu poder total es prácticamente mítico'},
-  {min:10000,nombre:'Trascendente',          icon:'⚡', cls:'tk-9', desc:'El rango exclusivo más alto de Demon Akademy'},
-];
-
-function getNivelRango(nivel){
-  let r=NIVEL_RANGOS[0];
-  for(const rr of NIVEL_RANGOS){if(nivel>=rr.min)r=rr;else break;}
-  return r;
-}
-function getSkillRango(val){
-  let r=SKILL_RANGOS[0];
-  for(const rr of SKILL_RANGOS){if(val>=rr.min)r=rr;else break;}
-  return r;
-}
-function getMaxSkill(m){return Math.max(m.sk_melee||0,m.sk_magic||0,m.sk_dist||0,m.sk_def||0);}
-function getMaxSkillName(m){
-  const vals={Melee:m.sk_melee||0,Magia:m.sk_magic||0,Dist:m.sk_dist||0,Def:m.sk_def||0};
-  return Object.entries(vals).reduce((a,b)=>b[1]>a[1]?b:a)[0];
-}
-function getNivelRangoBadge(m){
-  const r=getNivelRango(m.level);
-  return`<span class="rank-badge ${r.cls}">${r.icon} ${r.nombre}</span>`;
-}
-function getSkillRangoBadge(m){
-  const ms=getMaxSkill(m);const r=getSkillRango(ms);const sn=getMaxSkillName(m);
-  return`<span class="sk-badge ${r.cls}">${r.icon} ${r.nombre} ${sn}</span>`;
-}
-// Poder Total = Nivel + Melee + Magia + Distancia + Defensa
-function getTotalPoder(m){
-  return (m.level||0)+(m.sk_melee||0)+(m.sk_magic||0)+(m.sk_dist||0)+(m.sk_def||0);
-}
-function getTotalRango(val){
-  let r=TOTAL_RANGOS[0];
-  for(const rr of TOTAL_RANGOS){if(val>=rr.min)r=rr;else break;}
-  return r;
-}
-function getTotalBadge(m){
-  const val=getTotalPoder(m);const r=getTotalRango(val);
-  return`<span class="total-badge ${r.cls}">${r.icon} ${r.nombre}</span>`;
-}
-function getAllBadges(m){return getNivelRangoBadge(m)+'&nbsp;'+getSkillRangoBadge(m);}
-function getAllBadgesFull(m){return getNivelRangoBadge(m)+'&nbsp;'+getSkillRangoBadge(m)+'&nbsp;'+getTotalBadge(m);}
-
-function previewInsignia(){
-  const nivel=parseInt(document.getElementById('i-lv')?.value)||0;
-  if(!nivel)return;
-  const mel=parseInt(document.getElementById('sk-mel')?.value)||0;
-  const mag=parseInt(document.getElementById('sk-mag')?.value)||0;
-  const dis=parseInt(document.getElementById('sk-dis')?.value)||0;
-  const def=parseInt(document.getElementById('sk-def')?.value)||0;
-  const fakeM={level:nivel,sk_melee:mel,sk_magic:mag,sk_dist:dis,sk_def:def};
-  const nrango=getNivelRango(nivel);
-  document.getElementById('insigPreview').style.display='block';
-  document.getElementById('insigIcon').textContent=nrango.icon;
-  document.getElementById('insigName').textContent=nrango.nombre;
-  document.getElementById('insigDesc').textContent=nrango.desc;
-  document.getElementById('insigBadgesRow').innerHTML=getNivelRangoBadge(fakeM)+'&nbsp;'+getSkillRangoBadge(fakeM)+'&nbsp;'+getTotalBadge(fakeM);
-  // Progreso hacia siguiente rango de nivel
-  const idx=NIVEL_RANGOS.findIndex(r=>r===nrango);
-  const next=NIVEL_RANGOS[idx+1];
-  const pct=next?Math.round((nivel-nrango.min)/(next.min-nrango.min)*100):100;
-  document.getElementById('insigProgFill').style.width=pct+'%';
-  document.getElementById('insigProgLabel').textContent=next?`Siguiente: ${next.icon} ${next.nombre} — Nivel ${next.min}`:'¡Rango máximo de nivel!';
-  // Ruta de rangos de nivel
-  const rutaEl=document.getElementById('rutaRangos');
-  if(rutaEl){
-    rutaEl.innerHTML=NIVEL_RANGOS.map((r,i)=>{
-      const unlocked=nivel>=r.min;
-      const isCurr=r===nrango;
-      return`<div class="ruta-item ${unlocked?'unlocked':''} ${isCurr?'current':''}">
-        ${!unlocked?'<div class="ruta-lock">🔒</div>':''}
-        <span class="ruta-icon">${r.icon}</span>
-        <div class="ruta-name">${r.nombre}</div>
-        <div class="ruta-req">Lv.${r.min}+</div>
-      </div>`;
-    }).join('');
-  }
-  // Skill rank row
-  const skRow=document.getElementById('skillRankRow');
-  if(skRow){
-    const maxVal=getMaxSkill(fakeM);const maxNm=getMaxSkillName(fakeM);
-    const sr=getSkillRango(maxVal);
-    const skIdx=SKILL_RANGOS.findIndex(r=>r===sr);
-    const skNext=SKILL_RANGOS[skIdx+1];
-    const skPct=skNext?Math.round((maxVal-sr.min)/(skNext.min-sr.min)*100):100;
-    skRow.innerHTML=`
-      ${getSkillRangoBadge(fakeM)}
-      <span style="font-size:0.7rem;color:var(--text3);font-family:'Cinzel',serif">${maxNm}: ${maxVal} pts · ${skNext?`Siguiente: ${skNext.nombre} en ${skNext.min}`:'¡Rango máximo!'}</span>
-      <div style="flex:1;min-width:100px;height:5px;background:rgba(44,31,15,0.8);border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-top:2px">
-        <div style="width:${skPct}%;height:100%;background:linear-gradient(90deg,var(--fire),var(--gold));border-radius:3px"></div>
-      </div>`;
-  }
-  // Total power rank row + ruta
-  const totalVal=getTotalPoder(fakeM);
-  const tr=getTotalRango(totalVal);
-  const trIdx=TOTAL_RANGOS.findIndex(r=>r===tr);
-  const trNext=TOTAL_RANGOS[trIdx+1];
-  const trPct=trNext?Math.round((totalVal-tr.min)/(trNext.min-tr.min)*100):100;
-  const totalRow=document.getElementById('totalRankRow');
-  if(totalRow){
-    totalRow.innerHTML=`
-      ${getTotalBadge(fakeM)}
-      <span style="font-size:0.7rem;color:var(--text3);font-family:'Cinzel',serif">Poder Total: ${totalVal} pts · ${trNext?`Siguiente: ${trNext.nombre} en ${trNext.min}`:'¡Rango máximo!'}</span>
-      <div style="flex:1;min-width:100px;height:5px;background:rgba(44,31,15,0.8);border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-top:2px">
-        <div style="width:${trPct}%;height:100%;background:linear-gradient(90deg,var(--fire),var(--gold));border-radius:3px"></div>
-      </div>`;
-  }
-  const rutaTotalEl=document.getElementById('rutaTotal');
-  if(rutaTotalEl){
-    rutaTotalEl.innerHTML=TOTAL_RANGOS.map((r)=>{
-      const unlocked=totalVal>=r.min;
-      const isCurr=r===tr;
-      return`<div class="ruta-item ${unlocked?'unlocked':''} ${isCurr?'current':''}">
-        ${!unlocked?'<div class="ruta-lock">🔒</div>':''}
-        <span class="ruta-icon">${r.icon}</span>
-        <div class="ruta-name">${r.nombre}</div>
-        <div class="ruta-req">${r.min}+ pts</div>
-      </div>`;
-    }).join('');
-  }
-}
-
-// ═══════════════════════════════════════════════
-// API
-// ═══════════════════════════════════════════════
-async function apiReq(path,method='GET',body=null,extraH={}){
-  const opts={method,headers:{...H,...extraH}};
-  if(body)opts.body=JSON.stringify(body);
-  const r=await fetch(SUPA_URL+path,opts);
-  if(!r.ok){const e=await r.text();throw new Error(e);}
-  const t=await r.text();return t?JSON.parse(t):[];
-}
-let members=[],avisos=[],curRank='level',chatCache=[],chatInterval=null;
-
-async function loadAll(){
-  try{
-    const[m,a]=await Promise.all([
-      apiReq('/members?select=*&order=level.desc'),
-      apiReq('/announcements?select=*&order=created_at.desc')
-    ]);
-    members=m;avisos=a.filter(x=>!x.expires_at||new Date(x.expires_at)>new Date());
-    updateAll();
-  }catch(e){console.error(e);showToast('⚠ Error al conectar');}
-}
-
-// ═══════════════════════════════════════════════
-// CHAT — Supabase polling
-// ═══════════════════════════════════════════════
-async function loadChat(){
-  try{const msgs=await apiReq('/chat_messages?select=*&order=created_at.asc&limit=60');chatCache=msgs;renderChat();}
-  catch(e){console.error('Chat:',e);}
-}
-async function sendChat(){
-  const nick=(document.getElementById('chatNick')?.value||'').trim();
-  const text=(document.getElementById('chatText')?.value||'').trim();
-  if(!nick){showToast('⚠ Escribe tu nick');return;}
-  if(!text){showToast('⚠ Escribe un mensaje');return;}
-  const btn=document.querySelector('.chat-send-btn');
-  if(btn){btn.disabled=true;btn.textContent='...';}
-  try{
-    await apiReq('/chat_messages','POST',{nick,message:text},{'Prefer':'return=minimal'});
-    document.getElementById('chatText').value='';
-    await loadChat();
-  }catch(e){showToast('⚠ Error: '+e.message);}
-  if(btn){btn.disabled=false;btn.textContent='⚔ Enviar';}
-}
-async function deleteChat(id){
-  try{await apiReq('/chat_messages?id=eq.'+id,'DELETE',null,{'Prefer':'return=minimal'});await loadChat();}
-  catch(e){}
-}
-function renderChat(){
-  const el=document.getElementById('chatMessages');if(!el)return;
-  if(!chatCache.length){el.innerHTML='<div class="empty">¡Sé el primero en escribir!</div>';return;}
-  const wasBottom=el.scrollHeight-el.scrollTop-el.clientHeight<80;
-  const clsF=c=>c==='warrior'?'⚔':c==='mage'?'🔮':c==='archer'?'🏹':'👤';
-  el.innerHTML=chatCache.map(msg=>{
-    const mb=members.find(m=>m.name.toLowerCase()===msg.nick.toLowerCase());
-    const badges=mb?getAllBadges(mb):`<span class="rank-badge rk-n0">👤 Visitante</span>`;
-    const icon=mb?clsF(mb.class):'👤';
-    const t=new Date(msg.created_at).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
-    return`<div class="chat-msg">
-      <div class="chat-avatar">${icon}</div>
-      <div class="chat-bubble">
-        <div class="chat-meta">
-          <span class="chat-author">${msg.nick}</span>${badges}
-          <span class="chat-time">${t}</span>
-          <button onclick="deleteChat(${msg.id})" style="background:none;border:none;color:rgba(192,57,43,0.5);cursor:pointer;font-size:0.56rem;padding:0 0.28rem;margin-left:auto">✕</button>
-        </div>
-        <div class="chat-text">${msg.message.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
-      </div>
-    </div>`;
-  }).join('');
-  if(wasBottom)el.scrollTop=el.scrollHeight;
-}
-function startChatPolling(){loadChat();if(chatInterval)clearInterval(chatInterval);chatInterval=setInterval(loadChat,5000);}
-
-// ═══════════════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════════════
-function v(id){return(document.getElementById(id)?.value||'').trim();}
-function n(id){return parseInt(document.getElementById(id)?.value)||0;}
-function set(id,val){const e=document.getElementById(id);if(e)e.value=val;}
-function makeId(name){return name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');}
-function clsEmoji(c){return c==='warrior'?'⚔':c==='mage'?'🔮':c==='archer'?'🏹':'⚡';}
-function clsLabel(c){return c==='warrior'?'Warrior':c==='mage'?'Mage':c==='archer'?'Archer':c||'';}
-function clsBadge(c){const cl=c==='warrior'?'rw':c==='mage'?'rm':'ra';return`<span class="rb ${cl}">${clsEmoji(c)} ${clsLabel(c)}</span>`;}
-function timeAgo(ts){const d=Date.now()-ts;if(d<60000)return'hace unos segundos';if(d<3600000)return'hace '+Math.floor(d/60000)+'min';if(d<86400000)return'hace '+Math.floor(d/3600000)+'h';return'hace '+Math.floor(d/86400000)+'d';}
-function buildData(id,name,level,cls,mel,mag,dis,def){return{id,name,guild:'Demon Akademy',level,class:cls,sk_melee:mel,sk_magic:mag,sk_dist:dis,sk_def:def,updated_at:Date.now()};}
-function calcPaises(dateStr,hh){
-  const f=new Date(`${dateStr}T${String(hh).padStart(2,'0')}:00:00-04:00`);
-  return PAISES.map(p=>({n:p.n,hora:f.toLocaleTimeString('es-ES',{timeZone:p.tz,hour:'2-digit',minute:'2-digit',hour12:true}),dia:f.toLocaleDateString('es-ES',{timeZone:p.tz,weekday:'short',day:'numeric',month:'short'})}));
-}
-
-// ═══════════════════════════════════════════════
-// AVISOS
-// ═══════════════════════════════════════════════
-function toggleAvisoForm(){
-  const f=document.getElementById('avisoForm');f.classList.toggle('open');
-  if(f.classList.contains('open')&&!document.getElementById('av-date').value)
-    document.getElementById('av-date').value=new Date().toISOString().split('T')[0];
-}
-async function publicarAviso(){
-  const msg=v('av-msg'),date=v('av-date'),hourS=document.getElementById('av-hour').value.trim();
-  if(!msg){showToast('⚠ Escribe el mensaje');return;}
-  const btn=document.getElementById('btnPublicar');btn.disabled=true;btn.textContent='...';
-  let eventTime=null,expiresAt=null;
-  if(date){
-    const exp=new Date(date+'T23:59:59-04:00');exp.setDate(exp.getDate()+1);expiresAt=exp.toISOString();
-    if(hourS!==''){const h=parseInt(hourS);if(h>=0&&h<=23)eventTime=`${date}T${String(h).padStart(2,'0')}:00:00-04:00`;}
-  }
-  try{
-    await apiReq('/announcements','POST',{message:msg,event_time:eventTime,expires_at:expiresAt});
-    showToast('✅ Aviso publicado');
-    ['av-msg','av-hour','av-date'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
-    document.getElementById('avisoForm').classList.remove('open');await loadAll();
-  }catch(e){showToast('⚠ Error: '+e.message);}
-  btn.disabled=false;btn.textContent='🔥 Publicar';
-}
-async function borrarAviso(id){
-  if(!confirm('¿Borrar?'))return;
-  try{await apiReq('/announcements?id=eq.'+id,'DELETE',null,{'Prefer':'return=minimal'});await loadAll();}
-  catch(e){showToast('⚠ Error');}
-}
-function renderAvisos(){
-  const el=document.getElementById('avisosList');if(!avisos.length){el.innerHTML='';return;}
-  el.innerHTML=[...avisos].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).map(a=>{
-    const hasTime=!!a.event_time;let ph='';
-    if(hasTime){
-      const et=new Date(a.event_time);
-      const yy=et.toLocaleDateString('en-CA',{timeZone:'America/Caracas'});
-      const hh=parseInt(et.toLocaleTimeString('es-ES',{timeZone:'America/Caracas',hour:'2-digit',hour12:false}));
-      const lista=calcPaises(yy,hh);
-      ph=`<div style="font-family:Cinzel,serif;font-size:0.6rem;color:var(--gold2);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.5rem">🌎 Horarios</div>
-        <div class="paises-grid">${lista.map(p=>`<div class="pais-item">${p.n}: <span>${p.hora}</span> <span style="color:var(--text3);font-size:0.6rem">${p.dia}</span></div>`).join('')}</div>`;
-    }
-    return`<div class="aviso-card">
-      <button class="aviso-del" onclick="borrarAviso(${a.id})">🗑</button>
-      <div style="font-family:'Cinzel',serif;font-size:0.62rem;color:var(--gold2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem">📢 Aviso Guild</div>
-      <div style="font-size:0.95rem;color:var(--text);line-height:1.5;margin-bottom:0.5rem;font-weight:bold">${a.message}</div>
-      ${ph}
-      <div style="font-size:0.66rem;color:var(--text3);font-family:'Cinzel',serif;margin-top:0.3rem">${a.expires_at?'Expira: '+new Date(a.expires_at).toLocaleDateString('es-ES',{day:'numeric',month:'short'}):'Sin expiración'}</div>
-    </div>`;
-  }).join('');
-}
-
-// ═══════════════════════════════════════════════
-// PERFIL
-// ═══════════════════════════════════════════════
-async function saveProfile(){
-  const name=v('i-name'),lv=n('i-lv'),cls=v('i-cls');
-  if(!name){showToast('⚠ Nombre requerido');return;}
-  if(!lv){showToast('⚠ Nivel requerido');return;}
-  if(!cls){showToast('⚠ Clase requerida');return;}
-  const btn=document.getElementById('btnSave');btn.disabled=true;btn.textContent='Guardando...';
-  const id=makeId(name);
-  const data=buildData(id,name,lv,cls,n('sk-mel'),n('sk-mag'),n('sk-dis'),n('sk-def'));
-  try{
-    await apiReq('/members','POST',data,{'Prefer':'return=representation,resolution=merge-duplicates'});
-    const nr=getNivelRango(lv);showToast(`✅ ${name} — ${nr.icon} ${nr.nombre}`);
-    ['i-name','i-lv','i-cls','sk-mel','sk-mag','sk-dis','sk-def'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
-    document.getElementById('insigPreview').style.display='none';await loadAll();
-  }catch(e){showToast('⚠ Error: '+e.message);}
-  btn.disabled=false;btn.textContent='🔥 Guardar / Actualizar';
-}
-function openEdit(mid){
-  const m=members.find(x=>x.id===mid);if(!m)return;
-  set('edit-id',m.id);set('edit-name',m.name);set('edit-lv',m.level);
-  set('edit-cls',m.class);set('edit-mel',m.sk_melee);set('edit-mag',m.sk_magic);
-  set('edit-dis',m.sk_dist);set('edit-def',m.sk_def);
-  document.getElementById('editModal').classList.add('open');
-}
-function closeEdit(){document.getElementById('editModal').classList.remove('open');}
-async function saveEdit(){
-  const id=v('edit-id'),name=v('edit-name');if(!id)return;
-  const btn=document.getElementById('btnEditSave');btn.disabled=true;btn.textContent='Guardando...';
-  const data=buildData(id,name,n('edit-lv'),v('edit-cls'),n('edit-mel'),n('edit-mag'),n('edit-dis'),n('edit-def'));
-  try{
-    await apiReq('/members','POST',data,{'Prefer':'return=representation,resolution=merge-duplicates'});
-    showToast('✅ Actualizado');closeEdit();await loadAll();
-  }catch(e){showToast('⚠ Error: '+e.message);}
-  btn.disabled=false;btn.textContent='🔥 Guardar Cambios';
-}
-
-// ═══════════════════════════════════════════════
-// UPDATE ALL
-// ═══════════════════════════════════════════════
-function updateAll(){
-  updatePortal();renderAvisos();renderChat();
-  if(document.getElementById('s-ranking').classList.contains('active'))renderRanking(curRank);
-  if(document.getElementById('s-members').classList.contains('active'))renderMembers();
-  if(document.getElementById('s-progreso').classList.contains('active'))renderMes();
-  if(document.getElementById('s-arena').classList.contains('active'))fillFightSelects();
-  updateCmpSelects();
-  if(document.getElementById('s-compare').classList.contains('active'))renderCompare();
-  document.getElementById('gUpd').textContent='Act. '+timeAgo(Date.now());
-}
-function updatePortal(){
-  const m=members;document.getElementById('gTotal').textContent=m.length;
-  if(!m.length){['gAvg','gTop'].forEach(id=>document.getElementById(id).textContent='-');['pMelee','pMage','pDist','pPower'].forEach(id=>document.getElementById(id).innerHTML='<div class="empty">Sin datos</div>');document.getElementById('pR').innerHTML='<div class="empty">¡Sé el primero!</div>';return;}
-  document.getElementById('gAvg').textContent=Math.round(m.reduce((a,x)=>a+x.level,0)/m.length);
-  const top=m.reduce((a,x)=>x.level>a.level?x:a,m[0]);
-  document.getElementById('gTop').textContent=top.name+' (Lv.'+top.level+')';
-  const topOf=(sk,lbl,elId)=>{
-    const f=[...m].sort((a,b)=>b[sk]-a[sk]);
-    document.getElementById(elId).innerHTML=f.length?`<div class="mn">${clsEmoji(f[0].class)} ${f[0].name}</div>
-      <div style="display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.4rem;align-items:center">
-        <span style="padding:2px 7px;background:rgba(44,31,15,0.8);border:1px solid var(--border);font-size:0.73rem;color:var(--text2)">Lv.<span style="color:var(--gold);font-weight:bold"> ${f[0].level}</span></span>
-        <span style="padding:2px 7px;background:rgba(44,31,15,0.8);border:1px solid var(--border);font-size:0.73rem;color:var(--text2)">${lbl} <span style="color:var(--gold);font-weight:bold">${f[0][sk]}</span></span>
-        ${getAllBadges(f[0])}
-      </div>`:'<div class="empty">Sin datos</div>';
-  };
-  topOf('sk_melee','Melee','pMelee');topOf('sk_magic','Magia','pMage');topOf('sk_dist','Dist','pDist');
-  // Top Poder Total (suma de stats)
-  const fPow=[...m].sort((a,b)=>getTotalPoder(b)-getTotalPoder(a));
-  document.getElementById('pPower').innerHTML=fPow.length?`<div class="mn">${clsEmoji(fPow[0].class)} ${fPow[0].name}</div>
-    <div style="display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.4rem;align-items:center">
-      <span style="padding:2px 7px;background:rgba(44,31,15,0.8);border:1px solid var(--border);font-size:0.73rem;color:var(--text2)">Poder <span style="color:var(--gold);font-weight:bold">${getTotalPoder(fPow[0])}</span></span>
-      ${getTotalBadge(fPow[0])}
-    </div>`:'<div class="empty">Sin datos</div>';
-  const rec=[...m].sort((a,b)=>b.updated_at-a.updated_at).slice(0,8);
-  document.getElementById('pR').innerHTML=rec.map(x=>`
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.38rem 0.4rem;border-bottom:1px solid rgba(192,57,43,0.1);gap:0.4rem;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap">${clsEmoji(x.class)} <span style="color:var(--text);font-size:0.82rem">${x.name}</span> <span style="color:var(--gold);font-size:0.7rem">Lv.${x.level}</span> ${getNivelRangoBadge(x)}</div>
-      <div style="color:var(--text3);font-size:0.66rem">${timeAgo(x.updated_at)}</div>
-    </div>`).join('');
-}
-function showRank(type,el){curRank=type;document.querySelectorAll('.rtab').forEach(t=>t.classList.remove('active'));if(el)el.classList.add('active');renderRanking(type);}
-function renderRanking(type){
-  const el=document.getElementById('rankCard');
-  if(!members.length){el.innerHTML='<div class="empty">Sin miembros</div>';return;}
-  const labels={level:'Nivel',sk_melee:'Melee',sk_magic:'Magia',sk_dist:'Distancia',sk_def:'Defensa',total:'Poder Total'};
-  const getVal=(m)=>type==='total'?getTotalPoder(m):(m[type]??0);
-  const sorted=[...members].sort((a,b)=>getVal(b)-getVal(a));
-  const rows=sorted.map((m,i)=>{
-    const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1);
-    const vc=i===0?'var(--gold)':i===1?'#c0c0c0':i===2?'#cd7f32':'var(--text2)';
-    return`<tr>
-      <td style="font-size:${i<3?'1.05':'0.82'}rem">${medal}</td>
-      <td style="color:var(--text);font-weight:${i<3?'bold':'normal'}">${m.name}</td>
-      <td>${clsBadge(m.class)}</td>
-      <td>${getNivelRangoBadge(m)}</td>
-      <td>${getSkillRangoBadge(m)}</td>
-      <td>${getTotalBadge(m)}</td>
-      <td style="color:${vc};font-weight:bold;font-size:${i<3?'1.02':'0.85'}rem">${getVal(m)}</td>
-    </tr>`;
-  }).join('');
-  el.innerHTML=`<div style="overflow-x:auto"><table class="rt" style="min-width:560px"><thead><tr><th>#</th><th>Nombre</th><th>Clase</th><th>Rango Nivel</th><th>Rango Skill</th><th>Rango Poder</th><th>${labels[type]}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
-}
-function renderMembers(){
-  const srch=(document.getElementById('srch')?.value||'').toLowerCase();
-  const fc=document.getElementById('fCls')?.value||'';
-  let list=members.filter(m=>(!srch||m.name.toLowerCase().includes(srch))&&(!fc||m.class===fc));
-  list=[...list].sort((a,b)=>b.level-a.level);
-  if(!list.length){document.getElementById('mGrid').innerHTML='<div class="empty">No encontrado</div>';return;}
-  const skb=(lbl,val)=>{const pct=Math.min(100,(val/999)*100);return`<div class="skr"><div class="skn">${lbl}</div><div class="skbg"><div class="skfill" style="width:${pct}%"></div></div><div class="skv">${val}</div></div>`;};
-  document.getElementById('mGrid').innerHTML=`<div class="mg2">${list.map(m=>`<div class="mc">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem">
-      <div>
-        <div class="mn">${clsEmoji(m.class)} ${m.name}</div>
-        <div class="mlv">Lv. ${m.level}</div>
-        <div style="margin-top:0.3rem;display:flex;gap:0.3rem;flex-wrap:wrap">${getAllBadgesFull(m)}</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem">${clsBadge(m.class)}<button class="btn-sm" onclick="openEdit('${m.id}')">✏ Editar</button></div>
-    </div>
-    ${skb('⚔ Melee',m.sk_melee)}${skb('🔮 Magia',m.sk_magic)}${skb('🏹 Dist',m.sk_dist)}${skb('🛡 Def',m.sk_def)}
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem">
-      <span style="font-family:'Cinzel',serif;font-size:0.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em">💪 Poder Total: <span style="color:var(--gold);font-weight:bold">${getTotalPoder(m)}</span></span>
-      <span style="font-size:0.63rem;color:var(--text3)">${timeAgo(m.updated_at)}</span>
-    </div>
-  </div>`).join('')}</div>`;
-}
-function updateCmpSelects(){
-  const opts='<option value="">Seleccionar...</option>'+[...members].sort((a,b)=>b.level-a.level).map(m=>`<option value="${m.id}">${m.name} (Lv.${m.level})</option>`).join('');
-  ['c1','c2'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const val=el.value;el.innerHTML=opts;el.value=val;});
-}
-function renderCompare(){
-  const k1=document.getElementById('c1')?.value,k2=document.getElementById('c2')?.value;
-  const res=document.getElementById('cmpRes');if(!k1||!k2){res.innerHTML='';return;}
-  const m1=members.find(m=>m.id===k1),m2=members.find(m=>m.id===k2);
-  if(!m1||!m2){res.innerHTML='<div class="empty">Selecciona dos jugadores</div>';return;}
-  const stats=[{l:'Nivel',a:m1.level,b:m2.level,i:'⭐'},{l:'Melee',a:m1.sk_melee,b:m2.sk_melee,i:'⚔'},{l:'Magia',a:m1.sk_magic,b:m2.sk_magic,i:'🔮'},{l:'Dist',a:m1.sk_dist,b:m2.sk_dist,i:'🏹'},{l:'Defensa',a:m1.sk_def,b:m2.sk_def,i:'🛡'},{l:'Poder Total',a:getTotalPoder(m1),b:getTotalPoder(m2),i:'💪'}];
-  let w1=0,w2=0;stats.forEach(s=>{if(s.a>s.b)w1++;else if(s.b>s.a)w2++;});
-  res.innerHTML=`<div class="card" style="margin-top:0.8rem">
-    <div style="display:flex;justify-content:space-around;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem">
-      <div style="text-align:center">
-        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold)">${clsEmoji(m1.class)} ${m1.name}</div>
-        <div style="margin:0.3rem 0;display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center">${getAllBadgesFull(m1)}</div>
-        <div style="font-size:1.5rem;color:var(--fire);font-family:'Cinzel Decorative',serif">${w1}</div>
-        <div style="font-size:0.62rem;color:var(--text3)">victorias</div>
-      </div>
-      <div style="font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:var(--text3)">VS</div>
-      <div style="text-align:center">
-        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold)">${clsEmoji(m2.class)} ${m2.name}</div>
-        <div style="margin:0.3rem 0;display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center">${getAllBadgesFull(m2)}</div>
-        <div style="font-size:1.5rem;color:var(--fire);font-family:'Cinzel Decorative',serif">${w2}</div>
-        <div style="font-size:0.62rem;color:var(--text3)">victorias</div>
-      </div>
-    </div>
-    <div style="text-align:center;font-family:'Cinzel',serif;font-size:0.82rem;color:var(--gold);margin-bottom:1rem">🏆 Ganador: ${w1>w2?m1.name:w2>w1?m2.name:'¡Empate!'}</div>
-    ${stats.map(s=>{const mx=Math.max(s.a,s.b,1);const p1=Math.round(s.a/mx*100);
-      return`<div style="margin-bottom:0.75rem">
-        <div style="display:flex;justify-content:space-between;font-size:0.76rem;margin-bottom:0.2rem">
-          <span style="color:${s.a>=s.b?'var(--gold)':'var(--text3)'};font-weight:${s.a>s.b?'bold':'normal'}">${s.a}</span>
-          <span style="color:var(--text3);font-size:0.65rem">${s.i} ${s.l}</span>
-          <span style="color:${s.b>=s.a?'var(--gold)':'var(--text3)'};font-weight:${s.b>s.a?'bold':'normal'}">${s.b}</span>
-        </div>
-        <div style="display:flex;height:5px;border-radius:3px;overflow:hidden;background:rgba(44,31,15,0.8);border:1px solid var(--border)">
-          <div style="width:${p1}%;background:linear-gradient(90deg,var(--fire),var(--gold))"></div>
-        </div>
-      </div>`;}).join('')}
-  </div>`;
-}
-
-// ═══════════════════════════════════════════════
-// PROGRESO MENSUAL — Lista clara
-// ═══════════════════════════════════════════════
-let mesField='level';
-function showMesTab(field,el){mesField=field;document.querySelectorAll('.mes-tab').forEach(t=>t.classList.remove('active'));if(el)el.classList.add('active');renderMes();}
-function renderMes(){
-  const el=document.getElementById('mesList');if(!el)return;
-  const now=new Date();
-  const mn=now.toLocaleDateString('es-ES',{month:'long',year:'numeric'});
-  const b=document.getElementById('mesBadge');if(b)b.textContent=mn.charAt(0).toUpperCase()+mn.slice(1);
-  if(!members.length){el.innerHTML='<div class="empty">Sin miembros</div>';return;}
-  const labels={level:'Nivel',sk_melee:'⚔ Melee',sk_magic:'🔮 Magia',sk_dist:'🏹 Distancia',sk_def:'🛡 Defensa',total:'💪 Poder Total'};
-  const getVal=(m)=>mesField==='total'?getTotalPoder(m):(m[mesField]||0);
-  const sorted=[...members].sort((a,b)=>getVal(b)-getVal(a));
-  const medals=['🥇','🥈','🥉'];
-  el.innerHTML=sorted.map((m,i)=>`
-    <div class="mes-list-item">
-      <div class="mes-medal">${medals[i]||'<span style="font-family:Cinzel,serif;font-size:0.7rem;color:var(--text3)">#${i+1}</span>'}</div>
-      <div class="mes-linfo">
-        <div class="mes-lname">${clsEmoji(m.class)} ${m.name}</div>
-        <div class="mes-lsub">${getNivelRangoBadge(m)} ${getSkillRangoBadge(m)} ${getTotalBadge(m)}</div>
-      </div>
-      <div style="text-align:right;padding-right:0.3rem">
-        <div class="mes-lval">${getVal(m)}</div>
-        <div class="mes-ldiff" style="color:${i<3?'#2ecc71':'var(--text3)'}">↑ ${mesField!=='level'&&mesField!=='total'?((m[mesField]||0)/Math.max(m.level,1)).toFixed(1)+' ratio':'activo'}</div>
-      </div>
-    </div>`).join('');
-}
-
-// ═══════════════════════════════════════════════
-// ARENA — NAVIGACIÓN
-// ═══════════════════════════════════════════════
-function switchArena(panel,el){
-  document.querySelectorAll('.arena-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.arena-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('arena-'+panel).classList.add('active');
-  if(el)el.classList.add('active');
-  if(panel==='trivia')startTrivia();
-  if(panel==='puzzle')initPuzzle();
-}
-
-// ═══════════════════════════════════════════════
-// BUFFS PARA PvP
-// ═══════════════════════════════════════════════
-const BUFF_LIST=[
-  {id:'rage',    name:'Furia',    icon:'🔥',desc:'+40% ATK',  atk:1.4, def:1,  hp:1,   crit:0},
-  {id:'shield',  name:'Escudo',   icon:'🛡',desc:'+50% DEF',  atk:1,   def:1.5,hp:1,   crit:0},
-  {id:'potion',  name:'Poción',   icon:'💚',desc:'+30% HP',   atk:1,   def:1,  hp:1.3, crit:0},
-  {id:'crit',    name:'Crítico',  icon:'💥',desc:'+25% Crit', atk:1,   def:1,  hp:1,   crit:0.25},
-  {id:'bless',   name:'Bendición',icon:'✨',desc:'+20% todo', atk:1.2, def:1.2,hp:1.2, crit:0.1},
-  {id:'curse',   name:'Maldición',icon:'💀',desc:'Envenena enemigo',poison:true,atk:1,def:1,hp:1,crit:0},
-];
-let selectedBuffs={1:[],2:[]};
-function updateBuffSelects(){
-  selectedBuffs={1:[],2:[]};
-  ['1','2'].forEach(p=>{
-    const row=document.getElementById('buffRow'+p);if(!row)return;
-    row.innerHTML=BUFF_LIST.map(b=>`
-      <div class="buff-card" id="buff-${p}-${b.id}" onclick="toggleBuff('${p}','${b.id}')">
-        <span class="buff-icon">${b.icon}</span>
-        <div class="buff-name">${b.name}</div>
-        <div class="buff-desc">${b.desc}</div>
-      </div>`).join('');
-  });
-}
-function toggleBuff(player,buffId){
-  const arr=selectedBuffs[player];
-  const idx=arr.indexOf(buffId);
-  if(idx>=0){arr.splice(idx,1);}
-  else{if(arr.length>=2){showToast('⚠ Máximo 2 buffs por guerrero');return;}arr.push(buffId);}
-  document.getElementById(`buff-${player}-${buffId}`)?.classList.toggle('selected',arr.includes(buffId));
-}
-function applyBuffs(baseAtk,baseDef,baseHp,baseCrit,buffs){
-  let atk=baseAtk,def=baseDef,hp=baseHp,crit=baseCrit,poison=false;
-  buffs.forEach(bid=>{const b=BUFF_LIST.find(x=>x.id===bid);if(!b)return;atk*=b.atk;def*=b.def;hp*=b.hp;crit+=b.crit;if(b.poison)poison=true;});
-  return{atk:Math.floor(atk),def:Math.floor(def),hp:Math.floor(hp),crit:Math.min(0.6,crit),poison};
-}
-
-function fillFightSelects(){
-  const opts='<option value="">Seleccionar...</option>'+[...members].sort((a,b)=>b.level-a.level).map(m=>`<option value="${m.id}">${clsEmoji(m.class)} ${m.name} (Lv.${m.level})</option>`).join('');
-  ['f1','f2'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const val=el.value;el.innerHTML=opts;el.value=val;});
-  updateBuffSelects();
-}
-
-const WARRIOR_SKS=['Slash Infernal','Grand Slash','Aura de Fuego','Iron Strike','Furia Berserker'];
-const MAGE_SKS=['Bola de Fuego','Nova Arcana','Rayo de Hielo','Tormenta Mágica','Explosión Astral'];
-const ARCHER_SKS=['Flecha Perforante','Lluvia de Flechas','Disparo Crítico','Flecha de Fuego','Saeta Mortal'];
-const BLOCK_SKS=['Escudo Mágico','Parada Perfecta','Desvío Ágil','Bloqueo Divino'];
-function getSkills(cls){return cls==='warrior'?WARRIOR_SKS:cls==='mage'?MAGE_SKS:ARCHER_SKS;}
-function calcMaxHP(m){return Math.floor(100+m.level*3+m.sk_def*2);}
-function calcAtk(m){const b=m.class==='warrior'?m.sk_melee:m.class==='mage'?m.sk_magic:m.sk_dist;return Math.floor(8+b*0.8+m.level*0.5);}
-function calcDef(m){return Math.floor(m.sk_def*0.6+m.level*0.2);}
-function calcPow(m){return calcMaxHP(m)*0.3+calcAtk(m)*2+calcDef(m)*1.5+m.level*8;}
-
-function startFight(){
-  const id1=document.getElementById('f1').value,id2=document.getElementById('f2').value;
-  if(!id1||!id2||id1===id2){showToast('⚠ Selecciona dos guerreros distintos');return;}
-  const m1=members.find(m=>m.id===id1),m2=members.find(m=>m.id===id2);if(!m1||!m2)return;
-  const maxHp1=calcMaxHP(m1),maxHp2=calcMaxHP(m2);
-  const b1=applyBuffs(calcAtk(m1),calcDef(m1),maxHp1,0.05,selectedBuffs[1]);
-  const b2=applyBuffs(calcAtk(m2),calcDef(m2),maxHp2,0.05,selectedBuffs[2]);
-  const buffNames1=selectedBuffs[1].map(id=>BUFF_LIST.find(b=>b.id===id)?.name||'').filter(Boolean);
-  const buffNames2=selectedBuffs[2].map(id=>BUFF_LIST.find(b=>b.id===id)?.name||'').filter(Boolean);
-  const pow1=b1.hp*0.3+b1.atk*2+b1.def*1.5+m1.level*8;
-  const pow2=b2.hp*0.3+b2.atk*2+b2.def*1.5+m2.level*8;
-  let winP1=pow1/(pow1+pow2);
-  const lvDiff=Math.abs(m1.level-m2.level);
-  if(lvDiff>50){const boost=Math.min(0.45,lvDiff*0.0015);winP1=m1.level>m2.level?Math.min(0.95,winP1+boost):Math.max(0.05,winP1-boost);}
-  let hp1=b1.hp,hp2=b2.hp;
-  const rounds=[];const sk1=getSkills(m1.class),sk2=getSkills(m2.class);
-  let poisonDmg1=0,poisonDmg2=0;
-  if(b2.poison)poisonDmg1=3;
-  if(b1.poison)poisonDmg2=3;
-  for(let r=0;r<10&&hp1>0&&hp2>0;r++){
-    // Veneno
-    if(poisonDmg1>0){hp1-=poisonDmg1;rounds.push({type:'miss',msg:`☠️ ${m1.name} sufre veneno: -${poisonDmg1} HP (${Math.round(hp1/b1.hp*100)}%)`});}
-    if(poisonDmg2>0){hp2-=poisonDmg2;rounds.push({type:'miss',msg:`☠️ ${m2.name} sufre veneno: -${poisonDmg2} HP (${Math.round(hp2/b2.hp*100)}%)`});}
-    if(hp1<=0||hp2<=0)break;
-    // Ataque m1→m2
-    if(Math.random()<0.07){rounds.push({type:'miss',msg:`${m1.name} falla — ${m2.name} lo esquiva`});}
-    else{
-      const isCrit=Math.random()<b1.crit,isSk=Math.random()<0.32,isBlk=Math.random()<0.09;
-      const skn=sk1[Math.floor(Math.random()*sk1.length)];
-      let dmg=Math.max(1,b1.atk-Math.floor(b2.def*(0.3+Math.random()*0.4)));
-      if(isCrit)dmg=Math.floor(dmg*(1.8+Math.random()*0.3));if(isSk)dmg=Math.floor(dmg*1.2);if(isBlk)dmg=Math.floor(dmg*0.25);
-      hp2=Math.max(0,hp2-dmg);const pct=Math.round(hp2/b2.hp*100);
-      if(isBlk)rounds.push({type:'block',msg:`🛡 ${m2.name} bloquea con <b>${BLOCK_SKS[Math.floor(Math.random()*BLOCK_SKS.length)]}</b> — solo ${dmg} daño · HP ${pct}%`});
-      else if(isSk)rounds.push({type:'skill',msg:`✨ ${m1.name} usa <b>${skn}</b> → ${dmg}${isCrit?' CRÍTICO!':''} · ${m2.name} HP ${pct}%`});
-      else if(isCrit)rounds.push({type:'crit',msg:`💥 ${m1.name} CRÍTICO → ${dmg} · ${m2.name} HP ${pct}%`});
-      else rounds.push({type:'hit',msg:`⚔ ${m1.name} → ${dmg} · ${m2.name} HP ${pct}%`});
-    }
-    if(hp2<=0)break;
-    // Ataque m2→m1
-    if(Math.random()<0.07){rounds.push({type:'miss',msg:`${m2.name} falla — ${m1.name} lo esquiva`});}
-    else{
-      const isCrit=Math.random()<b2.crit,isSk=Math.random()<0.32,isBlk=Math.random()<0.09;
-      const skn=sk2[Math.floor(Math.random()*sk2.length)];
-      let dmg=Math.max(1,b2.atk-Math.floor(b1.def*(0.3+Math.random()*0.4)));
-      if(isCrit)dmg=Math.floor(dmg*(1.8+Math.random()*0.3));if(isSk)dmg=Math.floor(dmg*1.2);if(isBlk)dmg=Math.floor(dmg*0.25);
-      hp1=Math.max(0,hp1-dmg);const pct=Math.round(hp1/b1.hp*100);
-      if(isBlk)rounds.push({type:'block',msg:`🛡 ${m1.name} bloquea — solo ${dmg} daño · HP ${pct}%`});
-      else if(isSk)rounds.push({type:'skill',msg:`✨ ${m2.name} usa <b>${skn}</b> → ${dmg}${isCrit?' CRÍTICO!':''} · ${m1.name} HP ${pct}%`});
-      else if(isCrit)rounds.push({type:'crit',msg:`💥 ${m2.name} CRÍTICO → ${dmg} · ${m1.name} HP ${pct}%`});
-      else rounds.push({type:'hit',msg:`⚔ ${m2.name} → ${dmg} · ${m1.name} HP ${pct}%`});
-    }
-  }
-  let won1;
-  if(hp1>0&&hp2<=0)won1=true;
-  else if(hp2>0&&hp1<=0)won1=false;
-  else won1=Math.random()<winP1;
-  const fHp1=won1?Math.max(5,Math.floor(b1.hp*(0.08+Math.random()*0.28))):0;
-  const fHp2=won1?0:Math.max(5,Math.floor(b2.hp*(0.08+Math.random()*0.28)));
-  const winner=won1?m1:m2;
-  const oroLost=Math.floor((Math.random()*400+100)*Math.floor(Math.min(m1.level,m2.level)/100+1));
-  const res=document.getElementById('fightResult');
-  res.innerHTML=`<div class="card">
-    <div style="font-size:0.6rem;font-family:'Cinzel',serif;color:var(--text3);text-align:center;margin-bottom:0.6rem">
-      POD: ${m1.name} ${Math.round(pow1)} vs ${m2.name} ${Math.round(pow2)}
-      ${buffNames1.length?` · Buffs 1: ${buffNames1.join(', ')}`:''}
-      ${buffNames2.length?` · Buffs 2: ${buffNames2.join(', ')}`:''}
-    </div>
-    <div class="fight-stage">
-      <div class="fighter-box ${won1?'winner':'loser'}">
-        <div class="fighter-name">${clsEmoji(m1.class)} ${m1.name}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center;margin:0.3rem 0">${getAllBadgesFull(m1)}</div>
-        <div class="fighter-lv">Lv.${m1.level} · ATK:${b1.atk} DEF:${b1.def}</div>
-        ${buffNames1.length?`<div style="font-size:0.58rem;color:#f0b27a;font-family:'Cinzel',serif">${buffNames1.map(n=>'🔹'+n).join(' ')}</div>`:''}
-        <div style="font-size:0.6rem;font-family:'Cinzel',serif;color:var(--text3);margin-top:0.3rem;margin-bottom:2px">HP</div>
-        <div class="hp-bar"><div class="hp-fill hp-high" id="hpBar1" style="width:100%"></div></div>
-        <div style="font-size:0.62rem;color:var(--text3);font-family:'Cinzel',serif" id="hpVal1">${b1.hp}</div>
-        ${won1?'<div style="font-family:Cinzel Decorative,serif;font-size:.88rem;color:var(--gold);margin-top:.35rem">👑 GANADOR</div>':'<div style="font-size:.68rem;color:#f1948a;font-family:Cinzel,serif;margin-top:.25rem">💀 Eliminado</div>'}
-      </div>
-      <div class="vs-glyph">⚔<br>VS</div>
-      <div class="fighter-box ${!won1?'winner':'loser'}">
-        <div class="fighter-name">${clsEmoji(m2.class)} ${m2.name}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.3rem;justify-content:center;margin:0.3rem 0">${getAllBadgesFull(m2)}</div>
-        <div class="fighter-lv">Lv.${m2.level} · ATK:${b2.atk} DEF:${b2.def}</div>
-        ${buffNames2.length?`<div style="font-size:0.58rem;color:#f0b27a;font-family:'Cinzel',serif">${buffNames2.map(n=>'🔹'+n).join(' ')}</div>`:''}
-        <div style="font-size:0.6rem;font-family:'Cinzel',serif;color:var(--text3);margin-top:0.3rem;margin-bottom:2px">HP</div>
-        <div class="hp-bar"><div class="hp-fill hp-high" id="hpBar2" style="width:100%"></div></div>
-        <div style="font-size:0.62rem;color:var(--text3);font-family:'Cinzel',serif" id="hpVal2">${b2.hp}</div>
-        ${!won1?'<div style="font-family:Cinzel Decorative,serif;font-size:.88rem;color:var(--gold);margin-top:.35rem">👑 GANADOR</div>':'<div style="font-size:.68rem;color:#f1948a;font-family:Cinzel,serif;margin-top:.25rem">💀 Eliminado</div>'}
-      </div>
-    </div>
-    <div class="fight-log" id="fightLog"></div>
-    <div id="fightEnd" style="display:none;background:rgba(10,6,4,0.8);border:1px solid var(--gold);padding:0.7rem;margin-top:0.5rem;text-align:center">
-      <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold)">⚔ ${winner.name} victorioso</div>
-      <div style="font-size:0.7rem;color:var(--text3);font-family:'Cinzel',serif;margin-top:0.3rem">💰 ${won1?m2.name:m1.name} pierde ~${oroLost} oro en este PvP</div>
-    </div>
-  </div>`;
-  const logEl=document.getElementById('fightLog');let delay=0;
-  rounds.forEach(r=>{setTimeout(()=>{logEl.innerHTML+=`<div class="${r.type}">${r.msg}</div>`;logEl.scrollTop=logEl.scrollHeight;},delay);delay+=420;});
-  setTimeout(()=>{
-    logEl.innerHTML+=`<div class="end">🏆 ¡${winner.name} gana el combate PvP!</div>`;logEl.scrollTop=logEl.scrollHeight;
-    const pct1=Math.round(fHp1/b1.hp*100),pct2=Math.round(fHp2/b2.hp*100);
-    const bar1=document.getElementById('hpBar1'),bar2=document.getElementById('hpBar2');
-    if(bar1){bar1.style.width=pct1+'%';bar1.className='hp-fill '+(pct1>50?'hp-high':pct1>25?'hp-mid':'hp-low');}
-    if(bar2){bar2.style.width=pct2+'%';bar2.className='hp-fill '+(pct2>50?'hp-high':pct2>25?'hp-mid':'hp-low');}
-    document.getElementById('hpVal1').textContent=fHp1;document.getElementById('hpVal2').textContent=fHp2;
-    document.getElementById('fightEnd').style.display='block';
-  },delay+250);
-}
-
-// ═══════════════════════════════════════════════
-// TRIVIA
-// ═══════════════════════════════════════════════
-const TQS=[
-  {q:'Al morir en PvP en Rucoy, ¿qué pierdes?',ops:['Ítems equipados','Solo oro','Todo','Nada'],a:1,e:'En Rucoy PvP solo se pierde ORO — los ítems siempre están seguros.'},
-  {q:'¿Cuántas clases jugables hay en Rucoy Online?',ops:['2','3','4','6'],a:1,e:'Warrior, Mage y Archer — exactamente 3.'},
-  {q:'¿Qué recurso consume usar habilidades?',ops:['HP','Mana','SP (Stamina)','Gold'],a:2,e:'SP (Stamina Points) es el recurso de habilidades en Rucoy.'},
-  {q:'¿Qué skill usa el Warrior para atacar cuerpo a cuerpo?',ops:['Magic','Range','Melee','Defense'],a:2,e:'Melee es la skill de daño principal del Warrior.'},
-  {q:'¿Qué hace la skill Defense en Rucoy?',ops:['Sube el daño','Sube el HP máx.','Reduce daño recibido','Da velocidad'],a:2,e:'Defense reduce directamente el daño físico recibido.'},
-  {q:'¿Cómo se gana XP más eficientemente?',ops:['Solo quests','Matando monstruos constantemente','Comprando boosters','Solo PvP'],a:1,e:'El grind de monstruos es el método principal de XP en Rucoy.'},
-  {q:'¿Qué clase usa la skill Magic para atacar?',ops:['Warrior','Archer','Mage','Todas'],a:2,e:'El Mage usa Magic como skill de ataque principal.'},
-  {q:'¿Para qué sirven las Health Potions?',ops:['Subir nivel','Recuperar HP','Comprar ítems','Mejorar armas'],a:1,e:'Las pociones recuperan HP durante el combate.'},
-  {q:'¿Qué distingue la zona Full PvP?',ops:['Más XP','Más monstruos','Ataques entre jugadores libres','Mejores drops'],a:2,e:'En Full PvP cualquier jugador puede atacar a otro sin restricción.'},
-  {q:'¿Qué clase tiene ataques a distancia?',ops:['Warrior','Mage','Archer','Guardian'],a:2,e:'El Archer es la clase de ataque a distancia con arco/ballesta.'},
-  {q:'¿Qué pasa si tienes nivel 500 pero skill Melee 0?',ops:['Haces daño normal','Tu daño físico es mínimo','No puedes atacar','Ganas defensa'],a:1,e:'Sin skills de ataque, el daño es muy bajo aunque el nivel sea alto.'},
-  {q:'En PvP de Rucoy, ¿quién tiene ventaja mayor?',ops:['El que tiene más skill','El de nivel más alto','Son iguales','El que tiene mejor equipo'],a:1,e:'El nivel da una ventaja enorme en Rucoy — supera a los skills en PvP directo.'},
-];
-let tIdx=0,tScore=0,tAnswered=false,tShuf=[];
-function startTrivia(){tShuf=[...TQS].sort(()=>Math.random()-.5);tIdx=0;tScore=0;tAnswered=false;document.getElementById('tScore').textContent='0';document.getElementById('tTotal').textContent=tShuf.length;renderTrivia();}
-function renderTrivia(){
-  const area=document.getElementById('triviaArea');
-  if(tIdx>=tShuf.length){
-    const pct=Math.round(tScore/tShuf.length*100);
-    const rnk=pct>=90?'🔥 Maestro de Rucoy':pct>=70?'⚔ Veterano':pct>=50?'🛡 Aprendiz':'💀 Sigue aprendiendo';
-    area.innerHTML=`<div style="text-align:center;padding:1.5rem">
-      <div style="font-family:'Cinzel Decorative',serif;font-size:1.6rem;color:var(--gold)">${tScore}/${tShuf.length}</div>
-      <div style="font-size:2.2rem;margin:0.5rem 0">${pct>=90?'👑':pct>=70?'🏆':pct>=50?'⚔':'💀'}</div>
-      <div style="font-family:'Cinzel',serif;font-size:.8rem;color:var(--text3)">${rnk}</div>
-      <div class="bc" style="margin-top:1rem"><button class="btn-fire" onclick="startTrivia()">🔄 Jugar de Nuevo</button></div>
-    </div>`;return;
-  }
-  const q=tShuf[tIdx];
-  document.getElementById('tScore').textContent=tScore;
-  document.getElementById('tProgBar').style.width=(tIdx/tShuf.length*100).toFixed(0)+'%';
-  area.innerHTML=`<div class="trivia-card">
-    <div style="font-size:.62rem;color:var(--text3);font-family:Cinzel,serif;margin-bottom:.4rem">PREGUNTA ${tIdx+1} DE ${tShuf.length}</div>
-    <div class="trivia-q">${q.q}</div>
-    <div class="trivia-opts">${q.ops.map((op,i)=>`<button class="trivia-opt" onclick="answerTrivia(${i})">${op}</button>`).join('')}</div>
-    <div id="triviaFB" style="text-align:center;margin-top:.8rem;min-height:1.4rem;font-size:.73rem;font-family:Cinzel,serif;line-height:1.4"></div>
-  </div>`;tAnswered=false;
-}
-function answerTrivia(idx){
-  if(tAnswered)return;tAnswered=true;const q=tShuf[tIdx];const ok=idx===q.a;if(ok)tScore++;
-  document.querySelectorAll('.trivia-opt').forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add('correct');else if(i===idx&&!ok)b.classList.add('wrong');});
-  const fb=document.getElementById('triviaFB');
-  if(fb)fb.innerHTML=(ok?'<span style="color:#2ecc71">✓ ¡Correcto!</span>':'<span style="color:#e74c3c">✗ Era: <strong style="color:var(--gold)">'+q.ops[q.a]+'</strong></span>')+(q.e?`<div style="margin-top:.35rem;color:var(--text3);font-size:.66rem;font-style:italic">${q.e}</div>`:'');
-  setTimeout(()=>{tIdx++;renderTrivia();},2400);
-}
-
-// ═══════════════════════════════════════════════
-// DUNGEON RPG — con clase seleccionable
-// ═══════════════════════════════════════════════
-const DCELL={WALL:1,FLOOR:0,MONSTER:2,TRAP:3,EXIT:4,POWER:5,BOSS:6,TREASURE:7};
-const POWERS=[
-  {id:'fury',name:'Furia',icon:'🔥',desc:'+40% ATK',fx:p=>{p.atk=Math.round(p.atk*1.4);}},
-  {id:'shield',name:'Escudo',icon:'🛡',desc:'+3 DEF',fx:p=>{p.def+=3;}},
-  {id:'heal',name:'Curación',icon:'💚',desc:'+3 HP',fx:p=>{p.hp=Math.min(p.hp+3,p.maxHp+3);p.maxHp+=3;}},
-  {id:'crit',name:'Crítico',icon:'💥',desc:'+20% crítico',fx:p=>{p.crit=Math.min(0.6,(p.crit||0.1)+0.2);}},
-  {id:'swift',name:'Velocidad',icon:'⚡',desc:'Doble paso',fx:p=>{p.swift=true;}},
-];
-// Stats base por clase
-const CLS_STATS={
-  warrior:{hp:7, atk:12, def:3, crit:0.07, icon:'⚔️', dodge:0.04},
-  mage:   {hp:4, atk:18, def:1, crit:0.14, icon:'🔮', dodge:0.07},
-  archer: {hp:5, atk:14, def:2, crit:0.18, icon:'🏹', dodge:0.12},
-};
-const DGRID=10,DCOLS=10;
-let dMap=[],dPlayer={},dKills=0,dGold=0,dSteps=0,dGameOver=false,dFloor=1,dActivePowers=[],dClass='warrior',dNick='';
-let dTopData=JSON.parse(localStorage.getItem('da_dungeon_top')||'[]');
-let dungeonClsSelected=null;
-
-function selectDungeonClass(cls){
-  dungeonClsSelected=cls;
-  document.querySelectorAll('.cls-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('cls-'+cls)?.classList.add('selected');
-  document.getElementById('btnStartDungeon').disabled=false;
-}
-
-function startDungeon(){
-  if(!dungeonClsSelected){showToast('⚠ Elige una clase');return;}
-  dClass=dungeonClsSelected;
-  dNick=(document.getElementById('dungeonNick')?.value||'').trim()||'Aventurero';
-  document.getElementById('dungeonStartScreen').style.display='none';
-  document.getElementById('dungeonGameScreen').style.display='block';
-  initDungeon();
-}
-
-function initDungeon(){
-  const cs=CLS_STATS[dClass];
-  dPlayer={x:1,y:1,hp:cs.hp,maxHp:cs.hp,atk:cs.atk,def:cs.def,crit:cs.crit,dodge:cs.dodge,swift:false};
-  dKills=0;dGold=0;dSteps=0;dGameOver=false;dFloor=1;dActivePowers=[];
-  dMap=genMap(1);updateDHUD();renderDungeon();
-  setDLog(`⚔ ${dNick} (${CLS_STATS[dClass].icon}) entra al piso 1`);
-  document.getElementById('dungeonLvlBadge').textContent=`🗺 Piso 1 — ${dNick}`;
-}
-
-function genMap(floor){
-  const map=[];
-  for(let y=0;y<DGRID;y++){map.push([]);for(let x=0;x<DCOLS;x++)map[y].push(DCELL.WALL);}
-  function carve(x,y){map[y][x]=DCELL.FLOOR;const dirs=[[0,-2],[0,2],[-2,0],[2,0]].sort(()=>Math.random()-.5);for(const[dx,dy]of dirs){const nx=x+dx,ny=y+dy;if(nx>0&&nx<DCOLS-1&&ny>0&&ny<DGRID-1&&map[ny][nx]===DCELL.WALL){map[y+dy/2][x+dx/2]=DCELL.FLOOR;carve(nx,ny);}}}
-  carve(1,1);
-  // Asegurar acceso a la salida
-  map[DGRID-2][DCOLS-2]=DCELL.EXIT;
-  if(map[DGRID-3][DCOLS-2]===DCELL.WALL)map[DGRID-3][DCOLS-2]=DCELL.FLOOR;
-  if(map[DGRID-2][DCOLS-3]===DCELL.WALL)map[DGRID-2][DCOLS-3]=DCELL.FLOOR;
-  map[1][1]=DCELL.FLOOR;
-  const place=(type,count)=>{let p=0,a=0;while(p<count&&a<300){a++;const x=Math.floor(Math.random()*(DCOLS-2))+1,y=Math.floor(Math.random()*(DGRID-2))+1;if(map[y][x]===DCELL.FLOOR&&!(x<=2&&y<=2)&&!(x>=DCOLS-3&&y>=DGRID-3)){map[y][x]=type;p++;}}};
-  place(DCELL.MONSTER,Math.min(3+Math.floor(floor*0.7),9));
-  place(DCELL.TRAP,Math.min(2+Math.floor(floor*0.4),6));
-  place(DCELL.POWER,Math.min(1+Math.floor(floor/3),3));
-  place(DCELL.TREASURE,Math.min(1+Math.floor(floor/4),2));
-  if(floor%3===0){place(DCELL.BOSS,1);}
-  return map;
-}
-
-function renderDungeon(){
-  const grid=document.getElementById('dungeonMap');if(!grid)return;
-  grid.style.gridTemplateColumns=`repeat(${DCOLS},30px)`;
-  const ICONS={[DCELL.WALL]:'⬛',[DCELL.FLOOR]:'⬜',[DCELL.MONSTER]:'💀',[DCELL.TRAP]:'🔥',[DCELL.EXIT]:'🔑',[DCELL.POWER]:'💎',[DCELL.BOSS]:'👹',[DCELL.TREASURE]:'💰'};
-  grid.innerHTML='';
-  for(let y=0;y<DGRID;y++)for(let x=0;x<DCOLS;x++){
-    const div=document.createElement('div');
-    const isP=dPlayer.x===x&&dPlayer.y===y;
-    if(isP){div.className='dungeon-cell player';div.textContent=CLS_STATS[dClass].icon;}
-    else{const t=dMap[y][x];let cn='dungeon-cell ';if(t===DCELL.WALL)cn+='wall';else if(t===DCELL.EXIT)cn+='exit';else if(t===DCELL.MONSTER)cn+='monster';else if(t===DCELL.BOSS)cn+='boss-cell';else if(t===DCELL.TRAP)cn+='trap';else if(t===DCELL.POWER)cn+='power';else if(t===DCELL.TREASURE)cn+='treasure';div.className=cn;div.textContent=t===DCELL.WALL?'':ICONS[t]||'';}
-    grid.appendChild(div);
-  }
-  // Poderes activos
-  const pr=document.getElementById('powersRow');
-  if(pr)pr.innerHTML=dActivePowers.map(p=>`<span class="pow-badge">${p.icon} ${p.name}</span>`).join('');
-}
-
-function movePlayer(dir){
-  if(dGameOver)return;
-  let nx=dPlayer.x,ny=dPlayer.y;
-  if(dir==='up')ny--;else if(dir==='down')ny++;else if(dir==='left')nx--;else if(dir==='right')nx++;
-  if(nx<0||nx>=DCOLS||ny<0||ny>=DGRID||dMap[ny][nx]===DCELL.WALL)return;
-  dPlayer.x=nx;dPlayer.y=ny;dSteps++;
-  const cell=dMap[ny][nx];
-  if(cell===DCELL.MONSTER){
-    dKills++;const monAtk=Math.max(1,Math.floor(dFloor*0.8-dPlayer.def));
-    const isCrit=Math.random()<dPlayer.crit;
-    const dodged=Math.random()<dPlayer.dodge;
-    const gold=Math.floor(8+Math.random()*15*dFloor);dGold+=gold;dMap[ny][nx]=DCELL.FLOOR;
-    if(dodged){setDLog(`🏹 ${dNick} esquiva al monstruo y lo mata! +${gold} oro · Kill #${dKills}`);}
-    else{dPlayer.hp=Math.max(0,dPlayer.hp-monAtk);if(dPlayer.hp<=0){dGameOver=true;saveDTop();setDLog(`💀 ${dNick} murió en piso ${dFloor}! ${dKills} kills`);}else setDLog(`⚔ Kill #${dKills}${isCrit?' CRÍTICO':''}! -${monAtk} HP · +${gold} oro · HP:${dPlayer.hp}`);}
-  }else if(cell===DCELL.BOSS){
-    const bAtk=Math.max(2,Math.floor(dFloor*1.5-dPlayer.def));const gold=150+dFloor*40;
-    const win=Math.random()<0.65||dPlayer.atk*2>15+dFloor*3;
-    dMap[ny][nx]=DCELL.FLOOR;dGold+=gold;
-    if(win){dKills++;dPlayer.hp=Math.max(1,dPlayer.hp-Math.floor(bAtk));showToast('👹 ¡JEFE DERROTADO! +'+gold+' oro');setDLog(`👹 ¡Jefe caído! +${gold} oro · HP:${dPlayer.hp}`);}
-    else{dPlayer.hp=Math.max(0,dPlayer.hp-bAtk*2);if(dPlayer.hp<=0){dGameOver=true;saveDTop();setDLog(`💀 El jefe destruyó a ${dNick} en piso ${dFloor}!`);}else setDLog(`⚠️ El jefe te golpeó fuerte · HP:${dPlayer.hp}`);}
-  }else if(cell===DCELL.TRAP){
-    const dmg=Math.max(1,Math.floor(1+dFloor*0.4-dPlayer.def*0.2));
-    dPlayer.hp=Math.max(0,dPlayer.hp-dmg);dMap[ny][nx]=DCELL.FLOOR;
-    if(dPlayer.hp<=0){dGameOver=true;saveDTop();setDLog(`💀 Trampa mortal en piso ${dFloor}!`);}
-    else setDLog(`🔥 Trampa! -${dmg} HP · HP:${dPlayer.hp}`);
-  }else if(cell===DCELL.POWER){
-    const pow=POWERS[Math.floor(Math.random()*POWERS.length)];pow.fx(dPlayer);dMap[ny][nx]=DCELL.FLOOR;
-    dActivePowers.push(pow);showToast(`💎 ${pow.icon} ${pow.name}: ${pow.desc}`);setDLog(`💎 Poder: ${pow.name} — ${pow.desc}`);
-  }else if(cell===DCELL.TREASURE){
-    const gold=80+Math.floor(Math.random()*100*dFloor);dGold+=gold;dMap[ny][nx]=DCELL.FLOOR;
-    showToast('💰 Tesoro! +'+gold+' oro');setDLog(`💰 ¡Tesoro! +${gold} oro · Total: ${dGold}`);
-  }else if(cell===DCELL.EXIT){
-    saveDTop();showToast(`🏆 ¡Piso ${dFloor} superado!`);
-    dFloor++;dPlayer.x=1;dPlayer.y=1;dPlayer.hp=Math.min(dPlayer.hp+2,dPlayer.maxHp);
-    dPlayer.atk=Math.floor(dPlayer.atk*1.04+1);dPlayer.def=Math.floor(dPlayer.def*1.04);
-    dMap=genMap(dFloor);const isBoss=dFloor%3===0;
-    setDLog(isBoss?`⚠️ PISO ${dFloor} — ¡JEFE presente! Prepárate`:`✅ Piso ${dFloor} — recuperas 2 HP`);
-    document.getElementById('dungeonLvlBadge').textContent=`🗺 Piso ${dFloor}${isBoss?' 👹 JEFE':''} — ${dNick}`;
-  }else{setDLog(`Piso ${dFloor} · HP:${dPlayer.hp}/${dPlayer.maxHp} · Oro:${dGold}`);}
-  updateDHUD();renderDungeon();
-}
-function updateDHUD(){
-  document.getElementById('dHP').textContent=`${dPlayer.hp}/${dPlayer.maxHp}`;
-  document.getElementById('dAtk').textContent=dPlayer.atk;
-  document.getElementById('dDef').textContent=dPlayer.def;
-  document.getElementById('dGold').textContent=dGold;
-  document.getElementById('dKills').textContent=dKills;
-  document.getElementById('dLevel').textContent=dFloor;
-}
-function setDLog(msg){const el=document.getElementById('dungeonLog');if(el)el.innerHTML=msg;}
-function saveDTop(){
-  const e={nick:dNick,cls:dClass,floor:dFloor,kills:dKills,gold:dGold,date:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short'})};
-  dTopData.push(e);dTopData.sort((a,b)=>b.floor-a.floor||(b.kills-a.kills));dTopData=dTopData.slice(0,10);
-  localStorage.setItem('da_dungeon_top',JSON.stringify(dTopData));
-}
-function renderDungeonTop(){
-  const el=document.getElementById('dungeonTopList');if(!el)return;
-  if(!dTopData.length){el.innerHTML='<div class="empty">Sin partidas aún</div>';return;}
-  el.innerHTML=dTopData.map((e,i)=>{
-    const md=i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1);
-    return`<div class="dtr"><span>${md} <strong>${e.nick}</strong> ${CLS_STATS[e.cls]?.icon||''}</span><span style="color:var(--gold)">Piso ${e.floor}</span><span style="color:#e74c3c">${e.kills}💀</span><span style="color:var(--gold2)">${e.gold}💰</span><span style="color:var(--text3);font-size:0.6rem">${e.date}</span></div>`;
-  }).join('');
-}
-document.addEventListener('keydown',e=>{
-  if(!document.getElementById('s-arena').classList.contains('active'))return;
-  if(!document.getElementById('arena-dungeon').classList.contains('active'))return;
-  const m={'ArrowUp':'up','ArrowDown':'down','ArrowLeft':'left','ArrowRight':'right','w':'up','s':'down','a':'left','d':'right'};
-  if(m[e.key]){e.preventDefault();movePlayer(m[e.key]);}
-});
-
-// ═══════════════════════════════════════════════
-// PUZZLE DE RUNAS
-// ═══════════════════════════════════════════════
-// Piezas temáticas de Rucoy
-const RUNE_SYMS_3=['⚔','🔮','🏹','🛡','🔥','💀','👑','🗡','·'];
-const RUNE_SYMS_4=['⚔','🔮','🏹','🛡','🔥','💀','👑','🗡','⚡','🌟','🏰','🐉','💎','🦅','💀','·'];
-let puzSize=4,puzBoard=[],puzEmpty=0,puzMoves=0,puzSolved=false,puzTimer=null,puzSeconds=0;
-let puzRecords=JSON.parse(localStorage.getItem('da_puz_records')||'{}');
-
-function setPuzzleSize(s){puzSize=s;document.getElementById('puzSizeBtn').textContent=s+'×'+s+' '+( s===3?'Fácil':'Normal');initPuzzle();}
-function initPuzzle(){
-  const total=puzSize*puzSize;
-  const syms=puzSize===3?RUNE_SYMS_3:RUNE_SYMS_4;
-  puzBoard=Array.from({length:total},(_,i)=>i);
-  // Mezclar asegurando resoluble
-  for(let i=total-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[puzBoard[i],puzBoard[j]]=[puzBoard[j],puzBoard[i]];}
-  // Asegurar paridad (puzzle siempre resoluble)
-  let inv=0;for(let i=0;i<total-1;i++)for(let j=i+1;j<total;j++)if(puzBoard[i]!==total-1&&puzBoard[j]!==total-1&&puzBoard[i]>puzBoard[j])inv++;
-  const emptyRow=Math.floor(puzBoard.indexOf(total-1)/puzSize);
-  if(puzSize%2===0){if((inv+emptyRow)%2!==0){let i=0,j=1;while(puzBoard[i]===total-1||puzBoard[j]===total-1){j++;if(j>=total){i++;j=i+1;}};[puzBoard[i],puzBoard[j]]=[puzBoard[j],puzBoard[i]];}}
-  else{if(inv%2!==0){let i=0,j=1;while(puzBoard[i]===total-1||puzBoard[j]===total-1){j++;if(j>=total){i++;j=i+1;}};[puzBoard[i],puzBoard[j]]=[puzBoard[j],puzBoard[i]];}}
-  puzEmpty=puzBoard.indexOf(total-1);puzMoves=0;puzSolved=false;puzSeconds=0;
-  if(puzTimer)clearInterval(puzTimer);
-  puzTimer=setInterval(()=>{if(!puzSolved){puzSeconds++;document.getElementById('puzTime').textContent=puzSeconds+'s';}},1000);
-  const rec=puzRecords[puzSize+'x'];
-  document.getElementById('puzRecord').textContent=rec?rec+'mov':'-';
-  document.getElementById('puzMoves').textContent='0';
-  document.getElementById('puzTime').textContent='0s';
-  document.getElementById('puzzleMsg').textContent='';
-  renderPuzzle();
-}
-function renderPuzzle(){
-  const grid=document.getElementById('puzzleGrid');if(!grid)return;
-  grid.style.gridTemplateColumns=`repeat(${puzSize},${puzSize===3?72:60}px)`;
-  const syms=puzSize===3?RUNE_SYMS_3:RUNE_SYMS_4;
-  const total=puzSize*puzSize;
-  grid.innerHTML='';
-  puzBoard.forEach((val,idx)=>{
-    const div=document.createElement('div');
-    div.style.width=div.style.height=(puzSize===3?'72px':'60px');
-    if(val===total-1){div.className='puz-cell empty-cell';div.style.background='rgba(5,3,1,0.9)';div.style.border='2px solid rgba(44,31,15,0.4)';}
-    else{
-      div.className='puz-cell';div.textContent=syms[val];
-      div.innerHTML=`${syms[val]}<span class="puz-num">${val+1}</span>`;
-      div.onclick=()=>movePuzCell(idx);
-    }
-    grid.appendChild(div);
-  });
-}
-function movePuzCell(idx){
-  if(puzSolved)return;
-  const r=Math.floor(idx/puzSize),c=idx%puzSize;
-  const er=Math.floor(puzEmpty/puzSize),ec=puzEmpty%puzSize;
-  if(Math.abs(r-er)+Math.abs(c-ec)!==1)return;
-  [puzBoard[idx],puzBoard[puzEmpty]]=[puzBoard[puzEmpty],puzBoard[idx]];
-  puzEmpty=idx;puzMoves++;
-  document.getElementById('puzMoves').textContent=puzMoves;
-  renderPuzzle();
-  if(checkPuzSolved()){
-    puzSolved=true;clearInterval(puzTimer);
-    const key=puzSize+'x';if(!puzRecords[key]||puzMoves<puzRecords[key]){puzRecords[key]=puzMoves;localStorage.setItem('da_puz_records',JSON.stringify(puzRecords));document.getElementById('puzRecord').textContent=puzMoves+'mov';}
-    document.getElementById('puzzleMsg').textContent=`🏆 ¡Runa restaurada! ${puzMoves} movimientos · ${puzSeconds}s`;
-    showToast('🧩 ¡Puzzle completado! '+puzMoves+' movimientos');
-    // Iluminar todas las celdas
-    document.querySelectorAll('.puz-cell:not(.empty-cell)').forEach(c=>c.classList.add('solved'));
-  }
-}
-function checkPuzSolved(){const total=puzSize*puzSize;return puzBoard.every((v,i)=>v===i);}
-
-// ═══════════════════════════════════════════════
-// MISIONES DE RUCOY
-// ═══════════════════════════════════════════════
-const MISIONES_DATA=[
-  // MISIONES DE FARMEO
-  {cat:'⚔ Farmeo & Grinding',id:'m01',name:'Primer Kill',desc:'Mata tu primer monstruo en Rucoy Online',reward:'XP inicial + experiencia básica',diff:'easy'},
-  {cat:'⚔ Farmeo & Grinding',id:'m02',name:'50 Kills Seguidos',desc:'Mata 50 monstruos sin salir de la zona',reward:'Hábito de grinding establecido',diff:'easy'},
-  {cat:'⚔ Farmeo & Grinding',id:'m03',name:'1 Hora de Farm',desc:'Farmea monstruos durante 1 hora continua',reward:'Subida notable de XP y Skills',diff:'med'},
-  {cat:'⚔ Farmeo & Grinding',id:'m04',name:'500 Kills en un día',desc:'Acumula 500 kills en una sola sesión',reward:'Grandes ganancias de nivel',diff:'hard'},
-  {cat:'⚔ Farmeo & Grinding',id:'m05',name:'Zona Élite',desc:'Llega a una zona donde los monstruos te superan en nivel',reward:'Riesgo alto = XP alto',diff:'hard'},
-  // HABILIDADES
-  {cat:'🌟 Habilidades',id:'s01',name:'Skill 100',desc:'Llega a 100 en cualquier skill de combate',reward:'Rango de Skill: Aprendiz',diff:'easy'},
-  {cat:'🌟 Habilidades',id:'s02',name:'Skill 300',desc:'Llega a 300 en tu skill principal',reward:'Rango de Skill: Experto',diff:'med'},
-  {cat:'🌟 Habilidades',id:'s03',name:'Skill 500',desc:'Alcanza 500 en tu skill dominante',reward:'Rango de Skill: Maestro',diff:'hard'},
-  {cat:'🌟 Habilidades',id:'s04',name:'Skill 700',desc:'Llega a 700 en tu skill principal',reward:'Rango de Skill: Grandmaestro',diff:'epic'},
-  {cat:'🌟 Habilidades',id:'s05',name:'Defensa 200',desc:'Desarrolla tu skill de Defensa a 200',reward:'Resistencia notable en PvP',diff:'med'},
-  {cat:'🌟 Habilidades',id:'s06',name:'Cuatro Skills Activos',desc:'Tener al menos 100 puntos en los 4 skills',reward:'Personaje versátil y balanceado',diff:'hard'},
-  // NIVEL
-  {cat:'⭐ Niveles',id:'n01',name:'Nivel 100',desc:'Alcanza el nivel 100 en Rucoy Online',reward:'Rango de Nivel: Aprendiz · Acceso a más zonas',diff:'easy'},
-  {cat:'⭐ Niveles',id:'n02',name:'Nivel 300',desc:'Supera el nivel 300',reward:'Rango: Guerrero · Acceso a zonas avanzadas',diff:'med'},
-  {cat:'⭐ Niveles',id:'n03',name:'Nivel 500',desc:'El nivel 500 — élite del servidor',reward:'Rango: Élite · Respeto de la comunidad',diff:'hard'},
-  {cat:'⭐ Niveles',id:'n04',name:'Nivel 750',desc:'Alcanza el nivel 750',reward:'Rango: Veterano · Jugador de alto rango',diff:'epic'},
-  // PvP
-  {cat:'⚔ PvP',id:'p01',name:'Primera Kill PvP',desc:'Mata a otro jugador en zona PvP',reward:'Iniciación en el combate real',diff:'med'},
-  {cat:'⚔ PvP',id:'p02',name:'10 Kills PvP',desc:'Acumula 10 kills contra otros jugadores',reward:'Experiencia PvP real',diff:'hard'},
-  {cat:'⚔ PvP',id:'p03',name:'Sobrevivir Full PvP 30min',desc:'Entra a zona Full PvP y sobrevive 30 minutos',reward:'Maestría defensiva',diff:'hard'},
-  {cat:'⚔ PvP',id:'p04',name:'Vencer a alguien de mayor nivel',desc:'Mata a un jugador con más nivel que tú en PvP',reward:'Logro épico de habilidad',diff:'epic'},
-  // GUILD
-  {cat:'🏰 Guild',id:'g01',name:'Unirse a Demon Akademy',desc:'Ser aceptado como miembro oficial de la guild',reward:'Acceso a guerras y eventos de guild',diff:'easy'},
-  {cat:'🏰 Guild',id:'g02',name:'Participar en una Guerra',desc:'Luchar en una guerra oficial de Demon Akademy',reward:'Experiencia de guerra real',diff:'med'},
-  {cat:'🏰 Guild',id:'g03',name:'Ganar una Guerra',desc:'La guild gana una guerra con tu participación',reward:'Contribución al historial de victorias',diff:'hard'},
-  {cat:'🏰 Guild',id:'g04',name:'Top 3 en Ranking',desc:'Alcanza el top 3 en cualquier ranking de la guild',reward:'Reconocimiento en el portal',diff:'hard'},
-  {cat:'🏰 Guild',id:'g05',name:'Registrar un Momento Épico',desc:'Agrega tu primer momento al Muro de la Fama',reward:'Inmortalidad en la historia de DA',diff:'easy'},
-];
-
-function renderMisiones(){
-  const nick=(document.getElementById('misNick')?.value||'').trim();
-  const storageKey='da_mis_'+(nick||'default');
-  let done=[];
-  try{done=JSON.parse(localStorage.getItem(storageKey)||'[]');}catch(e){}
-  const container=document.getElementById('misionesContainer');if(!container)return;
-  const cats=[...new Set(MISIONES_DATA.map(m=>m.cat))];
-  container.innerHTML=cats.map(cat=>{
-    const items=MISIONES_DATA.filter(m=>m.cat===cat);
-    const doneCnt=items.filter(m=>done.includes(m.id)).length;
-    return`<div class="mis-section">
-      <div class="mis-section-title">${cat} <span style="font-size:0.6rem;color:var(--text3);font-family:'Cinzel',serif">(${doneCnt}/${items.length})</span>
-        <div style="flex:1;height:3px;background:rgba(44,31,15,0.8);border-radius:2px;overflow:hidden;margin-left:0.5rem">
-          <div style="width:${Math.round(doneCnt/items.length*100)}%;height:100%;background:linear-gradient(90deg,var(--fire),var(--gold))"></div>
-        </div>
-      </div>
-      ${items.map(m=>`<div class="mis-item ${done.includes(m.id)?'done':''}" onclick="toggleMision('${m.id}','${nick}')">
-        <div class="mis-check">${done.includes(m.id)?'✓':''}</div>
-        <div class="mis-info">
-          <div class="mis-name">${m.name}</div>
-          <div class="mis-desc">${m.desc}</div>
-          <div class="mis-reward">🎁 ${m.reward}</div>
-          <span class="mis-diff diff-${m.diff}">${m.diff==='easy'?'Fácil':m.diff==='med'?'Medio':m.diff==='hard'?'Difícil':'Épico'}</span>
-        </div>
-      </div>`).join('')}
-    </div>`;
-  }).join('');
-  // Total completadas
-  const totalDone=MISIONES_DATA.filter(m=>done.includes(m.id)).length;
-  container.innerHTML=`<div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;flex-wrap:wrap">
-    <div style="font-family:'Cinzel',serif;font-size:0.75rem;color:var(--gold)">Completadas: <span style="font-size:1rem">${totalDone}/${MISIONES_DATA.length}</span></div>
-    <div style="flex:1;height:8px;background:rgba(44,31,15,0.8);border:1px solid var(--border);border-radius:4px;overflow:hidden;min-width:100px">
-      <div style="width:${Math.round(totalDone/MISIONES_DATA.length*100)}%;height:100%;background:linear-gradient(90deg,var(--fire),var(--gold))"></div>
-    </div>
-    <div style="font-size:0.7rem;color:var(--text3);font-family:'Cinzel',serif">${Math.round(totalDone/MISIONES_DATA.length*100)}%</div>
-  </div>`+container.innerHTML;
-}
-function toggleMision(id,nick){
-  const storageKey='da_mis_'+(nick||'default');
-  let done=[];try{done=JSON.parse(localStorage.getItem(storageKey)||'[]');}catch(e){}
-  const idx=done.indexOf(id);
-  if(idx>=0){done.splice(idx,1);}else{done.push(id);const m=MISIONES_DATA.find(x=>x.id===id);if(m)showToast('✅ Misión completada: '+m.name);}
-  localStorage.setItem(storageKey,JSON.stringify(done));
-  renderMisiones();
-}
-
-// ═══════════════════════════════════════════════
-// RULETA
-// ═══════════════════════════════════════════════
-const RULETA_DATA={
-  misiones:[{t:'Cazar 50 monstruos',c:'#c0392b'},{t:'Farmear XP 1 hora',c:'#8e44ad'},{t:'Proteger al más bajo',c:'#2980b9'},{t:'WAR práctica',c:'#16a085'},{t:'Subir 1 skill',c:'#d35400'},{t:'Explorar nuevo mapa',c:'#27ae60'},{t:'Ayudar a un novato',c:'#f39c12'},{t:'PvP libre 30min',c:'#922b21'}],
-  roles:[{t:'Tanque del día',c:'#8e44ad'},{t:'Healer obligatorio',c:'#2980b9'},{t:'Explorador',c:'#16a085'},{t:'Guardaespaldas líder',c:'#d35400'},{t:'Cazador recursos',c:'#27ae60'},{t:'Spy guild enemiga',c:'#c0392b'},{t:'Mentor novatos',c:'#f39c12'},{t:'Campeón guild',c:'#8e44ad'}],
-  castigos:[{t:'Farmear 2h solo',c:'#c0392b'},{t:'Llevar al más débil',c:'#8e44ad'},{t:'Sin PvP 1 día',c:'#2980b9'},{t:'Donación fondo guild',c:'#16a085'},{t:'Defender castillo solo',c:'#d35400'},{t:'Sin pociones 30min',c:'#27ae60'},{t:'Anunciar derrota chat',c:'#f39c12'},{t:'Misión suicida épica',c:'#922b21'}],
-};
-let rActiva='misiones',rGirando=false,rAngle=0,rInit=false;
-function initRuleta(){
-  if(rInit)return;rInit=true;
-  const cats=document.getElementById('ruletaCats');if(!cats)return;
-  const lbl={misiones:'⚔ Misiones',roles:'👑 Roles',castigos:'💀 Castigos'};
-  cats.innerHTML=Object.keys(RULETA_DATA).map(k=>`<button class="ruleta-cat-btn ${k===rActiva?'active':''}" onclick="setRuletaCat('${k}',this)">${lbl[k]}</button>`).join('');
-  drawRuleta();
-}
-function setRuletaCat(cat,el){rActiva=cat;document.querySelectorAll('.ruleta-cat-btn').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');rAngle=0;drawRuleta();document.getElementById('ruletaResult').textContent='';}
-function drawRuleta(hi=-1){
-  const canvas=document.getElementById('ruletaCanvas');if(!canvas)return;
-  const ctx=canvas.getContext('2d');const items=RULETA_DATA[rActiva],n=items.length,arc=2*Math.PI/n,cx=140,cy=140,r=128;
-  ctx.clearRect(0,0,280,280);
-  items.forEach((item,i)=>{
-    const s=rAngle+i*arc-Math.PI/2;
-    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,s,s+arc);ctx.closePath();
-    ctx.fillStyle=hi===i?'#f1c40f':item.c;ctx.fill();
-    ctx.strokeStyle='rgba(0,0,0,.5)';ctx.lineWidth=2;ctx.stroke();
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(s+arc/2);
-    ctx.fillStyle='#fff';ctx.font='bold 9px Cinzel,serif';ctx.textAlign='right';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=3;
-    const w=item.t.split(' ');
-    if(w.length<=2)ctx.fillText(item.t,r-7,3);else{const m=Math.ceil(w.length/2);ctx.fillText(w.slice(0,m).join(' '),r-7,-4);ctx.fillText(w.slice(m).join(' '),r-7,9);}
-    ctx.restore();
-  });
-  ctx.beginPath();ctx.arc(cx,cy,19,0,2*Math.PI);ctx.fillStyle='#0a0604';ctx.fill();ctx.strokeStyle='#f1c40f';ctx.lineWidth=2.5;ctx.stroke();
-  ctx.fillStyle='#f1c40f';ctx.font='bold 10px Cinzel,serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('DA',cx,cy);
-}
-function girarRuleta(){
-  if(rGirando)return;rGirando=true;document.getElementById('btnGirar').disabled=true;document.getElementById('ruletaResult').textContent='';
-  const items=RULETA_DATA[rActiva],n=items.length;
-  const ta=(5+Math.floor(Math.random()*6))*2*Math.PI+(2*Math.PI/n*Math.floor(Math.random()*n));
-  const dur=3800,st=performance.now(),sa=rAngle;
-  function step(now){const prog=Math.min((now-st)/dur,1),ease=1-Math.pow(1-prog,4);rAngle=sa+ta*ease;drawRuleta();
-    if(prog<1){requestAnimationFrame(step);}else{rAngle=sa+ta;const norm=((rAngle%(2*Math.PI))+2*Math.PI)%(2*Math.PI);const hit=Math.floor(((2*Math.PI-norm+Math.PI/2)%(2*Math.PI))/(2*Math.PI/n))%n;drawRuleta(hit);document.getElementById('ruletaResult').textContent='🎯 '+items[hit].t;rGirando=false;document.getElementById('btnGirar').disabled=false;showToast('🎲 '+items[hit].t);}
-  }requestAnimationFrame(step);
-}
-
-// ═══════════════════════════════════════════════
-// GUERRAS — Supabase
-// ═══════════════════════════════════════════════
-let wars=[];
-async function loadWars(){try{wars=await apiReq('/guild_wars?select=*&order=created_at.desc');renderWars();}catch(e){showToast('⚠ Error guerras');}}
-function toggleWarForm(){document.getElementById('warForm').classList.toggle('open');}
-async function saveWar(){
-  const enemy=document.getElementById('w-enemy').value.trim(),res=document.getElementById('w-res').value;
-  if(!enemy||!res){showToast('⚠ Completa los campos');return;}
-  const btn=document.getElementById('btnWarSave');btn.disabled=true;btn.textContent='...';
-  try{
-    await apiReq('/guild_wars','POST',{enemy,result:res,kills_da:parseInt(document.getElementById('w-kills').value)||0,kills_enemy:parseInt(document.getElementById('w-ekills').value)||0,notes:document.getElementById('w-notes').value.trim()||null},{'Prefer':'return=minimal'});
-    showToast('⚔ Guerra registrada!');document.getElementById('warForm').classList.remove('open');
-    ['w-enemy','w-res','w-kills','w-ekills','w-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});await loadWars();
-  }catch(e){showToast('⚠ Error: '+e.message);}
-  btn.disabled=false;btn.textContent='⚔ Guardar';
-}
-async function deleteWar(id){if(!confirm('¿Borrar?'))return;try{await apiReq('/guild_wars?id=eq.'+id,'DELETE',null,{'Prefer':'return=minimal'});await loadWars();}catch(e){}}
-function renderWars(){
-  const tbody=document.getElementById('warTable');if(!tbody)return;
-  const vic=wars.filter(w=>w.result==='victoria').length,der=wars.filter(w=>w.result==='derrota').length,emp=wars.filter(w=>w.result==='empate').length;
-  document.getElementById('ws-v').textContent=vic;document.getElementById('ws-d').textContent=der;document.getElementById('ws-e').textContent=emp;
-  document.getElementById('ws-r').textContent=wars.length?Math.round(vic/wars.length*100)+'%':'-';
-  if(!wars.length){tbody.innerHTML='<tr><td colspan="7" class="empty">Sin guerras</td></tr>';return;}
-  const bc={victoria:'war-w',derrota:'war-l',empate:'war-d'},bl={victoria:'VICTORIA',derrota:'DERROTA',empate:'EMPATE'};
-  tbody.innerHTML=wars.map(w=>{const f=new Date(w.created_at).toLocaleDateString('es-ES',{day:'numeric',month:'short'});return`<tr>
-    <td style="color:var(--text);font-weight:bold">${w.enemy}</td>
-    <td><span class="war-badge ${bc[w.result]||''}">${bl[w.result]||w.result}</span></td>
-    <td style="color:#2ecc71;font-weight:bold">${w.kills_da}</td>
-    <td style="color:#e74c3c;font-weight:bold">${w.kills_enemy}</td>
-    <td style="font-size:.7rem;color:var(--text3)">${w.notes||'—'}</td>
-    <td style="font-size:.66rem;color:var(--text3)">${f}</td>
-    <td><button class="war-del" onclick="deleteWar(${w.id})">🗑</button></td>
-  </tr>`;}).join('');
-}
-
-// ═══════════════════════════════════════════════
-// MURO — Supabase
-// ═══════════════════════════════════════════════
-let muros=[];
-async function loadMuro(){try{muros=await apiReq('/hall_of_fame?select=*&order=created_at.desc');renderMuro();}catch(e){showToast('⚠ Error muro');}}
-function toggleMuroForm(){document.getElementById('muroForm').classList.toggle('open');}
-async function saveMuro(){
-  const titulo=document.getElementById('m-titulo').value.trim(),tipo=document.getElementById('m-tipo').value,desc=document.getElementById('m-desc').value.trim();
-  if(!titulo||!tipo||!desc){showToast('⚠ Completa los campos');return;}
-  const btn=document.getElementById('btnMuroSave');btn.disabled=true;btn.textContent='...';
-  try{
-    await apiReq('/hall_of_fame','POST',{titulo,tipo,descripcion:desc,autor:document.getElementById('m-autor').value.trim()||'Anónimo'},{'Prefer':'return=minimal'});
-    showToast('💀 ¡Inmortalizado!');document.getElementById('muroForm').classList.remove('open');
-    ['m-titulo','m-tipo','m-desc','m-autor'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});await loadMuro();
-  }catch(e){showToast('⚠ Error: '+e.message);}
-  btn.disabled=false;btn.textContent='💀 Inmortalizar';
-}
-async function deleteMuro(id){if(!confirm('¿Borrar?'))return;try{await apiReq('/hall_of_fame?id=eq.'+id,'DELETE',null,{'Prefer':'return=minimal'});await loadMuro();}catch(e){}}
-function renderMuro(){
-  const grid=document.getElementById('muroGrid');if(!grid)return;
-  if(!muros.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1">Inmortaliza el primer momento épico 🔥</div>';return;}
-  const icons={kill:'💀',momento:'⚡',logro:'🏆',epico:'👑'},labels={kill:'Kill Épico',momento:'Gloria',logro:'Logro de Guild',epico:'Legendario'};
-  grid.innerHTML=muros.map(m=>`<div class="muro-card">
-    <div class="muro-icon">${icons[m.tipo]||'🔥'}</div>
-    <div class="muro-type ${m.tipo}">${labels[m.tipo]||m.tipo}</div>
-    <div class="muro-titulo">${m.titulo}</div>
-    <div class="muro-desc">${m.descripcion}</div>
-    <div class="muro-autor">👤 ${m.autor}</div>
-    <div class="muro-date">📅 ${new Date(m.created_at).toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'})}</div>
-    <button class="muro-del" onclick="deleteMuro(${m.id})">🗑</button>
-  </div>`).join('');
-}
-
-// ═══════════════════════════════════════════════
-// MÚSICA ÉPICA — generada con Web Audio API (sin copyright)
-// ═══════════════════════════════════════════════
-let audioCtx=null,musicGainMaster=null,musicInterval=null,musicPlaying=false,musicMuted=false;
-
-function initEpicMusic(){
-  if(audioCtx)return;
-  try{
-    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  }catch(e){return;}
-
-  musicGainMaster=audioCtx.createGain();
-  musicGainMaster.gain.value=0;
-  musicGainMaster.connect(audioCtx.destination);
-
-  // Eco/reverb sencillo con delay realimentado
-  const delay=audioCtx.createDelay(2.0);delay.delayTime.value=0.38;
-  const feedback=audioCtx.createGain();feedback.gain.value=0.32;
-  const delayFilter=audioCtx.createBiquadFilter();delayFilter.type='lowpass';delayFilter.frequency.value=1800;
-  delay.connect(feedback);feedback.connect(delayFilter);delayFilter.connect(delay);
-  delay.connect(musicGainMaster);
-
-  const dryGain=audioCtx.createGain();dryGain.gain.value=1;
-  dryGain.connect(musicGainMaster);dryGain.connect(delay);
-
-  // Progresión épica en La menor: Am - F - C - G
-  const chords=[
-    [220.00,261.63,329.63], // Am  (A3 C4 E4)
-    [174.61,220.00,261.63], // F   (F3 A3 C4)
-    [261.63,329.63,392.00], // C   (C4 E4 G4)
-    [196.00,246.94,293.66], // G   (G3 B3 D4)
-  ];
-  const chordDur=4.6;
-
-  function scheduleChord(freqs,startTime,dur){
-    freqs.forEach((f,i)=>{
-      const osc=audioCtx.createOscillator();
-      osc.type=i===0?'sawtooth':'sine';osc.frequency.value=f;
-      const osc2=audioCtx.createOscillator();
-      osc2.type='sine';osc2.frequency.value=f;osc2.detune.value=7;
-      const g=audioCtx.createGain();
-      g.gain.setValueAtTime(0,startTime);
-      g.gain.linearRampToValueAtTime(0.055,startTime+1.4);
-      g.gain.linearRampToValueAtTime(0.045,startTime+dur-1.6);
-      g.gain.linearRampToValueAtTime(0,startTime+dur);
-      const filt=audioCtx.createBiquadFilter();filt.type='lowpass';filt.frequency.value=1100;
-      osc.connect(filt);osc2.connect(filt);filt.connect(g);g.connect(dryGain);
-      osc.start(startTime);osc.stop(startTime+dur+0.15);
-      osc2.start(startTime);osc2.stop(startTime+dur+0.15);
-    });
-    // Bajo sub-grave
-    const sub=audioCtx.createOscillator();sub.type='sine';sub.frequency.value=freqs[0]/2;
-    const subG=audioCtx.createGain();
-    subG.gain.setValueAtTime(0,startTime);
-    subG.gain.linearRampToValueAtTime(0.13,startTime+1.6);
-    subG.gain.linearRampToValueAtTime(0,startTime+dur);
-    sub.connect(subG);subG.connect(dryGain);
-    sub.start(startTime);sub.stop(startTime+dur+0.15);
-    // Percusión sutil tipo "tambor de guerra" en cada cambio de acorde
-    const noiseDur=0.32;
-    const bufferSize=audioCtx.sampleRate*noiseDur;
-    const buffer=audioCtx.createBuffer(1,bufferSize,audioCtx.sampleRate);
-    const data=buffer.getChannelData(0);
-    for(let i=0;i<bufferSize;i++)data[i]=(Math.random()*2-1)*Math.pow(1-i/bufferSize,2.2);
-    const noise=audioCtx.createBufferSource();noise.buffer=buffer;
-    const noiseFilt=audioCtx.createBiquadFilter();noiseFilt.type='lowpass';noiseFilt.frequency.value=180;
-    const noiseG=audioCtx.createGain();noiseG.gain.value=0.22;
-    noise.connect(noiseFilt);noiseFilt.connect(noiseG);noiseG.connect(dryGain);
-    noise.start(startTime);
-  }
-
-  function scheduleLoop(){
-    let t=audioCtx.currentTime+0.15;
-    chords.forEach(c=>{scheduleChord(c,t,chordDur);t+=chordDur;});
-  }
-  scheduleLoop();
-  const loopLenMs=chordDur*chords.length*1000;
-  musicInterval=setInterval(scheduleLoop,loopLenMs);
-
-  musicGainMaster.gain.linearRampToValueAtTime(musicMuted?0:0.55,audioCtx.currentTime+2.2);
-  musicPlaying=true;
-}
-function toggleMusic(){
-  if(!audioCtx)return;
-  musicMuted=!musicMuted;
-  musicGainMaster.gain.linearRampToValueAtTime(musicMuted?0:0.55,audioCtx.currentTime+0.4);
-  const btn=document.getElementById('musicToggleBtn');
-  if(btn){btn.textContent=musicMuted?'🔇':'🔊';btn.classList.toggle('muted',musicMuted);}
-}
-function enterPortal(){
-  initEpicMusic();
-  const ov=document.getElementById('welcomeOverlay');
-  if(ov)ov.classList.add('hidden');
-  const mb=document.getElementById('musicToggleBtn');
-  if(mb)mb.style.display='flex';
-}
-
-// ═══════════════════════════════════════════════
-// NAVEGACIÓN
-// ═══════════════════════════════════════════════
-function go(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s-'+id).classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  if(id==='ranking')renderRanking(curRank);
-  if(id==='members')renderMembers();
-  if(id==='compare'){updateCmpSelects();renderCompare();}
-  if(id==='progreso')renderMes();
-  if(id==='arena'){fillFightSelects();}
-  if(id==='misiones')renderMisiones();
-  if(id==='ruleta')initRuleta();
-  if(id==='guerra')loadWars();
-  if(id==='muro')loadMuro();
-}
-
-// TOAST
-let tTimer;
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tTimer);tTimer=setTimeout(()=>t.classList.remove('show'),3500);}
-
-// ARRANQUE
-document.addEventListener('DOMContentLoaded',()=>{
-  loadAll();startChatPolling();
-  setInterval(loadAll,30000);
-  // Init puzzle con 4x4 por defecto
-  setPuzzleSize(4);
-});
-</script>
-</body>
-</html>
