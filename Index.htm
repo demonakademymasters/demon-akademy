@@ -403,6 +403,51 @@ body::before{content:'';position:fixed;inset:0;background:
 .music-toggle{position:fixed;bottom:1.5rem;left:1.5rem;z-index:400;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(44,31,15,0.95),rgba(10,6,4,0.97));border:1px solid var(--gold);color:var(--gold);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.25s;box-shadow:0 0 12px rgba(241,196,15,0.15)}
 .music-toggle:hover{box-shadow:0 0 18px rgba(241,196,15,0.4)}
 .music-toggle.muted{color:var(--text3);border-color:var(--border)}
+
+/* PARTÍCULAS DE FONDO (ascuas/chispas) */
+#particlesCanvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.55}
+
+/* SUB-NIVEL DE RANGO (Ⅰ Ⅱ Ⅲ dentro de cada rango) */
+.sublvl{font-size:0.62em;opacity:0.85;margin-left:2px}
+.title-combo{font-family:'Cinzel Decorative',serif;font-size:0.68rem;color:var(--gold);letter-spacing:0.04em;padding:3px 10px;border:1px solid var(--gold);border-radius:2px;background:rgba(80,40,0,0.35);display:inline-block}
+
+/* TAGS DE LIDERAZGO */
+.leader-tag{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:2px;font-family:'Cinzel',serif;font-size:0.56rem;letter-spacing:0.05em;font-weight:bold;border:1px solid;text-transform:uppercase;white-space:nowrap}
+.lt-lider{background:linear-gradient(90deg,rgba(241,196,15,0.3),rgba(192,57,43,0.3));color:var(--gold);border-color:var(--gold);box-shadow:0 0 6px rgba(241,196,15,0.35)}
+.lt-colider{background:rgba(192,57,43,0.28);color:#f1948a;border-color:rgba(192,57,43,0.6)}
+.lt-oficial{background:rgba(41,128,185,0.25);color:#85c1e9;border-color:rgba(41,128,185,0.5)}
+.lt-veterano{background:rgba(123,45,139,0.25);color:#c39bd3;border-color:rgba(123,45,139,0.5)}
+.lt-reclutador{background:rgba(39,174,96,0.22);color:#82e0aa;border-color:rgba(39,174,96,0.5)}
+.leader-panel{display:none}
+.leader-panel.open{display:block}
+.leader-row{display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0.5rem;border-bottom:1px solid rgba(192,57,43,0.1);gap:0.5rem;flex-wrap:wrap}
+.leader-del{background:none;border:1px solid rgba(192,57,43,0.4);color:rgba(192,57,43,0.8);cursor:pointer;font-size:0.58rem;padding:0.15rem 0.5rem;font-family:'Cinzel',serif}
+.leader-del:hover{background:rgba(192,57,43,0.3);color:#fff}
+
+/* ACTUALIZACIÓN RÁPIDA EN LOTE */
+.bulk-wrap{display:none}
+.bulk-wrap.open{display:block}
+.bulk-result{max-height:180px;overflow-y:auto;font-size:0.68rem;font-family:'Cinzel',serif;background:rgba(10,6,4,0.8);border:1px solid var(--border);padding:0.6rem;margin-top:0.6rem}
+.bulk-result .ok{color:#2ecc71}
+.bulk-result .err{color:#e74c3c}
+
+/* TIMELINE UNIFICADA */
+.tl-wrap{position:relative;padding-left:1.6rem}
+.tl-wrap::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:linear-gradient(180deg,var(--fire),var(--gold),var(--fire))}
+.tl-item{position:relative;margin-bottom:1rem;padding:0.7rem 0.9rem;background:rgba(44,31,15,0.55);border:1px solid var(--border);border-left:2px solid var(--gold2)}
+.tl-item::before{content:'';position:absolute;left:-1.42rem;top:0.85rem;width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px rgba(241,196,15,0.6);border:2px solid var(--dark)}
+.tl-item.tl-aviso::before{background:var(--gold)}
+.tl-item.tl-guerra-victoria::before{background:#2ecc71}
+.tl-item.tl-guerra-derrota::before{background:#e74c3c}
+.tl-item.tl-guerra-empate::before{background:#f1c40f}
+.tl-item.tl-muro::before{background:#9b59b6}
+.tl-type{font-family:'Cinzel',serif;font-size:0.58rem;color:var(--gold2);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.2rem}
+.tl-title{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--text);margin-bottom:0.2rem}
+.tl-desc{font-size:0.72rem;color:var(--text3);line-height:1.4}
+.tl-date{font-size:0.6rem;color:var(--text3);margin-top:0.3rem;font-family:'Cinzel',serif}
+
+/* AUTOCOMPLETE HINT */
+.ac-hint{font-size:0.58rem;color:var(--text3);margin-top:0.15rem;font-style:italic}
 </style>
 </head>
 <body>
